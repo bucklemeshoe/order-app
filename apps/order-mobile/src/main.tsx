@@ -14,35 +14,39 @@ import '@ionic/react/css/flex-utils.css'
 import '@ionic/react/css/display.css'
 import './theme/variables.css'
 import App from './App.tsx'
-import AppLocal from './AppLocal.tsx'
-import CheckoutLocal from './pages/CheckoutLocal.tsx'
-import { ClerkProvider } from '@clerk/clerk-react'
+import { AUTH_PROVIDER } from './config/auth'
+import { MockAuthProvider } from './auth/MockAuthProvider'
+// import { ClerkProvider } from '@clerk/clerk-react'
 import { BrowserRouter } from 'react-router-dom'
 
-const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string
-
-// For local development without Clerk
-const AppWithOptionalClerk = () => {
-  if (!clerkPublishableKey || clerkPublishableKey === 'disabled_for_local_dev') {
-    // Inject a route override for local checkout page if needed.
+const Root = () => {
+  if (AUTH_PROVIDER === 'mock') {
     return (
-      <BrowserRouter>
-        <AppLocal />
-      </BrowserRouter>
+      <MockAuthProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </MockAuthProvider>
     )
   }
-  
+  // Clerk path (enable and configure when using Clerk)
+  // const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string
+  // return (
+  //   <ClerkProvider publishableKey={clerkPublishableKey}>
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   </ClerkProvider>
+  // )
   return (
-    <ClerkProvider publishableKey={clerkPublishableKey}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ClerkProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   )
 }
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AppWithOptionalClerk />
+    <Root />
   </StrictMode>,
 )
