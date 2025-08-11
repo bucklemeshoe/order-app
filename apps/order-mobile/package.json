@@ -13,6 +13,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@order-app/core-ui": "*",
+    "@order-app/core-theme": "*",
+    "@order-app/core-lib": "*",
     "@capacitor/cli": "^7.4.2",
     "@capacitor/core": "^7.4.2",
     "@clerk/clerk-react": "^5.40.0",
