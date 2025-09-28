@@ -6,6 +6,8 @@ A modern, real-time coffee ordering and management system built with React, Type
 
 **📋 For upcoming features and development roadmap, see [UPNEXT.md](./UPNEXT.md)**
 
+**🌍 For 3-environment deployment setup (local/staging/production), see [ENVIRONMENT_SETUP.md](./ENVIRONMENT_SETUP.md)**
+
 **🚀 Quick Start: Run `npm start` or `npm run quick-start` to launch everything locally**
 
 ### ☕ Mobile App (Customer-Facing)

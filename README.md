@@ -17,6 +17,7 @@ npm run quick-start
 All documentation has been moved to the `docs/` folder:
 
 - **[Main Documentation](./docs/README.md)** - Complete project overview and features
+- **[Environment Setup](./docs/ENVIRONMENT_SETUP.md)** - 3-environment deployment setup
 - **[Quick Start Guide](./docs/STARTUP_GUIDE.md)** - Detailed startup instructions
 - **[Development Roadmap](./docs/UPNEXT.md)** - Upcoming features and priorities
 - **[Cashup Implementation](./docs/CASHUP_IMPLEMENTATION_PLAN.md)** - Analytics features plan
