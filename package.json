@@ -4,17 +4,21 @@
   "version": "0.1.0",
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "Staging/*"
   ],
   "scripts": {
     "dev:mobile": "npm run -w apps/order-mobile dev",
+    "dev:staging": "npm run -w Staging/order-mobile dev",
     "build": "npm run -w apps/order-mobile build",
     "lint": "npm -w apps/order-mobile run lint",
     "supabase:local:start": "supabase start",
     "supabase:local:reset": "supabase db reset",
     "supabase:link": "supabase link --project-ref",
     "supabase:push": "supabase db push",
-    "functions:deploy": "supabase functions deploy"
+    "functions:deploy": "supabase functions deploy",
+    "start": "./start-dev.sh",
+    "quick-start": "./quick-start.sh"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11"

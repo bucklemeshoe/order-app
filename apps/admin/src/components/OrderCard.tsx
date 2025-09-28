@@ -14,18 +14,24 @@ interface Order {
 
 interface OrderCardProps {
   order: Order
-  onStatusUpdate: (orderId: string, newStatus: string) => void
+  onStatusUpdate: (orderId: string, newStatus: string, collectionTime?: number) => void
   compact?: boolean
 }
 
 export function OrderCard({ order, onStatusUpdate, compact = false }: OrderCardProps) {
   const [updating, setUpdating] = useState(false)
+  const [selectedCollectionTime, setSelectedCollectionTime] = useState<number | null>(null)
 
   const handleStatusUpdate = async (newStatus: string) => {
     if (updating) return
     setUpdating(true)
     try {
-      await onStatusUpdate(order.id, newStatus)
+      // If starting to prepare and collection time is selected, include it
+      if (newStatus === 'preparing' && selectedCollectionTime) {
+        await onStatusUpdate(order.id, newStatus, selectedCollectionTime)
+      } else {
+        await onStatusUpdate(order.id, newStatus)
+      }
     } finally {
       setUpdating(false)
     }
@@ -157,7 +163,7 @@ export function OrderCard({ order, onStatusUpdate, compact = false }: OrderCardP
           {order.items.map((item: any, index: number) => (
             <li key={index} className="flex justify-between text-zinc-700">
               <span className="text-zinc-900">{item.quantity}x {item.name}</span>
-              <span className="font-medium text-zinc-900">${item.price}</span>
+              <span className="font-medium text-zinc-900">R{item.price}</span>
             </li>
           ))}
         </ul>
@@ -165,10 +171,34 @@ export function OrderCard({ order, onStatusUpdate, compact = false }: OrderCardP
           <div className="flex justify-between font-medium">
             <span className="text-zinc-900">Total:</span>
             <span className="text-zinc-900">
-              ${order.items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0).toFixed(2)}
+              R{order.items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0).toFixed(2)}
             </span>
           </div>
         </div>
+
+        {/* Collection Time Selection - only show for pending orders */}
+        {order.status === 'pending' && (
+          <div className="pt-3 border-t border-zinc-200">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-zinc-900">Collection Time:</label>
+              <div className="flex space-x-2">
+                {[15, 30, 45].map((minutes) => (
+                  <button
+                    key={minutes}
+                    onClick={() => setSelectedCollectionTime(minutes)}
+                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                      selectedCollectionTime === minutes
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'
+                    }`}
+                  >
+                    {minutes}min
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {nextActions.length > 0 && (

@@ -10,6 +10,8 @@ interface Order {
   share_location: boolean
   current_location?: any
   created_at: string
+  collection_time_minutes?: number
+  estimated_ready_at?: string
 }
 
 interface UseRealtimeOrdersOptions {
@@ -33,9 +35,10 @@ export function useRealtimeOrders(
     if (!supabase) return
 
     try {
+      // Try to fetch with collection time fields first
       let query = supabase
         .from('orders')
-        .select('*')
+        .select('id, user_id, items, status, pickup_time, share_location, current_location, created_at, collection_time_minutes, estimated_ready_at, order_number')
         .order('created_at', { ascending: false })
 
       // Filter by user if specified
@@ -43,7 +46,30 @@ export function useRealtimeOrders(
         query = query.eq('user_id', userId)
       }
 
-      const { data, error } = await query
+      let { data, error } = await query
+
+      // If collection time fields don't exist, fall back to query without them
+      if (error && error.message?.includes('collection_time_minutes')) {
+        console.warn('Collection time columns not found, falling back to basic query')
+        
+        let fallbackQuery = supabase
+          .from('orders')
+          .select('id, user_id, items, status, pickup_time, share_location, current_location, created_at, order_number')
+          .order('created_at', { ascending: false })
+
+        if (userId) {
+          fallbackQuery = fallbackQuery.eq('user_id', userId)
+        }
+
+        const fallbackResult = await fallbackQuery
+        data = fallbackResult.data?.map(order => ({
+          ...order,
+          collection_time_minutes: null,
+          estimated_ready_at: null,
+          order_number: order.order_number || null
+        })) || null
+        error = fallbackResult.error
+      }
 
       if (error) throw error
       setOrders(data || [])
@@ -75,8 +101,6 @@ export function useRealtimeOrders(
           table: 'orders'
         },
         (payload) => {
-          console.log('Real-time order change:', payload)
-
       switch (payload.eventType) {
             case 'INSERT':
               // Add new order
@@ -138,9 +162,10 @@ export function useRealtimeOrder(
     if (!supabase || !orderId) return
 
     try {
+      // Try to fetch with collection time fields first
       let query = supabase
         .from('orders')
-        .select('*')
+        .select('id, user_id, items, status, pickup_time, share_location, current_location, created_at, collection_time_minutes, estimated_ready_at, order_number')
         .eq('id', orderId)
 
       // Filter by user if specified (for security)
@@ -148,7 +173,30 @@ export function useRealtimeOrder(
         query = query.eq('user_id', userId)
       }
 
-      const { data, error } = await query.single()
+      let { data, error } = await query.single()
+
+      // If collection time fields don't exist, fall back to query without them
+      if (error && error.message?.includes('collection_time_minutes')) {
+        console.warn('Collection time columns not found in single order query, falling back to basic query')
+        
+        let fallbackQuery = supabase
+          .from('orders')
+          .select('id, user_id, items, status, pickup_time, share_location, current_location, created_at, order_number')
+          .eq('id', orderId)
+
+        if (userId) {
+          fallbackQuery = fallbackQuery.eq('user_id', userId)
+        }
+
+        const fallbackResult = await fallbackQuery.single()
+        data = fallbackResult.data?.map(order => ({
+          ...order,
+          collection_time_minutes: null,
+          estimated_ready_at: null,
+          order_number: order.order_number || null
+        })) || null
+        error = fallbackResult.error
+      }
 
       if (error) throw error
       setOrder(data)
@@ -177,7 +225,6 @@ export function useRealtimeOrder(
           filter: `id=eq.${orderId}`
         },
         (payload) => {
-          console.log('Real-time order update:', payload)
           const updatedOrder = payload.new as Order
           
           // Security check: only update if user matches (if userId provided)

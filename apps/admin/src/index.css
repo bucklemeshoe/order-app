@@ -1,5 +1,4 @@
-@import "tailwindcss";
+/* Import unified design system */
+@import "@order-app/design-system/index.css";
 
-@theme {
-  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-}
+

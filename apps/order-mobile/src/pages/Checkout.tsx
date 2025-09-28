@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useSupabase } from '../lib/useSupabase'
 import { useCartStore } from '../store/cart'
-import { useUser, useAuth } from '@clerk/clerk-react'
+import { useTaxCalculations } from '../hooks/useSettings'
 import { LocationSharing } from '../components/LocationSharing'
 import { locationToPostGIS } from '@order-app/lib'
 import { IonContent, IonCard, IonCardContent, IonButton, IonIcon, IonSelect, IonSelectOption, IonItem, IonLabel, IonNote, IonSpinner } from '@ionic/react'
@@ -9,9 +9,11 @@ import { checkmarkCircleOutline, alertCircleOutline, timeOutline, arrowBackOutli
 
 export default function CheckoutPage() {
   const supabase = useSupabase()
-  const { user } = useUser()
-  const { getToken } = useAuth()
   const { items, clear } = useCartStore()
+  const { settings, calculateSubtotal, calculateTax, calculateTotal } = useTaxCalculations()
+  
+  // Vanilla app uses a demo user - no authentication needed
+  const user = { id: 'demo-user-123', name: 'Demo User', email: 'demo@example.com' }
   const [pickupTime, setPickupTime] = useState<string>('ASAP')
   const [shareLocation, setShareLocation] = useState(false)
   const [currentLocation, setCurrentLocation] = useState<{ latitude: number; longitude: number } | null>(null)
@@ -24,16 +26,15 @@ export default function CheckoutPage() {
     setError(null)
     setSuccess(null)
     try {
-      if (!user) throw new Error('Sign in required')
       if (items.length === 0) throw new Error('Cart is empty')
 
       // Ensure profile row exists (with better error handling)
-      const { data: userProfile, error: userError } = await supabase
+      const { error: userError } = await supabase
         .from('users')
         .upsert({ 
           id: user.id, 
-          email: user.primaryEmailAddress?.emailAddress ?? null,
-          name: user.fullName ?? user.firstName ?? null
+          email: user.email,
+          name: user.name
         }, { onConflict: 'id' })
         .select()
 
@@ -49,10 +50,12 @@ export default function CheckoutPage() {
         const orderData: any = {
           user_id: user.id,
           items: items.map((i) => ({ 
-            id: i.id,
+            menu_item_id: i.id,
+            quantity: i.quantity,
             name: i.name,
             price: i.price,
-            quantity: i.quantity 
+            variant: i.variant,
+            extras: i.extras
           })),
           pickup_time: pickupTime === 'ASAP' ? new Date(Date.now() + 15 * 60000).toISOString() : new Date(pickupTime).toISOString(), // 15 min from now for ASAP
           share_location: shareLocation
@@ -64,6 +67,24 @@ export default function CheckoutPage() {
           orderData.current_location = locationToPostGIS(currentLocation.latitude, currentLocation.longitude)
         }
 
+        // Get next order number for local development
+        const { data: orderNumberData, error: orderNumberError } = await supabase
+          .from('app_settings')
+          .select('value')
+          .eq('key', 'current_order_number')
+          .single()
+
+        if (orderNumberError) {
+          console.error('Failed to get order number:', orderNumberError)
+          throw new Error('Failed to generate order number')
+        }
+
+        const currentOrderNumber = parseInt(String(orderNumberData.value || '1001'))
+        const nextOrderNumber = currentOrderNumber + 1
+
+        // Add order number to order data
+        orderData.order_number = currentOrderNumber
+
         console.log('Creating order with data:', orderData)
 
         const { data: order, error } = await supabase
@@ -72,11 +93,19 @@ export default function CheckoutPage() {
           .select()
           .single()
 
+        // Update next order number if insert was successful
+        if (!error) {
+          await supabase
+            .from('app_settings')
+            .update({ value: nextOrderNumber })
+            .eq('key', 'current_order_number')
+        }
+
         if (error) {
           console.error('Order insert error:', error)
           throw new Error(`Failed to create order: ${error.message}`)
         }
-        setSuccess(`Order placed! ID: ${order.id.slice(0, 8)}... Status: ${order.status}`)
+        setSuccess(`Order placed! Order #${order.order_number} Status: ${order.status}`)
         clear()
         
         // Redirect to order details after 2 seconds
@@ -87,18 +116,28 @@ export default function CheckoutPage() {
         // Cloud/production: Use Edge Function
         const payload = {
           user_id: user.id,
-          items: items.map((i) => ({ menu_item_id: i.id, quantity: i.quantity })),
+          items: items.map((i) => ({ 
+            menu_item_id: i.id, 
+            quantity: i.quantity,
+            name: i.name,
+            price: i.price,
+            variant: i.variant,
+            extras: i.extras
+          })),
           pickup_time: pickupTime === 'ASAP' ? new Date().toISOString() : new Date(pickupTime).toISOString(),
           share_location: shareLocation,
         }
 
         const functionsUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create_order`
-        const clerkJwt = await getToken({ template: 'supabase' })
+        
+        // For vanilla app, use anon key instead of JWT
+        const authToken = import.meta.env.VITE_SUPABASE_ANON_KEY
+        
         const resp = await fetch(functionsUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${clerkJwt}`,
+            Authorization: `Bearer ${authToken}`,
           },
           body: JSON.stringify(payload),
         })
@@ -114,10 +153,10 @@ export default function CheckoutPage() {
     }
   }
 
-  const handleLocationChange = (enabled: boolean, location?: { latitude: number; longitude: number }) => {
+  const handleLocationChange = useCallback((enabled: boolean, location?: { latitude: number; longitude: number }) => {
     setShareLocation(enabled)
     setCurrentLocation(location || null)
-  }
+  }, [])
 
   return (
     <IonContent className="ion-padding">
@@ -144,17 +183,45 @@ export default function CheckoutPage() {
         <IonCard>
           <IonCardContent>
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Summary</h2>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {items.map((item, index) => (
-                <div key={`${item.id}-${index}`} className="flex justify-between items-center">
-                  <span className="text-gray-900">{item.quantity}x {item.name}</span>
-                  <span className="font-semibold text-gray-900">R{(item.price * item.quantity).toFixed(2)}</span>
+                <div key={`${item.id}-${index}`}>
+                  <div className="flex justify-between items-center">
+                    <div className="flex-1">
+                      <span className="text-gray-900 font-medium">{item.quantity}x {item.name}</span>
+                      {item.variant && (
+                        <span className="text-gray-600"> ({item.variant.name})</span>
+                      )}
+                      {item.extras && item.extras.length > 0 && (
+                        <div className="ml-4 mt-1">
+                          {item.extras.map((extra, extraIndex) => (
+                            <div key={extraIndex} className="text-sm text-gray-600">
+                              + {extra.name}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <span className="font-semibold text-gray-900">R{(item.price * item.quantity).toFixed(2)}</span>
+                  </div>
                 </div>
               ))}
-              <div className="border-t pt-2 mt-2">
-                <div className="flex justify-between items-center font-bold text-lg">
-                  <span className="text-gray-900">Total</span>
-                  <span className="text-amber-600">R{items.reduce((sum, i) => sum + i.price * i.quantity, 0).toFixed(2)}</span>
+              <div className="border-t pt-2 mt-2 space-y-2">
+                <div className="flex justify-between text-gray-600">
+                  <span>Subtotal</span>
+                  <span>R{calculateSubtotal(items).toFixed(2)}</span>
+                </div>
+                {settings.taxesEnabled && (
+                  <div className="flex justify-between text-gray-600">
+                    <span>Tax ({(settings.taxRate * 100).toFixed(1)}%)</span>
+                    <span>R{calculateTax(calculateSubtotal(items)).toFixed(2)}</span>
+                  </div>
+                )}
+                <div className="border-t border-gray-200 pt-2">
+                  <div className="flex justify-between items-center font-bold text-lg">
+                    <span className="text-gray-900">Total</span>
+                    <span className="text-amber-600">R{calculateTotal(items).toFixed(2)}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -175,7 +242,7 @@ export default function CheckoutPage() {
             <IonSelect
               value={pickupTime}
               placeholder="Select pickup time"
-              onSelectionChange={(e) => setPickupTime(e.detail.value)}
+              onIonChange={(e) => setPickupTime((e as any).detail.value)}
               className="mt-3"
             >
               <IonSelectOption value="ASAP">ASAP (15 minutes)</IonSelectOption>

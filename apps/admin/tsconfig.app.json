@@ -17,7 +17,9 @@
     "baseUrl": ".",
     "paths": {
       "@order-app/lib": ["../../packages/lib/src"],
-      "@order-app/menu-admin": ["../../packages/menu-admin/src"]
+      "@order-app/menu-admin": ["../../packages/menu-admin/src"],
+      "@coffee-menu/*": ["src/coffee-menu/*"],
+      "@/*": ["src/coffee-menu/*"]
     },
 
     /* Linting */
