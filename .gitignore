@@ -1,8 +1,13 @@
 # Dependencies
 node_modules
 **/dist
+
+# Environment files (keep examples)
 **/.env
 **/.env.local
+**/.env.staging
+**/.env.production
+!**/.env.example
 
 # Logs
 npm-debug.log*

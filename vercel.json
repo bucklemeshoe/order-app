@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/admin/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "apps/order-mobile/package.json", 
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/admin/(.*)",
+      "dest": "/apps/admin/dist/$1"
+    },
+    {
+      "src": "/mobile/(.*)",
+      "dest": "/apps/order-mobile/dist/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/apps/admin/dist/index.html"
+    }
+  ],
+  "env": {
+    "VITE_ENV": "@vite_env"
+  }
+}

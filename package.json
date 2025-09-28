@@ -11,6 +11,8 @@
     "dev:mobile": "npm run -w apps/order-mobile dev",
     "dev:staging": "npm run -w Staging/order-mobile dev",
     "build": "npm run -w apps/order-mobile build",
+    "build:admin": "npm run -w apps/admin build",
+    "build:mobile": "npm run -w apps/order-mobile build",
     "lint": "npm -w apps/order-mobile run lint",
     "supabase:local:start": "supabase start",
     "supabase:local:reset": "supabase db reset",
@@ -18,7 +20,9 @@
     "supabase:push": "supabase db push",
     "functions:deploy": "supabase functions deploy",
     "start": "./start-dev.sh",
-    "quick-start": "./quick-start.sh"
+    "quick-start": "./quick-start.sh",
+    "deploy:staging": "./scripts/deploy-staging.sh",
+    "deploy:production": "./scripts/deploy-production.sh"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11"
