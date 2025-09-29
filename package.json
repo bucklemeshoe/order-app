@@ -23,7 +23,10 @@
     "quick-start": "./quick-start.sh",
     "deploy:staging": "./scripts/deploy-staging.sh",
     "deploy:production": "./scripts/deploy-production.sh",
-    "check:migrations": "./scripts/check-migrations.sh"
+    "check:migrations": "./scripts/check-migrations.sh",
+    "health:check": "./scripts/run-health-checks.sh",
+    "health:checkly": "checkly test",
+    "health:deploy": "checkly deploy"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11"

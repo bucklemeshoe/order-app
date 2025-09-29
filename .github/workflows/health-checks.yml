@@ -1,0 +1,111 @@
+name: Health Checks
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'apps/**'
+      - 'packages/**'
+      - 'supabase/**'
+  push:
+    branches: [main, develop]
+    paths:
+      - 'apps/**'
+      - 'packages/**'
+      - 'supabase/**'
+
+jobs:
+  health-checks:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Setup Checkly CLI
+        run: |
+          npm install -g @checkly/cli@latest
+          echo "Checkly CLI version: $(checkly --version)"
+          
+      - name: Run local health checks
+        run: |
+          echo "🔍 Running local health checks..."
+          
+          # Check if admin app builds
+          echo "📱 Checking admin app build..."
+          cd apps/admin
+          npm run build
+          echo "✅ Admin app builds successfully"
+          
+          # Check if mobile app builds
+          echo "📱 Checking mobile app build..."
+          cd ../order-mobile
+          npm run build
+          echo "✅ Mobile app builds successfully"
+          
+          cd ../..
+          
+      - name: Run Checkly health checks
+        env:
+          CHECKLY_API_KEY: ${{ secrets.CHECKLY_API_KEY }}
+          ADMIN_URL: ${{ secrets.ADMIN_URL }}
+          MOBILE_URL: ${{ secrets.MOBILE_URL }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          echo "🧪 Running Checkly health checks..."
+          
+          # Deploy checks to Checkly
+          checkly deploy --dry-run
+          
+          # Run health checks
+          checkly test --reporter=github
+          
+      - name: Check deployment readiness
+        run: |
+          echo "🚀 Checking deployment readiness..."
+          
+          # Check if both apps are ready for deployment
+          if [ -d "apps/admin/dist" ] && [ -d "apps/order-mobile/dist" ]; then
+            echo "✅ Both apps are ready for deployment"
+          else
+            echo "❌ Apps are not ready for deployment"
+            exit 1
+          fi
+          
+      - name: Run migration checks
+        run: |
+          echo "🗄️ Running migration checks..."
+          npm run check:migrations
+          
+      - name: Check for breaking changes
+        run: |
+          echo "🔍 Checking for breaking changes..."
+          
+          # Check for TypeScript errors
+          echo "📝 Checking TypeScript compilation..."
+          npx tsc --noEmit --project apps/admin/tsconfig.json
+          npx tsc --noEmit --project apps/order-mobile/tsconfig.json
+          echo "✅ No TypeScript errors"
+          
+          # Check for linting errors
+          echo "🔍 Checking linting..."
+          npm run lint
+          echo "✅ No linting errors"
+          
+      - name: Summary
+        run: |
+          echo "🎉 Health checks completed successfully!"
+          echo "✅ Admin app: Ready"
+          echo "✅ Mobile app: Ready"
+          echo "✅ Database: Ready"
+          echo "✅ No breaking changes detected"
