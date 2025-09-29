@@ -52,12 +52,6 @@ function App() {
     }
   }, [isUnavailable, hasShownInitialModal])
 
-  // Handler for when user clicks grayed out cart tab
-  const handleCartTabClick = () => {
-    if (isUnavailable) {
-      setShowUnavailableModal(true)
-    }
-  }
 
   return (
     <IonApp>

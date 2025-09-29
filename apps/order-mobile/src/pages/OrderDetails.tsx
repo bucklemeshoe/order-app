@@ -31,7 +31,6 @@ export function OrderDetailsPage() {
   // Using formatDateTime from utils instead
 
   const getEstimatedTime = (status: string, createdAt: string, collectionTimeMinutes?: number, estimatedReadyAt?: string) => {
-    const created = new Date(createdAt)
     const now = new Date()
 
     switch (status) {

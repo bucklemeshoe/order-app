@@ -55,7 +55,6 @@ interface MenuPageProps {
 }
 
 export default function MenuPage({ onShowUnavailableModal }: MenuPageProps) {
-  const navigate = useNavigate()
   const supabase = useSupabase()
   const add = useCartStore((s) => s.add)
   const { isUnavailable } = useUnavailableStore()
