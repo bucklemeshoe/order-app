@@ -26,7 +26,8 @@
     "check:migrations": "./scripts/check-migrations.sh",
     "health:check": "./scripts/run-health-checks.sh",
     "health:checkly": "checkly test",
-    "health:deploy": "checkly deploy"
+    "health:deploy": "checkly deploy",
+    "health:setup": "./scripts/setup-checkly.sh"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11"

@@ -119,11 +119,12 @@ fi
 # 7. Check for environment variables
 echo ""
 echo "🔧 Checking environment setup..."
-if [ -f ".env.local" ] || [ -f ".env.staging" ] || [ -f ".env.production" ]; then
+if [ -f ".env.local" ] || [ -f ".env.staging" ] || [ -f ".env.production" ] || [ -f ".env.checkly" ]; then
     print_status 0 "Environment files found"
 else
     echo -e "${YELLOW}⚠️ No environment files found${NC}"
     echo "   Make sure to set up environment variables for deployment"
+    echo "   Copy checkly.env.local.example to .env.checkly and fill in your values"
 fi
 
 # 8. Check Git status
