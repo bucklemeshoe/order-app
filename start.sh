@@ -29,6 +29,13 @@ npm install
 
 echo ""
 echo "🗄️ Starting Supabase local environment..."
+if ! docker info > /dev/null 2>&1; then
+    echo "❌ Docker is not running. Please start Docker Desktop first."
+    echo "   Download from: https://docs.docker.com/desktop/"
+    echo "   Then run this script again."
+    exit 1
+fi
+
 supabase start
 
 echo ""

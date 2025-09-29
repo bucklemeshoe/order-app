@@ -32,8 +32,10 @@ If you prefer to run commands manually:
 ### **1. Prerequisites**
 ```bash
 # Install Node.js 18+ from https://nodejs.org/
+# Install Docker Desktop from https://docs.docker.com/desktop/
 # Install Supabase CLI
-npm install -g supabase
+brew install supabase/tap/supabase
+# OR: npm install -g supabase
 ```
 
 ### **2. Clone & Setup**
@@ -78,6 +80,13 @@ npm run dev:mobile     # Terminal 2
 ```bash
 # Kill processes on ports 5173, 5174, 54321-54324
 lsof -ti:5173,5174,54321,54322,54323,54324 | xargs kill -9
+```
+
+### **Docker Issues**
+```bash
+# Start Docker Desktop first
+# Download from: https://docs.docker.com/desktop/
+# Then run the startup script again
 ```
 
 ### **Supabase Issues**
