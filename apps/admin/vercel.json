@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "cd ../.. && npm install",
+  "framework": "vite",
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "develop": true
+    }
+  },
+  "functions": {
+    "app/**": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet apps/admin/",
+  "env": {
+    "VITE_ENV": "@vite_env"
+  }
+}

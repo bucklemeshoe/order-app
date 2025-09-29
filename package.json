@@ -22,7 +22,8 @@
     "start": "./start-dev.sh",
     "quick-start": "./quick-start.sh",
     "deploy:staging": "./scripts/deploy-staging.sh",
-    "deploy:production": "./scripts/deploy-production.sh"
+    "deploy:production": "./scripts/deploy-production.sh",
+    "check:migrations": "./scripts/check-migrations.sh"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11"

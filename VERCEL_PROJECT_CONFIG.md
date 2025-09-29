@@ -1,6 +1,12 @@
 # Vercel Project Configuration Guide
 
-## 🎯 **Configure Each Project for Monorepo**
+## 🎯 **Smart Deployments for Monorepo**
+
+**How it works:**
+- **Admin changes** → Only `order-app-admin` deploys
+- **Mobile changes** → Only `order-app-mobile` deploys  
+- **Shared changes** → Both deploy
+- **No unnecessary deployments** 🎉
 
 ### **1. order-app-admin Project**
 

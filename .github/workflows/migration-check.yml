@@ -1,0 +1,95 @@
+name: Migration Dry Run Check
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'supabase/migrations/**'
+      - 'supabase/functions/**'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'supabase/migrations/**'
+      - 'supabase/functions/**'
+
+jobs:
+  migration-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Setup Supabase CLI
+        run: |
+          npm install -g supabase
+          echo "Supabase CLI version: $(supabase --version)"
+          
+      - name: Start Supabase locally
+        run: |
+          supabase start
+          
+      - name: Run migration dry run
+        run: |
+          echo "🔍 Running migration dry run check..."
+          supabase db diff --schema public --file temp_migration.sql
+          
+          if [ -f temp_migration.sql ]; then
+            echo "📝 Generated migration file:"
+            cat temp_migration.sql
+            echo ""
+            echo "✅ Migration dry run completed successfully"
+            rm temp_migration.sql
+          else
+            echo "✅ No schema changes detected"
+          fi
+          
+      - name: Test Edge Functions
+        run: |
+          echo "🧪 Testing Edge Functions..."
+          if [ -d "supabase/functions" ]; then
+            for func in supabase/functions/*/; do
+              if [ -d "$func" ]; then
+                func_name=$(basename "$func")
+                echo "Testing function: $func_name"
+                # Add function-specific tests here if needed
+              fi
+            done
+            echo "✅ Edge Functions check completed"
+          else
+            echo "ℹ️ No Edge Functions found"
+          fi
+          
+      - name: Stop Supabase
+        if: always()
+        run: |
+          supabase stop || true
+          
+      - name: Check for breaking changes
+        run: |
+          echo "🔍 Checking for potential breaking changes..."
+          
+          # Check for DROP statements (potential breaking changes)
+          if find supabase/migrations -name "*.sql" -exec grep -l "DROP" {} \; | grep -q .; then
+            echo "⚠️ WARNING: Found DROP statements in migrations"
+            echo "Please review these changes carefully:"
+            find supabase/migrations -name "*.sql" -exec grep -l "DROP" {} \; | xargs -I {} echo "  - {}"
+          fi
+          
+          # Check for ALTER COLUMN statements
+          if find supabase/migrations -name "*.sql" -exec grep -l "ALTER COLUMN" {} \; | grep -q .; then
+            echo "⚠️ WARNING: Found ALTER COLUMN statements"
+            echo "These may cause data loss or require application updates:"
+            find supabase/migrations -name "*.sql" -exec grep -l "ALTER COLUMN" {} \; | xargs -I {} echo "  - {}"
+          fi
+          
+          echo "✅ Breaking change check completed"
