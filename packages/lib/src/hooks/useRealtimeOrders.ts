@@ -190,12 +190,12 @@ export function useRealtimeOrder(
         }
 
         const fallbackResult = await fallbackQuery.single()
-        data = fallbackResult.data ? [fallbackResult.data].map((order: any) => ({
-          ...order,
+        data = fallbackResult.data ? {
+          ...fallbackResult.data,
           collection_time_minutes: null,
           estimated_ready_at: null,
-          order_number: order.order_number || null
-        })) : null
+          order_number: fallbackResult.data.order_number || null
+        } : null
         error = fallbackResult.error
       }
 

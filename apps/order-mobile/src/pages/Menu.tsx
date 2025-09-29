@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useSupabase } from '../lib/useSupabase'
 import { useCartStore } from '../store/cart'
 import { useUnavailableStore } from '../store/unavailable'
