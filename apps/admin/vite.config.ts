@@ -13,7 +13,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@order-app/lib': path.resolve(__dirname, '../../packages/lib/src'),
-      '@order-app/menu-admin': path.resolve(__dirname, '../../packages/menu-admin/src'),
+      '@coffee-menu': path.resolve(__dirname, './src/coffee-menu'),
     },
   },
 })

@@ -1,39 +1,37 @@
-import { Link } from 'react-router-dom'
+// Link not needed for vanilla cart
 import { useCartStore } from '../store/cart'
+import { useTaxCalculations } from '../hooks/useSettings'
 // Using Ionic + native elements
 import { IonContent, IonButton, IonIcon, IonCard, IonCardContent } from '@ionic/react'
 import { addOutline, removeOutline, trashOutline } from 'ionicons/icons'
 
 export default function CartPage() {
-  const { items, add, remove, updateQty, clear } = useCartStore()
-  const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0)
+  const { items, removeByIndex, updateQtyByIndex, clear } = useCartStore()
+  const { settings, calculateSubtotal, calculateTax, calculateTotal } = useTaxCalculations()
+  
+  const subtotal = calculateSubtotal(items)
+  const tax = calculateTax(subtotal)
+  const total = calculateTotal(items)
 
-  const handleIncrement = (id: string) => {
-    const item = items.find(i => i.id === id)
+  const handleIncrement = (index: number) => {
+    const item = items[index]
     if (item) {
-      add({ ...item, quantity: 1 })
+      updateQtyByIndex(index, item.quantity + 1)
     }
   }
 
-  const handleDecrement = (id: string) => {
-    const item = items.find(i => i.id === id)
+  const handleDecrement = (index: number) => {
+    const item = items[index]
     if (item) {
       if (item.quantity > 1) {
-        updateQty(id, item.quantity - 1)
+        updateQtyByIndex(index, item.quantity - 1)
       } else {
-        remove(id) // Remove item only when quantity would go to 0
+        removeByIndex(index) // Remove item only when quantity would go to 0
       }
     }
   }
 
-  const handleRemoveAll = (id: string) => {
-    const item = items.find(i => i.id === id)
-    if (item) {
-      for (let i = 0; i < item.quantity; i++) {
-        remove(id)
-      }
-    }
-  }
+
 
   if (items.length === 0) {
     return (
@@ -98,6 +96,22 @@ export default function CartPage() {
                 {/* Item Details */}
                 <div className="min-w-0 flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
+                  {item.variant && (
+                    <p className="text-sm text-gray-500">{item.variant.name}</p>
+                  )}
+                  {item.extras && item.extras.length > 0 && (
+                    <div className="mt-1">
+                      <p className="text-sm text-gray-500 font-medium">Extras:</p>
+                      <ul className="text-sm text-gray-600 ml-2">
+                        {item.extras.map((extra, extraIndex) => (
+                          <li key={extraIndex} className="flex justify-between">
+                            <span>+ {extra.name}</span>
+                            <span>R{extra.price.toFixed(2)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   <p className="text-amber-600 font-medium">
                     R{item.price.toFixed(2)} each
                   </p>
@@ -110,7 +124,7 @@ export default function CartPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex items-center">
                     <IonButton
-                      onClick={() => handleDecrement(item.id)}
+                      onClick={() => handleDecrement(index)}
                       fill="clear"
                       size="small"
                       color="medium"
@@ -122,7 +136,7 @@ export default function CartPage() {
                       {item.quantity}
                     </span>
                     <IonButton
-                      onClick={() => handleIncrement(item.id)}
+                      onClick={() => handleIncrement(index)}
                       fill="clear"
                       size="small"
                       color="medium"
@@ -134,7 +148,7 @@ export default function CartPage() {
 
                   {/* Remove Button */}
                   <IonButton
-                    onClick={() => handleRemoveAll(item.id)}
+                    onClick={() => removeByIndex(index)}
                     color="danger"
                     fill="clear"
                     size="small"
@@ -159,14 +173,16 @@ export default function CartPage() {
               <span>Subtotal</span>
               <span>R{subtotal.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between text-gray-600">
-              <span>Tax (8.5%)</span>
-              <span>R{(subtotal * 0.085).toFixed(2)}</span>
-            </div>
+            {settings.taxesEnabled && (
+              <div className="flex justify-between text-gray-600">
+                <span>Tax ({(settings.taxRate * 100).toFixed(1)}%)</span>
+                <span>R{tax.toFixed(2)}</span>
+              </div>
+            )}
             <div className="border-t border-amber-200 pt-2">
               <div className="flex justify-between text-lg font-bold text-gray-900">
                 <span>Total</span>
-                <span>R{(subtotal * 1.085).toFixed(2)}</span>
+                <span>R{total.toFixed(2)}</span>
               </div>
             </div>
           </div>

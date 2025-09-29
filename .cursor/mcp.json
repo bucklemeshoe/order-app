@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "supabase-local": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "DATABASE_URL": "postgresql://postgres:postgres@127.0.0.1:54322/postgres?sslmode=disable",
+        "PGOPTIONS": "-c statement_timeout=10000"
+      }
+    }
+  }
+}
+

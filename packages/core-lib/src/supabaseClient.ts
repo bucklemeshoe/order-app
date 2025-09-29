@@ -6,36 +6,24 @@
  */
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-const url = (import.meta as any).env?.VITE_SUPABASE_URL as string | undefined
-const anonKey = (import.meta as any).env?.VITE_SUPABASE_ANON_KEY as string | undefined
-
-if (!url || !anonKey) {
-  throw new Error(
-    'Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY — set in .env.local for local dev, or in cloud env for staging/prod.',
-  )
-}
-
 export function createSupabaseClient(): SupabaseClient {
-  return createClient(url, anonKey)
-}
-
-export const supabase = createSupabaseClient()
-
-// Backward-compatible export for legacy code paths that injected an external JWT per request.
-// This still uses env-only configuration for the base URL and anon key.
-export function createSupabaseWithExternalAuth(
-  getExternalToken: () => Promise<string | null>,
-): SupabaseClient {
-  const client = createClient(url, anonKey)
-  // Attach Authorization header dynamically when token is available
-  // @ts-expect-error: rest.fetch typing varies across versions
-  client.rest.fetch = async (input: RequestInfo, init?: RequestInit) => {
-    const token = await getExternalToken()
-    const headers = new Headers(init?.headers)
-    if (token) headers.set('Authorization', `Bearer ${token}`)
-    return fetch(input as any, { ...init, headers })
+  const url = (import.meta as any).env?.VITE_SUPABASE_URL as string | undefined
+  const anonKey = (import.meta as any).env?.VITE_SUPABASE_ANON_KEY as string | undefined
+  if (!url || !anonKey) {
+    throw new Error(
+      'Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY — set in .env.local for local dev, or in cloud env for staging/prod.',
+    )
   }
-  return client
+  return createClient(url as string, anonKey as string, {
+    auth: {
+      storageKey: 'order-app-auth', // Unique storage key to avoid conflicts
+      persistSession: true,
+      detectSessionInUrl: false
+    }
+  })
 }
+
+// Vanilla apps use the basic client without external auth
+// For client-specific apps that need external auth, they can implement their own auth layer
 
 

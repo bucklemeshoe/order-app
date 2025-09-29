@@ -1,1 +1,1 @@
-export * from '@order-app/core-lib/src/supabaseClient'
+export * from '../../core-lib/src/supabaseClient'

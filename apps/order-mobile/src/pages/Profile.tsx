@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useUser, useClerk } from '@clerk/clerk-react'
-import { IonContent, IonCard, IonCardContent, IonItem, IonLabel, IonInput, IonTextarea, IonButton, IonSpinner, IonToast, IonIcon, IonNote } from '@ionic/react'
+import { useEffect, useState } from 'react'
+import { IonContent, IonCard, IonCardContent, IonItem, IonLabel, IonInput, IonTextarea, IonButton, IonSpinner, IonToast, IonIcon } from '@ionic/react'
 import { checkmarkCircleOutline } from 'ionicons/icons'
 import { useSupabase } from '../lib/useSupabase'
 
@@ -14,26 +13,11 @@ type UserProfile = {
 
 export default function ProfilePage() {
   const supabase = useSupabase()
-  const { user } = useUser()
 
-  const clerkKey = (import.meta as any).env?.VITE_CLERK_PUBLISHABLE_KEY as string | undefined
-  const isClerkDisabled = !clerkKey || clerkKey === 'disabled_for_local_dev'
-  const { openUserProfile } = useClerk()
-
-  const demoUserId = useMemo(() => {
-    if (!isClerkDisabled) return null
-    const key = 'demo_user_id'
-    let id = localStorage.getItem(key)
-    if (!id) {
-      id = crypto.randomUUID()
-      localStorage.setItem(key, id)
-    }
-    return id
-  }, [isClerkDisabled])
-
-  const currentUserId = isClerkDisabled ? demoUserId! : (user?.id ?? '')
-  const defaultEmail = isClerkDisabled ? 'demo@example.com' : (user?.primaryEmailAddress?.emailAddress ?? '')
-  const defaultName = isClerkDisabled ? 'Demo User' : (user?.fullName ?? user?.firstName ?? '')
+  // Vanilla app uses a demo user - no authentication needed
+  const currentUserId = 'demo-user-123'
+  const defaultEmail = 'demo@example.com'
+  const defaultName = 'Demo User'
 
   const [profile, setProfile] = useState<UserProfile>({
     id: currentUserId,
@@ -134,12 +118,10 @@ export default function ProfilePage() {
                   value={profile.email ?? ''}
                   onIonInput={(e) => setProfile((p) => ({ ...p, email: e.detail.value ?? '' }))}
                   placeholder="you@example.com"
-                  readonly={!!clerkKey && !isClerkDisabled}
-                  disabled={!!clerkKey && !isClerkDisabled}
+                  readonly={false}
+                  disabled={false}
                 />
-                {!!clerkKey && !isClerkDisabled && (
-                  <IonNote color="medium">Managed by your account (Clerk)</IonNote>
-                )}
+
               </IonItem>
 
               <IonItem lines="full">
@@ -185,13 +167,7 @@ export default function ProfilePage() {
                     </>
                   )}
                 </IonButton>
-                {!!clerkKey && !isClerkDisabled && (
-                  <div className="pt-3">
-                    <IonButton expand="block" fill="outline" color="medium" onClick={() => openUserProfile?.()}>
-                      Manage Account (Clerk)
-                    </IonButton>
-                  </div>
-                )}
+
               </div>
             </div>
           </IonCardContent>

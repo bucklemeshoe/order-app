@@ -3,12 +3,19 @@ import { IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIc
 import { arrowBackOutline, addOutline, removeOutline, checkmarkOutline } from 'ionicons/icons'
 import { formatCurrency } from '../utils/format'
 
+type Variant = {
+  id: string
+  name: string
+  price: number
+}
+
 type Product = {
   id: string
   name: string
   description?: string
   price: number
   image_url?: string
+  variants?: Variant[]
 }
 
 export type ExtraOption = {
@@ -22,7 +29,7 @@ interface ProductDetailModalProps {
   product: Product | null
   adding?: boolean
   onDismiss: () => void
-  onAdd: (quantity: number, extras: ExtraOption[], instructions: string) => void | Promise<void>
+  onAdd: (quantity: number, extras: ExtraOption[], instructions: string, variant?: Variant) => void | Promise<void>
   extras?: ExtraOption[]
 }
 
@@ -30,22 +37,30 @@ export default function ProductDetailModal({ isOpen, product, adding, onDismiss,
   const [quantity, setQuantity] = useState(1)
   const [selectedExtras, setSelectedExtras] = useState<ExtraOption[]>([])
   const [instructions, setInstructions] = useState('')
+  const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null)
 
-  const defaultExtras: ExtraOption[] = [
-    { id: 'extra_shot', name: 'Extra shot', price: 5 },
-    { id: 'oat_milk', name: 'Oat milk', price: 6 },
-    { id: 'caramel', name: 'Caramel syrup', price: 4 },
-    { id: 'large', name: 'Large size', price: 10 },
-  ]
-
-  const effectiveExtras = extras && extras.length > 0 ? extras : defaultExtras
+  // Use only the extras passed from parent (configured in admin)
+  const effectiveExtras = extras || []
   const extrasUnitTotal = selectedExtras.reduce((sum, e) => sum + e.price, 0)
-  const perUnitTotal = (product?.price ?? 0) + extrasUnitTotal
+  
+  // Get current price from selected variant or fallback to base price
+  const currentPrice = selectedVariant?.price ?? product?.price ?? 0
+  const perUnitTotal = currentPrice + extrasUnitTotal
   const totalPrice = perUnitTotal * quantity
 
+  // Available variants for this product
+  const availableVariants = product?.variants || []
+  const hasMultipleVariants = availableVariants.length > 1
+
   useEffect(() => {
-    if (isOpen) setQuantity(1)
-  }, [isOpen])
+    if (isOpen) {
+      setQuantity(1)
+      setSelectedExtras([])
+      setInstructions('')
+      // Set default variant (first one or null if no variants)
+      setSelectedVariant(availableVariants.length > 0 ? availableVariants[0] : null)
+    }
+  }, [isOpen, availableVariants])
 
   const toggleExtra = (extra: ExtraOption, checked: boolean) => {
     setSelectedExtras((prev) => {
@@ -74,11 +89,11 @@ export default function ProductDetailModal({ isOpen, product, adding, onDismiss,
           <div className="space-y-6">
             <div className="flex justify-center">
               <div className="w-64 h-64 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
-                {product.image_url ? (
-                  <img src={product.image_url} alt={product.name} className="w-full h-full rounded-2xl object-cover" />
-                ) : (
-                  <span className="text-6xl">☕</span>
-                )}
+                <img 
+                  src={product.image_url || "/placeholder-0taew.png"} 
+                  alt={product.name} 
+                  className="w-full h-full rounded-2xl object-cover" 
+                />
               </div>
             </div>
 
@@ -87,38 +102,78 @@ export default function ProductDetailModal({ isOpen, product, adding, onDismiss,
               {product.description && (
                 <p className="text-lg text-gray-600 leading-relaxed">{product.description}</p>
               )}
-              <div className="text-4xl font-bold text-amber-600">{formatCurrency(product.price)}</div>
+              <div className="text-4xl font-bold text-amber-600">{formatCurrency(currentPrice)}</div>
             </div>
 
+            {/* Size Selection */}
+            {availableVariants.length > 0 && (
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-gray-900">
+                  {hasMultipleVariants ? 'Size' : 'Size'}
+                </h3>
+                {hasMultipleVariants ? (
+                  <div className="grid grid-cols-2 gap-2">
+                    {availableVariants.map((variant) => {
+                      const isSelected = selectedVariant?.id === variant.id
+                      return (
+                        <button
+                          key={variant.id}
+                          onClick={() => setSelectedVariant(variant)}
+                          className={`p-3 rounded-xl border-2 transition-all ${
+                            isSelected 
+                              ? 'border-amber-500 bg-amber-50 text-amber-900' 
+                              : 'border-gray-200 bg-white text-gray-700 hover:border-amber-300'
+                          }`}
+                        >
+                          <div className="text-center">
+                            <div className="font-semibold">{variant.name}</div>
+                            <div className="text-sm font-medium text-amber-600">
+                              {formatCurrency(variant.price)}
+                            </div>
+                          </div>
+                        </button>
+                      )
+                    })}
+                  </div>
+                ) : (
+                  <div className="text-center text-gray-600">
+                    {availableVariants[0]?.name} - {formatCurrency(availableVariants[0]?.price)}
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Extras */}
-            <div className="space-y-3">
-              <h3 className="text-xl font-semibold text-gray-900">Extras</h3>
-              <IonList>
-                {effectiveExtras.map((extra) => {
-                  const checked = !!selectedExtras.find((e) => e.id === extra.id)
-                  return (
-                    <IonItem key={extra.id} lines="full">
-                      <IonCheckbox
-                        checked={checked}
-                        onIonChange={(e) => toggleExtra(extra, !!e.detail.checked)}
-                        slot="start"
-                      />
-                      <IonLabel>
-                        <div className="flex items-center justify-between w-full">
-                          <span className="text-gray-900">{extra.name}</span>
-                          <span className="text-amber-600 font-medium">{formatCurrency(extra.price)}</span>
-                        </div>
-                      </IonLabel>
-                    </IonItem>
-                  )
-                })}
-              </IonList>
-              {selectedExtras.length > 0 && (
-                <div className="text-sm text-gray-600">
-                  Selected extras: {selectedExtras.map((e) => e.name).join(', ')} (+{formatCurrency(extrasUnitTotal)} per item)
-                </div>
-              )}
-            </div>
+            {effectiveExtras.length > 0 && (
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-gray-900">Extras</h3>
+                <IonList>
+                  {effectiveExtras.map((extra) => {
+                    const checked = !!selectedExtras.find((e) => e.id === extra.id)
+                    return (
+                      <IonItem key={extra.id} lines="full">
+                        <IonCheckbox
+                          checked={checked}
+                          onIonChange={(e) => toggleExtra(extra, !!e.detail.checked)}
+                          slot="start"
+                        />
+                        <IonLabel>
+                          <div className="flex items-center justify-between w-full">
+                            <span className="text-gray-900">{extra.name}</span>
+                            <span className="text-amber-600 font-medium">{formatCurrency(extra.price)}</span>
+                          </div>
+                        </IonLabel>
+                      </IonItem>
+                    )
+                  })}
+                </IonList>
+                {selectedExtras.length > 0 && (
+                  <div className="text-sm text-gray-600">
+                    Selected extras: {selectedExtras.map((e) => e.name).join(', ')} (+{formatCurrency(extrasUnitTotal)} per item)
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-gray-900 text-center">Quantity</h3>
@@ -149,7 +204,7 @@ export default function ProductDetailModal({ isOpen, product, adding, onDismiss,
                 expand="block"
                 size="large"
                 color="warning"
-                onClick={() => onAdd(quantity, selectedExtras, instructions)}
+                onClick={() => onAdd(quantity, selectedExtras, instructions, selectedVariant || undefined)}
                 disabled={adding}
               >
                 {adding ? (

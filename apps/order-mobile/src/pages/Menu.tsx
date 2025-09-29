@@ -1,22 +1,47 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSupabase } from '../lib/useSupabase'
 import { useCartStore } from '../store/cart'
-import { IonContent, IonRefresher, IonRefresherContent, IonSpinner, IonToast, IonCard, IonCardContent, IonButton, IonIcon, IonChip } from '@ionic/react'
-import { addOutline, checkmarkOutline } from 'ionicons/icons'
-import ProductDetailModal, { ExtraOption } from '../components/ProductDetailModal'
+import { useUnavailableStore } from '../store/unavailable'
+import { IonContent, IonRefresher, IonRefresherContent, IonSpinner, IonToast, IonChip, IonButton } from '@ionic/react'
+// Icons not needed for simplified menu
+import ProductDetailModal, { type ExtraOption } from '../components/ProductDetailModal'
 import { formatCurrency } from '../utils/format'
+
+interface Variant {
+  id: string
+  name: string
+  price: number
+}
 
 interface MenuItem {
   id: string
   name: string
   description?: string
-  price: number
+  price: number // Base price for backward compatibility
   category: string
   image_url?: string
   is_active: boolean
+  extras?: string[] // Available extras for this item
+  position?: number // Position within category for ordering
+  variants?: Variant[] // Size/price combinations
+  platforms?: string[] // Platforms where this item should be displayed
 }
 
 const categoryNames: Record<string, string> = {
+  // Admin categories - exact match
+  'Coffee': 'Coffees',
+  'Lattes': 'Lattes',
+  'Hot or Cold': 'Hot or Cold',
+  'Milkshakes & Smoothies': 'Milkshakes & Smoothies',
+  'Combos': 'Combos',
+  'Extras': 'Extras',
+  'Drinks': 'Drinks',
+  'Specialty': 'Specialty',
+  'Pastries': 'Pastries',
+  'Food': 'Food',
+  'Cold Drinks': 'Cold Drinks',
+  // Legacy fallback for any old data
   coffee: 'Coffees',
   pastry: 'Pastries',
   food: 'Food',
@@ -25,10 +50,17 @@ const categoryNames: Record<string, string> = {
   default: 'Items'
 }
 
-export default function MenuPage() {
+interface MenuPageProps {
+  onShowUnavailableModal?: () => void
+}
+
+export default function MenuPage({ onShowUnavailableModal }: MenuPageProps) {
+  const navigate = useNavigate()
   const supabase = useSupabase()
   const add = useCartStore((s) => s.add)
+  const { isUnavailable } = useUnavailableStore()
   const [items, setItems] = useState<MenuItem[]>([])
+  const [extrasMap, setExtrasMap] = useState<Record<string, ExtraOption>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -38,17 +70,51 @@ export default function MenuPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<MenuItem | null>(null)
 
+  const loadExtras = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('menu_items')
+        .select('name, price')
+        .eq('category', 'Extras')
+        .eq('is_active', true)
+
+      if (error) throw error
+      
+      const extrasMap: Record<string, ExtraOption> = {}
+      data?.forEach((extra: any) => {
+        extrasMap[extra.name] = {
+          id: extra.name.toLowerCase().replace(/\s+/g, '_'),
+          name: extra.name,
+          price: extra.price
+        }
+      })
+      setExtrasMap(extrasMap)
+    } catch (e: any) {
+      console.error('Failed to load extras:', e)
+    }
+  }
+
   const loadMenu = async () => {
     try {
       const { data, error } = await supabase
         .from('menu_items')
-        .select('*')
+        .select('*, variants')
         .eq('is_active', true)
         .order('category', { ascending: true })
+        .order('position', { ascending: true })
         .order('name', { ascending: true })
 
       if (error) throw error
-      setItems(data || [])
+      
+      // Two-level filtering:
+      // 1. Database query above already filtered for is_active = true (Available toggle)
+      // 2. Now filter available items by platform (Platform checkboxes)
+      const filteredItems = (data || []).filter((item: any) => {
+        // Only show items that explicitly include "Mobile App" in their platforms array
+        return item.platforms && Array.isArray(item.platforms) && item.platforms.includes("Mobile App")
+      })
+      
+      setItems(filteredItems)
     } catch (e: any) {
       setError(e?.message ?? 'Failed to load menu')
     } finally {
@@ -57,29 +123,16 @@ export default function MenuPage() {
   }
 
   useEffect(() => {
-    loadMenu()
+    const loadData = async () => {
+      await Promise.all([loadMenu(), loadExtras()])
+    }
+    loadData()
   }, [])
 
-  const handleAddToCart = async (item: MenuItem) => {
-    setAddingToCart(item.id)
-    add({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      quantity: 1
-    })
-    
-    setToastMessage(`${item.name} added to cart!`)
-    setShowToast(true)
-    
-    // Add a small delay for visual feedback
-    setTimeout(() => {
-      setAddingToCart(null)
-    }, 500)
-  }
+  // Add to cart functionality moved to product modal
 
   const handleRefresh = async (event: CustomEvent) => {
-    await loadMenu()
+    await Promise.all([loadMenu(), loadExtras()])
     event.detail.complete()
   }
 
@@ -88,20 +141,57 @@ export default function MenuPage() {
     setIsModalOpen(true)
   }
 
+  const getItemExtras = (item: MenuItem | null): ExtraOption[] => {
+    if (!item || !item.extras || item.extras.length === 0) {
+      return [] // No extras for this item
+    }
+    
+    return item.extras
+      .map(extraName => extrasMap[extraName])
+      .filter(Boolean) // Remove any undefined entries
+  }
+
   const closeProductModal = () => {
     setIsModalOpen(false)
     setSelectedProduct(null)
   }
 
-  const handleModalAddToCart = async (quantity: number, extras: ExtraOption[], instructions: string) => {
+  const handleModalAddToCart = async (quantity: number, extras: ExtraOption[], instructions: string, variant?: Variant) => {
     if (!selectedProduct) return
+    
+    // Check if app is unavailable - show modal
+    if (isUnavailable) {
+      closeProductModal()
+      if (onShowUnavailableModal) {
+        onShowUnavailableModal()
+      }
+      return
+    }
+    
     setAddingToCart(selectedProduct.id)
     try {
-      for (let i = 0; i < quantity; i++) {
-        add({ id: selectedProduct.id, name: selectedProduct.name, price: selectedProduct.price, quantity: 1, notes: instructions })
-      }
+      // Calculate total price including extras
+      const basePrice = variant?.price ?? selectedProduct.price
+      const extrasPrice = extras.reduce((sum, extra) => sum + extra.price, 0)
+      const totalPrice = basePrice + extrasPrice
+      
+      // Add single item with extras included
+      add({ 
+        id: selectedProduct.id, 
+        name: selectedProduct.name, 
+        price: totalPrice, // Include extras in the price
+        quantity: quantity, // Add all quantity at once
+        notes: instructions,
+        variant: variant,
+        extras: extras.map(extra => ({
+          id: extra.id,
+          name: extra.name,
+          price: extra.price
+        }))
+      })
+      const variantText = variant ? ` (${variant.name})` : ''
       const extrasText = extras.length ? ` with ${extras.map(e => e.name).join(', ')}` : ''
-      setToastMessage(`${quantity}x ${selectedProduct.name}${extrasText} added to cart!`)
+      setToastMessage(`${quantity}x ${selectedProduct.name}${variantText}${extrasText} added to cart!`)
       setShowToast(true)
       closeProductModal()
     } finally {
@@ -172,7 +262,7 @@ export default function MenuPage() {
                 onClick={() => setSelectedCategory(category)}
                 className="cursor-pointer whitespace-nowrap"
               >
-                {category === 'all' ? 'All Items' : category.charAt(0).toUpperCase() + category.slice(1)}
+                {category === 'all' ? 'All Items' : (categoryNames[category] || category)}
               </IonChip>
             ))}
           </div>
@@ -198,15 +288,11 @@ export default function MenuPage() {
                   <div className="flex gap-4">
                     {/* Item Image/Icon */}
                     <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-100 to-orange-100">
-                      {item.image_url ? (
-                        <img 
-                          src={item.image_url} 
-                          alt={item.name}
-                          className="h-full w-full rounded-xl object-cover"
-                        />
-                      ) : (
-                        <span className="text-2xl">☕</span>
-                      )}
+                      <img 
+                        src={item.image_url || "/placeholder-0taew.png"} 
+                        alt={item.name}
+                        className="h-full w-full rounded-xl object-cover"
+                      />
                     </div>
                     
                     {/* Item Details */}
@@ -263,6 +349,7 @@ export default function MenuPage() {
         adding={!!(selectedProduct && addingToCart === selectedProduct.id)}
         onDismiss={closeProductModal}
         onAdd={handleModalAddToCart}
+        extras={getItemExtras(selectedProduct)}
       />
     </IonContent>
   )

@@ -1,91 +1,57 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { useAuth, useUser } from '@clerk/clerk-react'
-import { createSupabaseWithExternalAuth, useRealtimeOrder } from '@order-app/lib'
+import { useRealtimeOrder } from '@order-app/lib'
+import { useSupabase } from '../lib/useSupabase'
+import { useTaxCalculations } from '../hooks/useSettings'
 import { IonContent, IonCard, IonCardContent, IonButton, IonIcon, IonBadge, IonSpinner } from '@ionic/react'
-import { arrowBackOutline, locationOutline, timeOutline } from 'ionicons/icons'
+import { arrowBackOutline } from 'ionicons/icons'
 import { formatCurrency, formatDateTime } from '../utils/format'
 import { getStatusBadgeColor as getStatusBadgeColorUtil } from '../utils/status'
 
-interface Order {
-  id: string
-  user_id: string
-  items: any[]
-  status: 'pending' | 'preparing' | 'ready' | 'collected' | 'cancelled'
-  pickup_time: string
-  share_location: boolean
-  created_at: string
-}
+// Order interface defined in useRealtimeOrder hook
 
 export function OrderDetailsPage() {
   const { orderId } = useParams()
-  const clerkKey = (import.meta as any).env?.VITE_CLERK_PUBLISHABLE_KEY as string | undefined
-  const isClerkDisabled = !clerkKey || clerkKey === 'disabled_for_local_dev'
-
-  const [supabase, setSupabase] = useState<any>(null)
-  const demoUserId = useMemo(() => {
-    if (!isClerkDisabled) return null
-    const key = 'demo_user_id'
-    let id = localStorage.getItem(key)
-    if (!id) {
-      id = crypto.randomUUID()
-      localStorage.setItem(key, id)
-    }
-    return id
-  }, [isClerkDisabled])
-
-  if (isClerkDisabled) {
-    // Demo mode: initialize Supabase without external JWT
-    useEffect(() => {
-      const client = createSupabaseWithExternalAuth(async () => null)
-      setSupabase(client)
-    }, [])
-  } else {
-    const { getToken, isLoaded } = useAuth()
-    useEffect(() => {
-      if (isLoaded) {
-        const client = createSupabaseWithExternalAuth(async () => {
-          return await getToken({ template: 'supabase' })
-        })
-        setSupabase(client)
-      }
-    }, [getToken, isLoaded])
-  }
-
+  const supabase = useSupabase()
+  const { settings, calculateSubtotal, calculateTax, calculateTotal } = useTaxCalculations()
   // Use real-time order hook for this specific order
-  const userId = isClerkDisabled ? demoUserId ?? undefined : (useUser().user?.id)
-  const { order, loading } = useRealtimeOrder(supabase, orderId, userId)
+  const userId = 'demo-user-123' // Vanilla app uses demo user
+  const { order, loading, error } = useRealtimeOrder(supabase, orderId, userId)
+  
+  // Handle errors gracefully
+  if (error) {
+    console.error('Order details error:', error)
+  }
 
   const getStatusStep = (currentStatus: string) => {
     const steps = ['pending', 'preparing', 'ready', 'collected']
     return steps.indexOf(currentStatus)
   }
 
-  const formatTime = (timestamp: string) => {
-    return new Date(timestamp).toLocaleString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  }
+  // Using formatDateTime from utils instead
 
-  const calculateTotal = (items: any[]) => {
-    return items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-  }
-
-  const getEstimatedTime = (status: string, createdAt: string) => {
+  const getEstimatedTime = (status: string, createdAt: string, collectionTimeMinutes?: number, estimatedReadyAt?: string) => {
     const created = new Date(createdAt)
     const now = new Date()
-    const elapsed = Math.floor((now.getTime() - created.getTime()) / (1000 * 60)) // minutes
 
     switch (status) {
       case 'pending':
         return 'Starting preparation soon...'
       case 'preparing':
-        const remaining = Math.max(0, 15 - elapsed) // Assume 15 min prep time
-        return remaining > 0 ? `~${remaining} minutes remaining` : 'Almost ready!'
+        if (collectionTimeMinutes && estimatedReadyAt) {
+          const readyTime = new Date(estimatedReadyAt)
+          const remainingMs = readyTime.getTime() - now.getTime()
+          const remainingMinutes = Math.max(0, Math.ceil(remainingMs / (1000 * 60)))
+          
+          if (remainingMinutes > 0) {
+            return `Order ready for collection in ${remainingMinutes} minutes`
+          } else {
+            return 'Almost ready!'
+          }
+        } else {
+          // No collection time set - show generic message
+          return 'Your order is being prepared...'
+        }
       case 'ready':
         return 'Ready for pickup now! 🎉'
       case 'collected':
@@ -97,22 +63,7 @@ export function OrderDetailsPage() {
     }
   }
 
-  const getStatusBadgeColor = (status: string) => {
-    switch (status) {
-      case 'pending':
-        return 'warning'
-      case 'preparing':
-        return 'primary'
-      case 'ready':
-        return 'success'
-      case 'collected':
-        return 'secondary'
-      case 'cancelled':
-        return 'danger'
-      default:
-        return 'medium'
-    }
-  }
+  // Using getStatusBadgeColorUtil from utils instead
 
   if (loading) {
     return (
@@ -122,6 +73,23 @@ export function OrderDetailsPage() {
             <IonSpinner name="crescent" color="warning" />
             <h1 className="text-2xl font-bold text-gray-900 mt-4">Loading order details...</h1>
           </div>
+        </div>
+      </IonContent>
+    )
+  }
+
+  if (error) {
+    return (
+      <IonContent className="ion-padding">
+        <div className="space-y-6 mt-10 text-center">
+          <h1 className="text-2xl font-bold text-gray-900">Order Not Found</h1>
+          <p className="text-gray-600">The order you're looking for doesn't exist or you don't have permission to view it.</p>
+          <Link to="/orders">
+            <IonButton color="warning">
+              <IonIcon icon={arrowBackOutline} slot="start" />
+              Back to Orders
+            </IonButton>
+          </Link>
         </div>
       </IonContent>
     )
@@ -183,7 +151,7 @@ export function OrderDetailsPage() {
         </IonButton>
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Order #{order.id.slice(0, 8)}
+            Order #{order.order_number || order.id.slice(0, 8)}
           </h1>
           <p className="text-gray-600">
             Placed on {formatDateTime(order.created_at)}
@@ -234,7 +202,7 @@ export function OrderDetailsPage() {
                 <span className="text-white text-sm">⏱️</span>
               </div>
               <p className="text-blue-700 font-medium">
-                {getEstimatedTime(order.status, order.created_at)}
+                {getEstimatedTime(order.status, order.created_at, order.collection_time_minutes, order.estimated_ready_at)}
               </p>
             </div>
           </div>
@@ -266,28 +234,54 @@ export function OrderDetailsPage() {
         
         <div className="space-y-3">
           {order.items.map((item, index) => (
-            <div key={index} className="flex justify-between items-center py-2">
-              <div>
-                <span className="font-medium text-gray-900">
-                  {item.quantity}x {item.name}
+            <div key={index} className="py-2">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <span className="font-medium text-gray-900">
+                    {item.quantity}x {item.name}
+                    {item.variant && (
+                      <span className="text-gray-600"> ({item.variant.name})</span>
+                    )}
+                  </span>
+                  {item.extras && item.extras.length > 0 && (
+                    <div className="ml-4 mt-1">
+                      {item.extras.map((extra: any, extraIndex: number) => (
+                        <div key={extraIndex} className="text-sm text-gray-600">
+                          + {extra.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {item.description && (
+                    <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                  )}
+                </div>
+                <span className="font-semibold text-gray-900">
+                  {formatCurrency(item.price * item.quantity)}
                 </span>
-                {item.description && (
-                  <p className="text-sm text-gray-600">{item.description}</p>
-                )}
               </div>
-              <span className="font-semibold text-gray-900">
-                {formatCurrency(item.price * item.quantity)}
-              </span>
             </div>
           ))}
         </div>
 
-        <div className="border-t border-gray-200 pt-4 mt-4">
-          <div className="flex justify-between items-center font-semibold text-lg">
-            <span className="text-gray-900">Total</span>
-            <span className="text-amber-600">
-              {formatCurrency(calculateTotal(order.items))}
-            </span>
+        <div className="border-t border-gray-200 pt-4 mt-4 space-y-2">
+          <div className="flex justify-between text-gray-600">
+            <span>Subtotal</span>
+            <span>{formatCurrency(calculateSubtotal(order.items))}</span>
+          </div>
+          {settings.taxesEnabled && (
+            <div className="flex justify-between text-gray-600">
+              <span>Tax ({(settings.taxRate * 100).toFixed(1)}%)</span>
+              <span>{formatCurrency(calculateTax(calculateSubtotal(order.items)))}</span>
+            </div>
+          )}
+          <div className="border-t border-gray-200 pt-2">
+            <div className="flex justify-between items-center font-semibold text-lg">
+              <span className="text-gray-900">Total</span>
+              <span className="text-amber-600">
+                {formatCurrency(calculateTotal(order.items))}
+              </span>
+            </div>
           </div>
         </div>
         </IonCardContent>
