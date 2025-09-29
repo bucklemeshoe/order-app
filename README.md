@@ -159,14 +159,21 @@ Pending → Preparing → Ready → Collected
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### ⚡ **One Command Startup (Recommended)**
+```bash
+./start.sh
+```
+
+**That's it!** This single command starts everything you need.
+
+### 📋 **Prerequisites**
 - Node.js 18+
 - npm
 - Supabase CLI (`npm install -g supabase`)
 
-### Quick Start
+### 🔧 **Manual Setup (Alternative)**
 
-**For detailed local setup instructions, see [UPNEXT.md](./UPNEXT.md#🖥️-local-setup-guide-macbook-pro)**
+**For detailed setup instructions, see [STARTUP_GUIDE.md](./STARTUP_GUIDE.md)**
 
 1. **Clone the repository**
    ```bash
