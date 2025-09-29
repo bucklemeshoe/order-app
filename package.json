@@ -4,25 +4,13 @@
   "version": "0.1.0",
   "workspaces": [
     "apps/*",
-    "packages/*",
-    "Staging/*"
+    "packages/*"
   ],
   "scripts": {
-    "dev:mobile": "npm run -w apps/order-mobile dev",
-    "dev:staging": "npm run -w Staging/order-mobile dev",
-    "build": "npm run -w apps/order-mobile build",
-    "build:admin": "npm run -w apps/admin build",
-    "build:mobile": "npm run -w apps/order-mobile build",
-    "lint": "npm -w apps/order-mobile run lint",
-    "supabase:local:start": "supabase start",
-    "supabase:local:reset": "supabase db reset",
-    "supabase:link": "supabase link --project-ref",
-    "supabase:push": "supabase db push",
-    "functions:deploy": "supabase functions deploy",
-    "start": "./start-dev.sh",
-    "quick-start": "./quick-start.sh",
-    "deploy:staging": "./scripts/deploy-staging.sh",
-    "deploy:production": "./scripts/deploy-production.sh"
+    "dev:mobile": "npm --workspace order-app-mobile run dev",
+    "dev:admin": "npm --workspace order-app-admin run dev",
+    "build": "npm run build -w order-app-mobile && npm run build -w order-app-admin",
+    "lint": "echo 'No linter configured yet'"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11"
