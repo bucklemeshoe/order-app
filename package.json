@@ -8,6 +8,7 @@
     "Staging/*"
   ],
   "scripts": {
+<<<<<<< HEAD
     "dev:mobile": "npm run -w apps/order-mobile dev",
     "dev:staging": "npm run -w Staging/order-mobile dev",
     "build": "npm run -w apps/order-mobile build",
@@ -17,6 +18,12 @@
     "supabase:link": "supabase link --project-ref",
     "supabase:push": "supabase db push",
     "functions:deploy": "supabase functions deploy"
+=======
+    "dev:mobile": "npm --workspace order-app-mobile run dev",
+    "dev:admin": "npm --workspace order-app-admin run dev",
+    "build": "npm run build -w order-app-mobile && npm run build -w order-app-admin",
+    "lint": "echo 'No linter configured yet'"
+>>>>>>> fad21f6192a765b3fb20be0c96ac225a9981b789
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11"

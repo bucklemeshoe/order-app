@@ -1,9 +1,10 @@
-# Order App - Order Management System
+# Order App
 
 A modern, real-time coffee ordering and management system built with React, TypeScript, and Supabase. **Now fully vanilla - no external authentication required!**
 
-## 🚀 Current Features
+## 🚀 Quick Start
 
+<<<<<<< HEAD
 **📋 For upcoming features and development roadmap, see [UPNEXT.md](./UPNEXT.md)**
 
 ### ☕ Mobile App (Customer-Facing)
@@ -36,38 +37,45 @@ A modern, real-time coffee ordering and management system built with React, Type
 - **Order Number Configuration**: Set starting numbers with lockdown after first order
 - **Component Inspector**: Advanced development tool with pink/blue component identification
 - **Responsive Design**: Works on desktop and mobile devices with consistent styling
+=======
+```bash
+# Start everything locally
+npm start
 
-## 🛠 Tech Stack
+# Or quick start (no prompts)
+npm run quick-start
+```
+>>>>>>> fad21f6192a765b3fb20be0c96ac225a9981b789
 
-### Frontend
-- **React 19** with TypeScript
-- **Vite** for build tooling
-- **Tailwind CSS v4** for styling
-- **Shadcn/ui** components for admin dashboard
-- **Ionic React** for mobile app
-- **Capacitor** for native mobile features
+## 📚 Documentation
 
-### Backend & Database
-- **Supabase** for database and real-time subscriptions
-- **PostgreSQL** with PostGIS for location data
-- **Row Level Security (RLS)** for data protection
-- **Edge Functions** for order processing
+All documentation has been moved to the `docs/` folder:
 
+- **[Main Documentation](./docs/README.md)** - Complete project overview and features
+- **[Environment Setup](./docs/ENVIRONMENT_SETUP.md)** - 3-environment deployment setup
+- **[Quick Start Guide](./docs/STARTUP_GUIDE.md)** - Detailed startup instructions
+- **[Development Roadmap](./docs/UPNEXT.md)** - Upcoming features and priorities
+- **[Cashup Implementation](./docs/CASHUP_IMPLEMENTATION_PLAN.md)** - Analytics features plan
+
+<<<<<<< HEAD
 ### Authentication
 - **Vanilla System**: No external authentication dependencies
 - **Local Development**: Simplified auth for rapid development
 - **Supabase Integration**: Direct database authentication when needed
+=======
+## 🌐 Access Points
+>>>>>>> fad21f6192a765b3fb20be0c96ac225a9981b789
 
-### Development
-- **npm Workspaces** monorepo structure
-- **TypeScript** throughout
-- **ESLint** for code quality
-- **Git** with feature branch workflow
+Once running:
+- **Admin Dashboard**: http://localhost:5174
+- **Mobile App**: http://localhost:5173
+- **Database Studio**: http://127.0.0.1:54323
 
 ## 📁 Project Structure
 
 ```
 order-app/
+<<<<<<< HEAD
 ├── apps/
 │   ├── admin/           # Admin dashboard (React + Shadcn)
 │   │   ├── src/
@@ -217,18 +225,32 @@ The reset will apply all migrations including:
 **⚠️ Important**: Run `npx supabase db reset` to get all the latest V2.0 features including size variants, extras, and configurable taxes.
 
 ### Development
-
-```bash
-# Start admin dashboard
-npm run dev:admin      # http://localhost:5174
-
-# Start mobile app  
-npm run dev:mobile     # http://localhost:5173
-
-# Start both
-npm run dev
+=======
+├── apps/                 # Main applications
+│   ├── admin/           # Admin dashboard
+│   └── order-mobile/    # Mobile app
+├── packages/            # Shared packages
+├── docs/               # Documentation
+├── supabase/           # Database & functions
+└── tooling/            # Development tools
 ```
 
+## 🛠 Development
+>>>>>>> fad21f6192a765b3fb20be0c96ac225a9981b789
+
+```bash
+# Install dependencies
+npm install
+
+# Start development
+npm start
+
+# Individual services
+npm run dev:admin      # Admin dashboard only
+npm run dev:mobile     # Mobile app only
+```
+
+<<<<<<< HEAD
 ### Component Inspector (Admin Only)
 
 The admin dashboard includes a powerful **Component Inspector** for development:
@@ -422,3 +444,6 @@ For questions or issues:
 ---
 
 **Built with ❤️ for the coffee community - Now Vanilla & More Powerful Than Ever! ☕✨**
+=======
+For detailed setup and development instructions, see [docs/STARTUP_GUIDE.md](./docs/STARTUP_GUIDE.md).
+>>>>>>> fad21f6192a765b3fb20be0c96ac225a9981b789
