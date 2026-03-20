@@ -33,9 +33,9 @@ export default function LandingPage() {
             />
           </Link>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
-            <Link href="#features" className="hover:text-brand transition-colors">Features</Link>
-            <Link href="#how-it-works" className="hover:text-brand transition-colors">How it works</Link>
-            <Link href="#use-cases" className="hover:text-brand transition-colors">Use cases</Link>
+            <Link href="#features" className="transition-all hover:text-zinc-900 hover:underline hover:decoration-wavy hover:decoration-zinc-900 hover:underline-offset-[6px]">Features</Link>
+            <Link href="#how-it-works" className="transition-all hover:text-zinc-900 hover:underline hover:decoration-wavy hover:decoration-zinc-900 hover:underline-offset-[6px]">How it works</Link>
+            <Link href="#use-cases" className="transition-all hover:text-zinc-900 hover:underline hover:decoration-wavy hover:decoration-zinc-900 hover:underline-offset-[6px]">Use cases</Link>
           </nav>
           <div className="flex items-center gap-4 pr-1">
             <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5">
@@ -231,7 +231,7 @@ export default function LandingPage() {
                 </ul>
                 
                 <div className="pt-6">
-                  <Button size="lg" asChild className="transition-all active:scale-[0.98] bg-white hover:bg-zinc-200 text-zinc-900 rounded-xl h-14 px-8 text-lg font-medium shadow-md">
+                  <Button asChild className="transition-all active:scale-[0.98] bg-white hover:bg-zinc-200 text-zinc-900 rounded-full font-medium px-6 py-5 shadow-md">
                     <Link href="/order">
                       Try the Customer Demo
                     </Link>
@@ -373,10 +373,10 @@ export default function LandingPage() {
               We&apos;ll handle the technical setup. You start taking your orders.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-xl w-full sm:w-auto h-16 px-10 text-xl font-medium shadow-xl">
+              <Button className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium sm:w-auto w-full px-6 py-5 shadow-xl">
                 Request Setup
               </Button>
-              <Button size="lg" variant="outline" asChild className="transition-all active:scale-[0.98] border-white/40 text-white hover:bg-white/10 rounded-xl w-full sm:w-auto h-16 px-10 text-xl font-medium bg-white/5 backdrop-blur-sm shadow-md">
+              <Button variant="outline" asChild className="transition-all active:scale-[0.98] border-white/40 text-white hover:bg-white/10 rounded-full font-medium sm:w-auto w-full px-6 py-5 bg-white/5 backdrop-blur-sm shadow-md">
                 <Link href="mailto:jared@makefriendly.co.za">
                   Contact Us
                 </Link>
