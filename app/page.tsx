@@ -221,7 +221,7 @@ export default function LandingPage() {
                 
                 <ul className="space-y-5 pt-4">
                   {[
-                    "No annoying app downloads required for customers",
+                    "Your app available to your customer",
                     "Lightning-fast digital cart system",
                     "Beautiful image-first product displays"
                   ].map((text, i) => (
