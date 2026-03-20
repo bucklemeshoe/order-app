@@ -106,7 +106,7 @@ export default function LandingPage() {
               <p className="text-zinc-600 text-lg">
                 <span className="relative inline-block mx-1">
                   <span className="relative z-10 font-bold text-zinc-900">Stop paying 30%</span>
-                  <svg className="absolute z-0 text-brand -top-2 -bottom-2 -left-3 -right-3 w-[calc(100%+24px)] h-[calc(100%+16px)] pointer-events-none opacity-80" viewBox="0 0 200 60" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="absolute z-0 text-brand -top-3 -bottom-3 -left-5 -right-5 w-[calc(100%+40px)] h-[calc(100%+24px)] pointer-events-none opacity-80" viewBox="0 0 200 60" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M 10 30 C 20 10 180 5 190 25 C 200 45 160 55 100 55 C 40 55 5 40 15 20" stroke="currentColor" strokeWidth="4" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
                   </svg>
                 </span>{' '}
