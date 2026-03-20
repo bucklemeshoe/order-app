@@ -187,13 +187,13 @@ export default function LandingPage() {
                   icon: <Monitor className="w-7 h-7 text-zinc-600" />
                 }
               ].map((item, i, arr) => (
-                <div key={i} className="relative flex-1 bg-zinc-50/50 rounded-3xl p-8 lg:p-10 border border-zinc-200">
+                <div key={i} className="group relative flex-1 bg-zinc-50/50 rounded-3xl p-8 lg:p-10 border border-zinc-200 hover:bg-zinc-100/50 transition-colors duration-500">
                   {i !== arr.length - 1 && (
-                    <div className="hidden md:block absolute top-[50%] -right-4 lg:-right-6 -tranzinc-y-1/2 z-20 bg-white rounded-full p-2 border border-zinc-200 shadow-sm">
+                    <div className="hidden md:block absolute top-[50%] -right-4 lg:-right-6 -translate-y-1/2 z-20 bg-white rounded-full p-2 border border-zinc-200 shadow-sm transition-transform duration-500 group-hover:translate-x-1">
                       <ArrowRight className="w-5 h-5 text-zinc-400" />
                     </div>
                   )}
-                  <div className="text-6xl font-black text-brand opacity-20 mb-6 font-[family-name:var(--font-heading)]">{item.step}</div>
+                  <div className="text-6xl font-black text-brand opacity-20 mb-6 font-[family-name:var(--font-heading)] transform transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-[1.05] origin-bottom-left inline-block">{item.step}</div>
                   <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-200 shadow-sm flex items-center justify-center mb-6">
                     {item.icon}
                   </div>
