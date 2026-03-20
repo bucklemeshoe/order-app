@@ -35,7 +35,6 @@ export default function LandingPage() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
             <Link href="#features" className="hover:text-brand transition-colors">Features</Link>
             <Link href="#how-it-works" className="hover:text-brand transition-colors">How it works</Link>
-            <Link href="/order" className="hover:text-brand transition-colors">Try Demo</Link>
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/admin/login" className="text-sm font-medium text-zinc-600 hover:text-brand transition-colors hidden sm:block">
