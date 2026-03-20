@@ -264,9 +264,15 @@ export default function LandingPage() {
               {/* Takeaway Shops */}
               <div className="flex items-center pl-2 pr-6 py-2 rounded-full bg-white border border-zinc-200 shadow-sm hover:scale-105 transition-all cursor-default">
                 <div className="flex mr-4 drop-shadow-sm">
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-orange-100 flex items-center justify-center text-2xl z-30">🍔</div>
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-red-100 flex items-center justify-center text-2xl -ml-5 z-20">🍕</div>
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-yellow-100 flex items-center justify-center text-2xl -ml-5 z-10">🍟</div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white z-30 bg-white">
+                    <Image src="/avatars/avatar_burger.png" alt="Burger" fill sizes="48px" className="object-cover" />
+                  </div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white -ml-5 z-20 bg-white">
+                    <Image src="/avatars/avatar_pizza.png" alt="Pizza" fill sizes="48px" className="object-cover" />
+                  </div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white -ml-5 z-10 bg-white">
+                    <Image src="/avatars/avatar_chinese.png" alt="Chinese Food" fill sizes="48px" className="object-cover" />
+                  </div>
                 </div>
                 <span className="text-lg font-bold text-zinc-900 tracking-tight">Takeaway shops</span>
               </div>
@@ -274,8 +280,12 @@ export default function LandingPage() {
               {/* Cafes */}
               <div className="flex items-center pl-2 pr-6 py-2 rounded-full bg-white border border-zinc-200 shadow-sm hover:scale-105 transition-all cursor-default">
                 <div className="flex mr-4 drop-shadow-sm">
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-amber-100 flex items-center justify-center text-2xl z-30">☕️</div>
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-orange-100 flex items-center justify-center text-2xl -ml-5 z-20">🥐</div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white z-30 bg-white">
+                    <Image src="/avatars/avatar_coffee.png" alt="Coffee" fill sizes="48px" className="object-cover" />
+                  </div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white -ml-5 z-20 bg-white">
+                    <Image src="/avatars/avatar_croissant.png" alt="Croissant" fill sizes="48px" className="object-cover" />
+                  </div>
                 </div>
                 <span className="text-lg font-bold text-zinc-900 tracking-tight">Cafes / Coffee bars</span>
               </div>
@@ -283,9 +293,12 @@ export default function LandingPage() {
               {/* Bakeries */}
               <div className="flex items-center pl-2 pr-6 py-2 rounded-full bg-white border border-zinc-200 shadow-sm hover:scale-105 transition-all cursor-default">
                 <div className="flex mr-4 drop-shadow-sm">
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-pink-100 flex items-center justify-center text-2xl z-30">🧁</div>
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-amber-100 flex items-center justify-center text-2xl -ml-5 z-20">🥖</div>
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-orange-100 flex items-center justify-center text-2xl -ml-5 z-10">🥨</div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white z-30 bg-white">
+                    <Image src="/avatars/avatar_cupcake.png" alt="Cupcake" fill sizes="48px" className="object-cover" />
+                  </div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white -ml-5 z-20 bg-white">
+                    <Image src="/avatars/avatar_pretzel.png" alt="Pretzel" fill sizes="48px" className="object-cover" />
+                  </div>
                 </div>
                 <span className="text-lg font-bold text-zinc-900 tracking-tight">Bakeries</span>
               </div>
@@ -293,9 +306,12 @@ export default function LandingPage() {
               {/* Meal prep */}
               <div className="flex items-center pl-2 pr-6 py-2 rounded-full bg-white border border-zinc-200 shadow-sm hover:scale-105 transition-all cursor-default">
                 <div className="flex mr-4 drop-shadow-sm">
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-green-100 flex items-center justify-center text-2xl z-30">🥗</div>
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-rose-100 flex items-center justify-center text-2xl -ml-5 z-20">🍱</div>
-                  <div className="w-12 h-12 rounded-full border-[3px] border-white bg-lime-100 flex items-center justify-center text-2xl -ml-5 z-10">🥑</div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white z-30 bg-white">
+                    <Image src="/avatars/avatar_salad.png" alt="Salad" fill sizes="48px" className="object-cover" />
+                  </div>
+                  <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white -ml-5 z-20 bg-white">
+                    <Image src="/avatars/avatar_bento.png" alt="Bento" fill sizes="48px" className="object-cover" />
+                  </div>
                 </div>
                 <span className="text-lg font-bold text-zinc-900 tracking-tight">Meal prep brands</span>
               </div>
