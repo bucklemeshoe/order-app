@@ -38,8 +38,8 @@ export default function BlogListingPage() {
                 {/* tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.tags.slice(0, 2).map((tag, i) => (
-                    <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold">
-                      <span>{tag.icon}</span> <span>{tag.name}</span>
+                    <span key={i} className="inline-flex items-center gap-2 pr-3 pl-1 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold">
+                      <span className="w-6 h-6 rounded-full bg-brand/15 flex items-center justify-center text-[10px]">{tag.icon}</span> <span>{tag.name}</span>
                     </span>
                   ))}
                 </div>

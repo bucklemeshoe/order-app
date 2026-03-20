@@ -43,8 +43,8 @@ export default function BlogPostDetail({ params }: { params: { slug: string } })
       <header className="mb-12 md:text-center max-w-3xl mx-auto">
         <div className="flex flex-wrap items-center justify-start md:justify-center gap-2 mb-6">
           {post.tags.map((tag, i) => (
-            <span key={i} className="inline-flex flex-shrink-0 items-center gap-1.5 px-4 py-1.5 rounded-full bg-zinc-100 text-zinc-800 text-sm font-semibold">
-              <span className="text-base">{tag.icon}</span> <span>{tag.name}</span>
+            <span key={i} className="inline-flex flex-shrink-0 items-center gap-2 pr-4 pl-1.5 py-1.5 rounded-full bg-zinc-100 text-zinc-800 text-sm font-semibold">
+              <span className="w-6 h-6 rounded-full bg-brand/15 text-brand flex items-center justify-center text-xs">{tag.icon}</span> <span>{tag.name}</span>
             </span>
           ))}
         </div>
@@ -54,7 +54,7 @@ export default function BlogPostDetail({ params }: { params: { slug: string } })
         </h1>
 
         <div className="flex items-center justify-start md:justify-center gap-4 text-sm font-medium text-zinc-500">
-          <span>By <strong>{post.author}</strong></span>
+          <span>By <strong><a href="https://make-friendly.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand transition-colors text-inherit">{post.author}</a></strong></span>
           <span className="text-zinc-300">•</span>
           <span>{post.date}</span>
           <span className="text-zinc-300">•</span>
@@ -141,6 +141,17 @@ export default function BlogPostDetail({ params }: { params: { slug: string } })
             font-weight: 900;
             font-size: 1.5rem;
             line-height: 1.75rem;
+          }
+
+          .blog-content .o-app-link {
+            color: var(--color-brand, #F83D60);
+            text-decoration: none;
+            font-weight: 900;
+            transition: opacity 0.2s ease;
+          }
+          
+          .blog-content .o-app-link:hover {
+            opacity: 0.8;
           }
         `}} />
       </div>
