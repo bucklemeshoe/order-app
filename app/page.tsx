@@ -12,13 +12,14 @@ import {
   CheckCircle2,
   Wrench,
   Monitor,
-  Store
 } from "lucide-react"
+import { Store } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Typewriter } from "@/components/ui/typewriter"
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-primary/20">
+    <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-cyan-300 selection:text-cyan-950 select-text">
       {/* Navbar */}
       <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -61,7 +62,9 @@ export default function LandingPage() {
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-4xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-zinc-900 drop-shadow-sm">
               Your own ordering system. <br className="hidden md:block" />
-              <span className="text-brand inline-block animate-in fade-in slide-in-from-bottom-4 duration-1000 ease-out fill-mode-both delay-300">No commissions.</span>
+              <span className="text-brand inline-block min-w-[300px] text-left">
+                <Typewriter text="No commissions." delay={75} />
+              </span>
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
