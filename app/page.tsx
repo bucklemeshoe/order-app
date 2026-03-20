@@ -27,8 +27,8 @@ export default function LandingPage() {
             <Image 
               src="/O_App_logo_transparent.png" 
               alt="O.App Logo" 
-              width={42} 
-              height={42} 
+              width={53} 
+              height={53} 
               className="object-contain"
             />
           </Link>
@@ -243,12 +243,12 @@ export default function LandingPage() {
               <div className="grid grid-cols-2 gap-4 order-1 lg:order-2">
                 <div className="space-y-4 pt-12">
                    <div className="rounded-[2rem] overflow-hidden border border-white/10 aspect-[4/5] relative bg-zinc-900 shadow-2xl">
-                     <Image src="/images/hero-banner.png" alt="App interface" fill className="object-cover" />
+                     <Image src="/images/family-sharing-food.png" alt="Family sharing order" fill className="object-cover" />
                    </div>
                 </div>
                 <div className="space-y-4">
                    <div className="rounded-[2rem] overflow-hidden border border-white/10 aspect-[4/5] relative bg-zinc-900 shadow-2xl">
-                     <Image src="/images/default-product.png" alt="Product interface" fill className="object-cover" />
+                     <Image src="/images/delivery-person.png" alt="Order delivery" fill className="object-cover" />
                    </div>
                 </div>
               </div>
@@ -347,8 +347,8 @@ export default function LandingPage() {
                 <Image 
                   src="/O_App_logo_transparent.png" 
                   alt="O.App Logo" 
-                  width={52} 
-                  height={52} 
+                  width={65} 
+                  height={65} 
                   className="object-contain"
                 />
               </Link>
