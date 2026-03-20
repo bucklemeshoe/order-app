@@ -50,7 +50,7 @@ export default function SecondaryLayout({
             
             <div className="flex flex-col md:items-end md:text-right">
               <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Product Options</h4>
-              <ul className="space-y-4 mb-8 text-left md:text-right">
+              <ul className="space-y-4 text-left md:text-right">
                 <li>
                   <Link href="/admin/login" className="text-zinc-400 hover:text-white transition-colors">Admin Dashboard</Link>
                 </li>
@@ -58,9 +58,6 @@ export default function SecondaryLayout({
                   <Link href="/order" className="text-zinc-400 hover:text-white transition-colors">Customer Demo</Link>
                 </li>
               </ul>
-              <a href="mailto:jared@makefriendly.co.za" className="text-white font-bold text-xl hover:text-brand transition-colors font-[family-name:var(--font-heading)] block mt-auto">
-                Email Us
-              </a>
             </div>
           </div>
           
