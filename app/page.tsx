@@ -268,7 +268,7 @@ export default function LandingPage() {
                   <div className="w-12 h-12 rounded-full border-[3px] border-white bg-red-100 flex items-center justify-center text-2xl -ml-5 z-20">🍕</div>
                   <div className="w-12 h-12 rounded-full border-[3px] border-white bg-yellow-100 flex items-center justify-center text-2xl -ml-5 z-10">🍟</div>
                 </div>
-                <span className="text-xl font-black tracking-tight">Takeaway shops</span>
+                <span className="text-lg font-bold text-zinc-900 tracking-tight">Takeaway shops</span>
               </div>
               
               {/* Cafes */}
@@ -277,7 +277,7 @@ export default function LandingPage() {
                   <div className="w-12 h-12 rounded-full border-[3px] border-white bg-amber-100 flex items-center justify-center text-2xl z-30">☕️</div>
                   <div className="w-12 h-12 rounded-full border-[3px] border-white bg-orange-100 flex items-center justify-center text-2xl -ml-5 z-20">🥐</div>
                 </div>
-                <span className="text-xl font-black tracking-tight">Cafes / Coffee bars</span>
+                <span className="text-lg font-bold text-zinc-900 tracking-tight">Cafes / Coffee bars</span>
               </div>
 
               {/* Bakeries */}
@@ -287,7 +287,7 @@ export default function LandingPage() {
                   <div className="w-12 h-12 rounded-full border-[3px] border-white bg-amber-100 flex items-center justify-center text-2xl -ml-5 z-20">🥖</div>
                   <div className="w-12 h-12 rounded-full border-[3px] border-white bg-orange-100 flex items-center justify-center text-2xl -ml-5 z-10">🥨</div>
                 </div>
-                <span className="text-xl font-black tracking-tight">Bakeries</span>
+                <span className="text-lg font-bold text-zinc-900 tracking-tight">Bakeries</span>
               </div>
 
               {/* Meal prep */}
@@ -297,7 +297,7 @@ export default function LandingPage() {
                   <div className="w-12 h-12 rounded-full border-[3px] border-white bg-rose-100 flex items-center justify-center text-2xl -ml-5 z-20">🍱</div>
                   <div className="w-12 h-12 rounded-full border-[3px] border-white bg-lime-100 flex items-center justify-center text-2xl -ml-5 z-10">🥑</div>
                 </div>
-                <span className="text-xl font-black tracking-tight">Meal prep brands</span>
+                <span className="text-lg font-bold text-zinc-900 tracking-tight">Meal prep brands</span>
               </div>
             </div>
           </div>
