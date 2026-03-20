@@ -124,30 +124,29 @@ Looking forward to hearing from you!`
                 <Textarea id="notes" name="notes" placeholder="Tell us if there's anything specific you need..." className="min-h-[120px] rounded-xl resize-y bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" />
               </div>
 
-              <div className="pt-8 border-t border-zinc-200 block w-full">
+              <div className="pt-8 border-t border-zinc-200 block w-full space-y-4">
                 <div className="flex items-start gap-4 w-full">
-                  <Checkbox id="terms-ack" name="terms-ack" className="mt-1 h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand shrink-0" required />
-                  <div className="space-y-4 leading-relaxed w-full">
-                    <Label htmlFor="terms-ack" className="font-bold text-base text-zinc-800 cursor-pointer pt-0.5 block select-none">
-                      I have read and understand the setup terms *
-                    </Label>
-                    <div className="text-sm text-zinc-600 font-medium leading-relaxed bg-zinc-50 p-6 rounded-2xl border border-zinc-200 space-y-4 w-full block">
-                      <p>
-                        I have read and understand that O.App is a one-time setup service. The setup includes deploying and configuring the system, connecting payments, and preparing a working environment with a core menu so the business can start taking orders.
-                      </p>
-                      <p>
-                        I understand that full menu population, ongoing updates, and custom development are not included. After setup, I will have full access to manage my system independently.
-                      </p>
-                      <p>
-                        I understand that support is not included as a monthly service, but is available separately if needed.
-                      </p>
-                    </div>
-                  </div>
+                  <Checkbox id="terms-ack" name="terms-ack" className="mt-0.5 h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand shrink-0" required />
+                  <Label htmlFor="terms-ack" className="font-bold text-base text-zinc-800 cursor-pointer pt-0 block select-none">
+                    I have read and understand the setup terms *
+                  </Label>
+                </div>
+                
+                <div className="text-sm text-zinc-600 font-medium leading-relaxed bg-amber-50/50 p-6 rounded-2xl border border-amber-100/60 space-y-4 w-full block">
+                  <p>
+                    I have read and understand that O.App is a one-time setup service. The setup includes deploying and configuring the system, connecting payments, and preparing a working environment with a core menu so the business can start taking orders.
+                  </p>
+                  <p>
+                    I understand that full menu population, ongoing updates, and custom development are not included. After setup, I will have full access to manage my system independently.
+                  </p>
+                  <p>
+                    I understand that support is not included as a monthly service, but is available separately if needed.
+                  </p>
                 </div>
               </div>
 
-              <div className="pt-6 block w-full">
-                <Button type="submit" className="w-full bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-8 h-12 transition-all active:scale-[0.98]">
+              <div className="pt-6 flex justify-end w-full">
+                <Button type="submit" className="w-full sm:w-auto bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-8 h-11 transition-all active:scale-[0.98]">
                   Submit Request
                 </Button>
               </div>
