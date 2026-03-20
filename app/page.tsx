@@ -26,8 +26,8 @@ export default function LandingPage() {
             <Image 
               src="/O_App_logo_transparent.png" 
               alt="O.App Logo" 
-              width={32} 
-              height={32} 
+              width={42} 
+              height={42} 
               className="object-contain"
             />
           </Link>
@@ -318,8 +318,8 @@ export default function LandingPage() {
                 <Image 
                   src="/O_App_logo_transparent.png" 
                   alt="O.App Logo" 
-                  width={40} 
-                  height={40} 
+                  width={52} 
+                  height={52} 
                   className="object-contain"
                 />
               </Link>
