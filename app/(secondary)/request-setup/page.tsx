@@ -55,13 +55,12 @@ Looking forward to hearing from you!`
   }
 
   return (
-    <div className="px-4 flex justify-center font-[family-name:var(--font-sans)] py-12">
-      <div className="w-full max-w-xl animate-in fade-in slide-in-from-bottom-8 duration-700">
-        <div className="mb-6">
-          <Link href="/" className="inline-flex items-center text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to home
-          </Link>
-        </div>
+    <div className="container mx-auto px-4 max-w-3xl font-[family-name:var(--font-sans)] animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div className="mb-10">
+        <Link href="/" className="inline-flex items-center text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
+          <ArrowLeft className="w-4 h-4 mr-2" /> Back to home
+        </Link>
+      </div>
         <div className="mb-10">
           <h1 className="text-4xl md:text-5xl font-black text-zinc-900 mb-4 font-[family-name:var(--font-heading)] tracking-tight">Request Setup</h1>
           <p className="text-zinc-600 text-lg md:text-xl font-medium">
@@ -136,7 +135,6 @@ Looking forward to hearing from you!`
             </form>
           </CardContent>
         </Card>
-      </div>
     </div>
   )
 }
