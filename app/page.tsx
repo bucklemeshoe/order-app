@@ -33,9 +33,24 @@ export default function LandingPage() {
             />
           </Link>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
-            <Link href="#features" className="transition-all hover:text-zinc-900 hover:underline hover:decoration-wavy hover:decoration-zinc-900 hover:underline-offset-[6px]">Features</Link>
-            <Link href="#how-it-works" className="transition-all hover:text-zinc-900 hover:underline hover:decoration-wavy hover:decoration-zinc-900 hover:underline-offset-[6px]">How it works</Link>
-            <Link href="#use-cases" className="transition-all hover:text-zinc-900 hover:underline hover:decoration-wavy hover:decoration-zinc-900 hover:underline-offset-[6px]">Use cases</Link>
+            <Link href="#features" className="group relative transition-all hover:text-brand">
+              <span className="relative z-10">Features</span>
+              <svg className="absolute -bottom-[6px] left-0 w-full h-[6px] text-zinc-900 opacity-0 group-hover:opacity-100 transition-all duration-300" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path d="M2,8 C15,-2 25,12 40,5 C55,-2 75,14 100,4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke"/>
+              </svg>
+            </Link>
+            <Link href="#how-it-works" className="group relative transition-all hover:text-brand">
+              <span className="relative z-10">How it works</span>
+              <svg className="absolute -bottom-[6px] left-0 w-full h-[6px] text-zinc-900 opacity-0 group-hover:opacity-100 transition-all duration-300" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path d="M0,6 C20,15 30,-5 50,8 C70,21 80,-2 100,7" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke"/>
+              </svg>
+            </Link>
+            <Link href="#use-cases" className="group relative transition-all hover:text-brand">
+              <span className="relative z-10">Use cases</span>
+              <svg className="absolute -bottom-[6px] left-0 w-full h-[6px] text-zinc-900 opacity-0 group-hover:opacity-100 transition-all duration-300" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path d="M5,9 C25,-5 35,16 60,3 C80,-10 90,15 100,5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke"/>
+              </svg>
+            </Link>
           </nav>
           <div className="flex items-center gap-4 pr-1">
             <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5">
