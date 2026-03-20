@@ -7,7 +7,7 @@ export function PWAOptimizer() {
   const pathname = usePathname()
   const isAdmin = pathname?.startsWith('/admin')
   const isMarketing = pathname === '/'
-  const isSecondary = pathname === '/request-setup' || pathname === '/privacy-policy' || pathname === '/terms-of-service'
+  const isSecondary = pathname === '/request-setup' || pathname === '/privacy-policy' || pathname === '/terms-of-service' || pathname?.startsWith('/blog')
 
   useEffect(() => {
     // Skip all PWA optimizations on admin, marketing, and secondary informational pages
