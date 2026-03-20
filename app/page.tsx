@@ -33,12 +33,13 @@ export default function LandingPage() {
             />
           </Link>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+            <Link href="#use-cases" className="hover:text-brand transition-colors">Use cases</Link>
             <Link href="#features" className="hover:text-brand transition-colors">Features</Link>
             <Link href="#how-it-works" className="hover:text-brand transition-colors">How it works</Link>
           </nav>
           <div className="flex items-center gap-4 pr-1">
             <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5">
-              <Link href="#contact">Get this for my business</Link>
+              <Link href="#contact">Get in touch</Link>
             </Button>
           </div>
         </div>
@@ -56,7 +57,7 @@ export default function LandingPage() {
               <span>Available for South African businesses</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-4xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-zinc-900 drop-shadow-sm">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-4xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-zinc-900">
               Your own ordering system. <br className="hidden md:block" />
               <span className="text-brand inline-block min-w-[300px] text-left">
                 <Typewriter text="No commissions." delay={75} />
@@ -254,7 +255,7 @@ export default function LandingPage() {
         </section>
 
         {/* Trust / Positioning */}
-        <section className="py-32 bg-zinc-100 flex items-center justify-center text-center px-4">
+        <section id="use-cases" className="py-32 bg-zinc-100 flex items-center justify-center text-center px-4">
           <div className="container mx-auto max-w-4xl">
             <Store className="w-16 h-16 mx-auto text-zinc-300 mb-8" />
             <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-10 font-[family-name:var(--font-heading)] text-zinc-900">
@@ -263,7 +264,7 @@ export default function LandingPage() {
             <div className="flex flex-wrap justify-center gap-4 text-zinc-900 mt-2 max-w-5xl mx-auto">
               {/* Takeaway Shops */}
               <div className="flex items-center pl-2 pr-6 py-2 rounded-full bg-white border border-zinc-200 shadow-sm hover:scale-105 transition-all cursor-default">
-                <div className="flex mr-4 drop-shadow-sm">
+                <div className="flex mr-4">
                   <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white z-30 bg-white">
                     <Image src="/avatars/avatar_burger.png" alt="Burger" fill sizes="48px" className="object-cover" />
                   </div>
@@ -279,7 +280,7 @@ export default function LandingPage() {
               
               {/* Cafes */}
               <div className="flex items-center pl-2 pr-6 py-2 rounded-full bg-white border border-zinc-200 shadow-sm hover:scale-105 transition-all cursor-default">
-                <div className="flex mr-4 drop-shadow-sm">
+                <div className="flex mr-4">
                   <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white z-30 bg-white">
                     <Image src="/avatars/avatar_coffee.png" alt="Coffee" fill sizes="48px" className="object-cover" />
                   </div>
@@ -292,7 +293,7 @@ export default function LandingPage() {
 
               {/* Bakeries */}
               <div className="flex items-center pl-2 pr-6 py-2 rounded-full bg-white border border-zinc-200 shadow-sm hover:scale-105 transition-all cursor-default">
-                <div className="flex mr-4 drop-shadow-sm">
+                <div className="flex mr-4">
                   <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white z-30 bg-white">
                     <Image src="/avatars/avatar_cupcake.png" alt="Cupcake" fill sizes="48px" className="object-cover" />
                   </div>
@@ -305,7 +306,7 @@ export default function LandingPage() {
 
               {/* Meal prep */}
               <div className="flex items-center pl-2 pr-6 py-2 rounded-full bg-white border border-zinc-200 shadow-sm hover:scale-105 transition-all cursor-default">
-                <div className="flex mr-4 drop-shadow-sm">
+                <div className="flex mr-4">
                   <div className="relative overflow-hidden w-12 h-12 rounded-full border-[3px] border-white z-30 bg-white">
                     <Image src="/avatars/avatar_salad.png" alt="Salad" fill sizes="48px" className="object-cover" />
                   </div>
@@ -365,10 +366,10 @@ export default function LandingPage() {
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
-            <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight mb-6 font-[family-name:var(--font-heading)] drop-shadow-sm">
+            <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight mb-6 font-[family-name:var(--font-heading)]">
               Get your own ordering system set up
             </h2>
-            <p className="text-xl md:text-2xl text-white/90 font-medium mb-12 drop-shadow-sm">
+            <p className="text-xl md:text-2xl text-white/90 font-medium mb-12">
               We&apos;ll handle the technical setup. You start taking your orders.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
