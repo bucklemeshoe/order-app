@@ -6,10 +6,11 @@ import { usePathname } from 'next/navigation'
 export function PWAOptimizer() {
   const pathname = usePathname()
   const isAdmin = pathname?.startsWith('/admin')
+  const isMarketing = pathname === '/'
 
   useEffect(() => {
-    // Skip all PWA optimizations on admin pages
-    if (isAdmin) return
+    // Skip all PWA optimizations on admin and marketing pages
+    if (isAdmin || isMarketing) return
 
     // Add pwa-mobile class to body for customer pages
     document.body.classList.add('pwa-mobile')
