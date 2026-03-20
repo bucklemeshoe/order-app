@@ -46,7 +46,7 @@ export const blogPosts: BlogPost[] = [
       <h3>You Don't Own Your Customers</h3>
       <p>When someone orders your food through MrD or UberEats, they aren't <em>your</em> customer. They are the platform's customer. You don't get their email address, you can't text them a promotional offer on a slow Tuesday, and you have no way to build long-term loyalty. If you leave the platform, you take zero customers with you.</p>
 
-      <h2>The Alternative: First-Party Ordering (<a href="/" class="o-app-link">O.App</a>)</h2>
+      <h2>The Alternative: First-Party Ordering (O.App)</h2>
       <p>A first-party ordering system is an app or website that belongs entirely to your restaurant. Customers order directly from you, not through an aggregator. This is where <a href="/" class="o-app-link">O.App</a> comes in.</p>
 
       <h3>Taking Back Your Margin</h3>
