@@ -24,7 +24,7 @@ export default function BlogListingPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.map((post) => (
           <Link href={`/blog/${post.slug}`} key={post.slug} className="group block">
-            <Card className="border-0 shadow-xl overflow-hidden rounded-[2rem] transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1 bg-white h-full flex flex-col">
+            <Card className="p-0 gap-0 border-0 shadow-xl overflow-hidden rounded-[2rem] transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1 bg-white h-full flex flex-col">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image 
                   src={post.coverImage} 
@@ -36,10 +36,11 @@ export default function BlogListingPage() {
               
               <CardContent className="p-8 flex flex-col flex-grow">
                 {/* tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.slice(0, 2).map((tag, i) => (
-                    <span key={i} className="inline-flex items-center gap-2 pr-3 pl-1 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold">
-                      <span className="w-6 h-6 rounded-full bg-brand/15 flex items-center justify-center text-[10px]">{tag.icon}</span> <span>{tag.name}</span>
+                <div className="flex flex-wrap items-center gap-2 mb-4 text-xs font-bold text-zinc-600 uppercase tracking-wider">
+                  {post.tags.slice(0, 2).map((tag, i, arr) => (
+                    <span key={i} className="flex items-center">
+                      <span>{tag.name}</span>
+                      {i < arr.length - 1 && <span className="ml-2 text-brand">•</span>}
                     </span>
                   ))}
                 </div>

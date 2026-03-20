@@ -42,11 +42,25 @@ export default function BlogPostDetail({ params }: { params: { slug: string } })
       {/* Header Container */}
       <header className="mb-12 md:text-center max-w-3xl mx-auto">
         <div className="flex flex-wrap items-center justify-start md:justify-center gap-2 mb-6">
-          {post.tags.map((tag, i) => (
-            <span key={i} className="inline-flex flex-shrink-0 items-center gap-2 pr-4 pl-1.5 py-1.5 rounded-full bg-zinc-100 text-zinc-800 text-sm font-semibold">
-              <span className="w-6 h-6 rounded-full bg-brand/15 text-brand flex items-center justify-center text-xs">{tag.icon}</span> <span>{tag.name}</span>
-            </span>
-          ))}
+          {post.tags.map((tag, i) => {
+            const colors = [
+              "bg-emerald-50 text-emerald-800 border-emerald-100",
+              "bg-indigo-50 text-indigo-800 border-indigo-100",
+              "bg-amber-50 text-amber-800 border-amber-100",
+              "bg-rose-50 text-rose-800 border-rose-100"
+            ]
+            const iconBgs = [
+              "bg-emerald-100",
+              "bg-indigo-100",
+              "bg-amber-100",
+              "bg-rose-100"
+            ]
+            return (
+              <span key={i} className={`inline-flex flex-shrink-0 items-center gap-2 pr-4 pl-1.5 py-1.5 rounded-full border ${colors[i % colors.length]} text-sm font-semibold`}>
+                <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${iconBgs[i % iconBgs.length]}`}>{tag.icon}</span> <span>{tag.name}</span>
+              </span>
+            )
+          })}
         </div>
 
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-zinc-900 mb-6 font-[family-name:var(--font-heading)] tracking-tight leading-tight">
@@ -97,7 +111,7 @@ export default function BlogPostDetail({ params }: { params: { slug: string } })
             font-size: 1.5rem;
             line-height: 2rem;
             font-weight: 800;
-            color: #18181b;
+            color: #312e81; /* subtle indigo-900 */
             margin-top: 2.5rem;
             margin-bottom: 1rem;
             font-family: var(--font-heading);
@@ -106,16 +120,17 @@ export default function BlogPostDetail({ params }: { params: { slug: string } })
 
           .blog-content p {
             margin-bottom: 1.5rem;
+            color: #3f3f46;
           }
 
           .blog-content strong {
             font-weight: 700;
-            color: #000;
+            color: #111827; /* gray-900 */
           }
 
           .blog-content em {
             font-style: italic;
-            color: #52525b; /* zinc-600 */
+            color: #0369a1; /* sky-700 subtle blue */
           }
 
           .blog-content ul {
