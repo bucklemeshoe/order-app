@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Image from "next/image"
+import { Smartphone } from "lucide-react"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -54,6 +55,19 @@ export default function LoginPage() {
 
   return (
     <main className="flex min-h-[100dvh] items-center justify-center bg-brand px-4 relative overflow-hidden" style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)" }}>
+      {/* Desktop warning overlay */}
+      <div className="hidden md:block relative z-10 bg-white p-10 rounded-[2rem] max-w-sm w-full shadow-2xl border border-zinc-200 text-center">
+        <div className="mx-auto w-20 h-20 bg-zinc-50 border border-zinc-100 rounded-full flex items-center justify-center shadow-inner mb-6">
+          <Smartphone className="w-10 h-10 text-zinc-900" />
+        </div>
+        <h2 className="text-2xl font-black font-[family-name:var(--font-heading)] text-zinc-900 tracking-tight mb-4">
+          Phone required
+        </h2>
+        <p className="text-zinc-600 font-medium leading-relaxed">
+          The customer experience is built entirely for your mobile app. Please open this link on your smartphone to continue ordering.
+        </p>
+      </div>
+
       {/* Scattered food emoji background */}
       <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
         {[
@@ -91,7 +105,7 @@ export default function LoginPage() {
           </span>
         ))}
       </div>
-      <div className="w-full max-w-sm space-y-6 relative z-10 bg-card border border-border rounded-2xl p-8 shadow-sm">
+      <div className="md:hidden w-full max-w-sm space-y-6 relative z-10 bg-card border border-border rounded-2xl p-8 shadow-sm">
         <div className="flex flex-col items-center gap-3">
           <Image
             src="/O_App_logo_transparent.png"

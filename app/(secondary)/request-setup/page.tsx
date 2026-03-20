@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export default function RequestSetupPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,6 +19,7 @@ export default function RequestSetupPage() {
       owner: formData.get('ownerName'),
       email: formData.get('email'),
       phone: formData.get('phone'),
+      payments: formData.get('payments') || 'None',
       menu: formData.get('menuLink') || 'Not provided',
       apps: formData.get('apps') || 'None',
       notes: formData.get('notes') || 'None',
@@ -37,6 +39,7 @@ WhatsApp: ${data.phone}
 
 CURRENT SETUP
 ---------------------------
+Payments System: ${data.payments}
 Menu Link: ${data.menu}
 Current Delivery Apps: ${data.apps}
 
@@ -53,6 +56,11 @@ Looking forward to hearing from you!`
   return (
     <div className="px-4 flex items-center justify-center font-[family-name:var(--font-sans)]">
       <div className="w-full max-w-xl animate-in fade-in slide-in-from-bottom-8 duration-700">
+        <div className="mb-6">
+          <Link href="/" className="inline-flex items-center text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to home
+          </Link>
+        </div>
         
         <Card className="border-0 shadow-2xl rounded-[2rem] overflow-hidden py-0 gap-0">
           <div className="bg-zinc-950 p-8 sm:p-10 text-white relative overflow-hidden">
@@ -88,6 +96,11 @@ Looking forward to hearing from you!`
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="payments" className="font-semibold text-zinc-900">Do you currently use Yoco, Snapscan, or both for payments?</Label>
+                <Input id="payments" name="payments" placeholder="E.g. We use Yoco" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" />
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="menuLink" className="font-semibold text-zinc-900">Link to your current menu (Website, Instagram, PDF)</Label>
                 <Input id="menuLink" name="menuLink" type="url" placeholder="https://..." className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" />
               </div>
@@ -102,13 +115,13 @@ Looking forward to hearing from you!`
                 <Textarea id="notes" name="notes" placeholder="Tell us if there's anything specific you need..." className="min-h-[120px] rounded-xl resize-y bg-zinc-50 border-zinc-200 focus-visible:ring-brand" />
               </div>
 
-              <div className="pt-6">
-                <Button type="submit" className="w-full bg-brand hover:bg-brand/90 text-white rounded-full h-14 text-lg font-medium shadow-[0_8px_30px_rgb(248,61,96,0.3)] transition-all hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]">
+              <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-zinc-500 text-sm font-medium order-2 sm:order-1">
+                  No credit card required.
+                </p>
+                <Button type="submit" className="w-full sm:w-auto bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-8 h-11 transition-all active:scale-[0.98] order-1 sm:order-2">
                   Submit Request
                 </Button>
-                <p className="text-center text-zinc-500 text-sm mt-5 font-medium">
-                  No credit card required. We usually set up your mockups within 24 hours.
-                </p>
               </div>
             </form>
           </CardContent>

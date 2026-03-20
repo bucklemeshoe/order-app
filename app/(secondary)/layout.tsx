@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import { HeaderAction } from './header-action'
 
 export default function SecondaryLayout({
   children,
@@ -21,9 +21,7 @@ export default function SecondaryLayout({
             />
           </Link>
           <div className="flex items-center gap-4 pr-1">
-            <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5 shadow-sm">
-              <Link href="/request-setup">Request Setup</Link>
-            </Button>
+            <HeaderAction />
           </div>
         </div>
       </header>
