@@ -1,7 +1,0 @@
-/* Core theme: map Tailwind tokens to Ionic CSS variables */
-:root {
-  --ion-color-primary: #111827; /* slate-900 example */
-  --ion-color-primary-contrast: #ffffff;
-}
-
-
