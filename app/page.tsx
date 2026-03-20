@@ -65,18 +65,7 @@ export default function LandingPage() {
               Let your customers order online, pay securely with SnapScan or Yoco, and choose delivery or collection — all managed from one simple dashboard.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-xl w-full sm:w-auto h-14 px-8 text-lg font-medium shadow-md">
-                <Link href="#demo">
-                  <Play className="w-5 h-5 mr-2 fill-current" /> Watch Demo
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="transition-all active:scale-[0.98] w-full sm:w-auto h-14 px-8 rounded-xl text-lg font-medium border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-900 shadow-sm">
-                <Link href="#contact">
-                  Get this for my business
-                </Link>
-              </Button>
-            </div>
+
 
             {/* Video Container (The Hero piece) */}
             <div id="demo" className="mt-20 relative mx-auto max-w-5xl rounded-2xl md:rounded-[2.5rem] border border-slate-200 bg-slate-50 p-2 md:p-4 shadow-2xl">
@@ -272,27 +261,56 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* CTA Section (Featuring the Emoji Pattern on Primary Color) */}
-        <section id="contact" className="py-32 bg-primary relative overflow-hidden flex items-center min-h-[500px]">
+        {/* CTA Section (Featuring the Emoji Pattern on Accent Color) */}
+        <section id="contact" className="py-32 bg-brand relative overflow-hidden flex items-center min-h-[500px]">
           {/* Subtle radial glow */}
           <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent pointer-events-none" />
           
-          {/* Emoji Pattern Background on Accent */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.08] flex items-center justify-center overflow-hidden">
-             <div className="grid grid-cols-6 md:grid-cols-12 gap-8 md:gap-16 text-4xl rotate-12 scale-150">
-               {Array.from({ length: 144 }).map((_, i) => (
-                 <span key={i}>
-                   {["🍔", "🍕", "☕️", "⚡️", "🛍️", "🛵", "💳", "🌶️"][i % 8]}
-                 </span>
-               ))}
-             </div>
+          {/* Scattered food emoji background (matches auth bg) */}
+          <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
+            {[
+              { emoji: "🍕", top: "10%", left: "8%",   size: "2.2rem", rotate: "-15deg" },
+              { emoji: "☕", top: "15%", right: "12%", size: "1.8rem", rotate: "20deg" },
+              { emoji: "🍔", top: "30%", left: "85%",  size: "2.5rem", rotate: "-8deg" },
+              { emoji: "🧁", top: "25%", left: "25%",  size: "1.6rem", rotate: "30deg" },
+              { emoji: "🍩", top: "45%", right: "18%", size: "2rem",   rotate: "-25deg" },
+              { emoji: "🍟", top: "60%", left: "5%",   size: "1.7rem", rotate: "12deg" },
+              { emoji: "🥤", top: "8%",  left: "50%",  size: "1.9rem", rotate: "-20deg" },
+              { emoji: "🍰", top: "80%", left: "15%",  size: "2.3rem", rotate: "18deg" },
+              { emoji: "🌮", top: "85%", right: "15%", size: "2rem",   rotate: "-12deg" },
+              { emoji: "🥐", top: "70%", left: "80%",  size: "1.8rem", rotate: "25deg" },
+              { emoji: "🍦", top: "85%", left: "40%",  size: "2.1rem", rotate: "-30deg" },
+              { emoji: "🥗", top: "90%", right: "30%", size: "1.7rem", rotate: "10deg" },
+              { emoji: "🍜", top: "50%", left: "12%",  size: "1.9rem", rotate: "-5deg" },
+              { emoji: "🧃", top: "40%", right: "5%",  size: "1.6rem", rotate: "22deg" },
+              { emoji: "🍪", top: "50%", left: "68%",  size: "1.5rem", rotate: "-18deg" },
+              { emoji: "🥞", top: "92%", left: "60%",  size: "2rem",   rotate: "8deg" },
+              { emoji: "🍿", top: "40%", left: "38%",  size: "1.8rem", rotate: "-22deg" },
+              { emoji: "🥨", top: "75%", left: "55%",  size: "1.6rem", rotate: "15deg" },
+              { emoji: "🍕", top: "15%", left: "70%",  size: "2.0rem", rotate: "14deg" },
+              { emoji: "🍔", top: "90%", left: "85%",  size: "2.2rem", rotate: "-11deg" }
+            ].map((item, i) => (
+              <span
+                key={i}
+                className="absolute opacity-55"
+                style={{
+                  top: item.top,
+                  left: item.left,
+                  right: (item as any).right,
+                  fontSize: item.size,
+                  transform: `rotate(${item.rotate})`,
+                }}
+              >
+                {item.emoji}
+              </span>
+            ))}
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
             <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight mb-6 font-[family-name:var(--font-heading)] drop-shadow-sm">
               Get your own ordering system set up
             </h2>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 font-medium mb-12 drop-shadow-sm">
+            <p className="text-xl md:text-2xl text-white/90 font-medium mb-12 drop-shadow-sm">
               We&apos;ll handle the technical setup. You start taking your orders.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
