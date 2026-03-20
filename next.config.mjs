@@ -17,7 +17,7 @@ export default withPWA({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: false, // Enable PWA in all environments for testing
+  disable: process.env.NODE_ENV === 'production', // Disable during build to avoid page collection errors
   scope: '/',
   sw: 'sw.js',
   fallbacks: {
