@@ -37,9 +37,6 @@ export default function LandingPage() {
             <Link href="#how-it-works" className="hover:text-brand transition-colors">How it works</Link>
           </nav>
           <div className="flex items-center gap-4 pr-1">
-            <Link href="/admin/login" className="text-sm font-medium text-zinc-600 hover:text-brand transition-colors hidden sm:block mr-2">
-              Log in
-            </Link>
             <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5">
               <Link href="#contact">Get this for my business</Link>
             </Button>
