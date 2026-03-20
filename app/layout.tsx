@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from 'next'
-import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import { Outfit } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import { PWAOptimizer } from '@/components/PWAOptimizer'
 
-const outfit = Outfit({
+const poppins = Poppins({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-heading',
+  variable: '--font-sans',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 })
 
 export const viewport: Viewport = {
@@ -43,12 +43,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable}`}>
+    <html lang="en" className={`${poppins.variable}`}>
       <head>
         <style>{`
 html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
+  font-family: ${poppins.style.fontFamily};
+  --font-sans: ${poppins.style.fontFamily};
+  --font-heading: ${poppins.style.fontFamily};
   --font-mono: ${GeistMono.variable};
 }
         `}</style>
