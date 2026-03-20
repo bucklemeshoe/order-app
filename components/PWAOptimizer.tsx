@@ -7,10 +7,11 @@ export function PWAOptimizer() {
   const pathname = usePathname()
   const isAdmin = pathname?.startsWith('/admin')
   const isMarketing = pathname === '/'
+  const isSecondary = pathname === '/request-setup' || pathname === '/privacy-policy' || pathname === '/terms-of-service'
 
   useEffect(() => {
-    // Skip all PWA optimizations on admin and marketing pages
-    if (isAdmin || isMarketing) return
+    // Skip all PWA optimizations on admin, marketing, and secondary informational pages
+    if (isAdmin || isMarketing || isSecondary) return
 
     // Add pwa-mobile class to body for customer pages
     document.body.classList.add('pwa-mobile')
@@ -71,7 +72,7 @@ export function PWAOptimizer() {
       document.removeEventListener('drop', disableDragDrop)
       document.removeEventListener('touchend', preventDoubleTabZoom)
     }
-  }, [isAdmin])
+  }, [isAdmin, isMarketing, isSecondary])
 
   return null
 }

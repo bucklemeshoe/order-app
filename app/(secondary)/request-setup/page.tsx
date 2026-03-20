@@ -55,7 +55,7 @@ Looking forward to hearing from you!`
   }
 
   return (
-    <div className="px-4 flex items-center justify-center font-[family-name:var(--font-sans)]">
+    <div className="px-4 flex justify-center font-[family-name:var(--font-sans)] py-12">
       <div className="w-full max-w-xl animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="mb-6">
           <Link href="/" className="inline-flex items-center text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
