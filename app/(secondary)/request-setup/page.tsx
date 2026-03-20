@@ -68,8 +68,8 @@ Looking forward to hearing from you!`
           </p>
         </div>
         
-        <Card className="border-0 shadow-2xl rounded-[2rem] overflow-hidden">
-          <CardContent className="p-8 sm:p-10 bg-white">
+        <Card className="border-0 shadow-none sm:shadow-2xl rounded-none sm:rounded-[2rem] overflow-hidden -mx-4 sm:mx-0 sm:border">
+          <CardContent className="px-6 py-8 sm:p-10 bg-white">
             <form className="space-y-8" onSubmit={handleSubmit}>
               <div className="space-y-3">
                 <Label htmlFor="restaurantName" className="text-base font-medium text-zinc-800">Restaurant / Business Name *</Label>
