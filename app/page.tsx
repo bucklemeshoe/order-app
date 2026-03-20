@@ -376,7 +376,7 @@ export default function LandingPage() {
               <Button className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium sm:w-auto w-full px-6 py-5 shadow-xl">
                 Request Setup
               </Button>
-              <Button variant="outline" asChild className="transition-all active:scale-[0.98] border-white/40 text-white hover:bg-white/10 rounded-full font-medium sm:w-auto w-full px-6 py-5 bg-white/5 backdrop-blur-sm shadow-md">
+              <Button variant="outline" asChild className="transition-all active:scale-[0.98] border-white/40 text-white hover:bg-white hover:text-zinc-900 rounded-full font-medium sm:w-auto w-full px-6 py-5 bg-white/5 backdrop-blur-sm shadow-md">
                 <Link href="mailto:jared@makefriendly.co.za">
                   Contact Us
                 </Link>
