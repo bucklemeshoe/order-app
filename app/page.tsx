@@ -99,8 +99,8 @@ export default function LandingPage() {
         {/* Feature Blocks */}
         <section id="features" className="py-24 bg-slate-50 border-y border-slate-200">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16 max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6 font-[family-name:var(--font-heading)] text-slate-900">
+            <div className="text-center mb-16 max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6 font-[family-name:var(--font-heading)] text-slate-900">
                 Everything you need to sell online
               </h2>
               <p className="text-slate-500 text-lg">
