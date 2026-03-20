@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
@@ -19,7 +20,7 @@ export default function RequestSetupPage() {
       owner: formData.get('ownerName'),
       email: formData.get('email'),
       phone: formData.get('phone'),
-      payments: formData.get('payments') || 'None',
+      payments: formData.getAll('payments').join(', ') || 'None',
       menu: formData.get('menuLink') || 'Not provided',
       apps: formData.get('apps') || 'None',
       notes: formData.get('notes') || 'None',
@@ -61,16 +62,14 @@ Looking forward to hearing from you!`
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to home
           </Link>
         </div>
+        <div className="mb-10">
+          <h1 className="text-4xl md:text-5xl font-black text-zinc-900 mb-4 font-[family-name:var(--font-heading)] tracking-tight">Request Setup</h1>
+          <p className="text-zinc-600 text-lg md:text-xl font-medium">
+            Tell us a bit about your business, and we'll handle the entire technical setup for you.
+          </p>
+        </div>
         
-        <Card className="border-0 shadow-2xl rounded-[2rem] overflow-hidden py-0 gap-0">
-          <div className="bg-zinc-950 p-8 sm:p-10 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand rounded-full blur-3xl opacity-20 -mr-20 -mt-20 pointer-events-none"></div>
-            <CardTitle className="text-3xl sm:text-4xl font-black font-[family-name:var(--font-heading)] mb-2 relative z-10 tracking-tight">Request Setup</CardTitle>
-            <CardDescription className="text-zinc-400 text-lg sm:text-xl relative z-10 font-medium">
-              Tell us a bit about your business, and we'll handle the entire technical setup for you.
-            </CardDescription>
-          </div>
-          
+        <Card className="border-0 shadow-2xl rounded-[2rem] overflow-hidden">
           <CardContent className="p-8 sm:p-10 bg-white">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid sm:grid-cols-2 gap-6">
@@ -95,9 +94,22 @@ Looking forward to hearing from you!`
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="payments" className="font-semibold text-zinc-900">Do you currently use Yoco, Snapscan, or both for payments?</Label>
-                <Input id="payments" name="payments" placeholder="E.g. We use Yoco" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" />
+              <div className="space-y-4 pt-2">
+                <Label className="font-semibold text-zinc-900 text-base">Do you currently use Yoco, Snapscan, or both for payments?</Label>
+                <div className="flex flex-col gap-4 pl-1">
+                  <div className="flex items-center space-x-3">
+                    <Checkbox id="payment-yoco" name="payments" value="Yoco" className="h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand" />
+                    <Label htmlFor="payment-yoco" className="font-medium cursor-pointer text-base text-zinc-700">Yoco</Label>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Checkbox id="payment-snapscan" name="payments" value="SnapScan" className="h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand" />
+                    <Label htmlFor="payment-snapscan" className="font-medium cursor-pointer text-base text-zinc-700">SnapScan</Label>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Checkbox id="payment-none" name="payments" value="None / Not yet" className="h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand" />
+                    <Label htmlFor="payment-none" className="font-medium cursor-pointer text-base text-zinc-700">Neither / Other</Label>
+                  </div>
+                </div>
               </div>
 
               <div className="space-y-2">

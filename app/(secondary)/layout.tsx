@@ -30,13 +30,56 @@ export default function SecondaryLayout({
         {children}
       </main>
 
-      <footer className="bg-zinc-50 border-t border-zinc-200 pt-12 pb-8 mt-auto">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500 font-medium">
+      <footer className="bg-zinc-950 border-t border-zinc-800 pt-20 pb-10 mt-auto">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div className="col-span-1 md:col-span-2">
+              <Link href="/" className="inline-block mb-6 hover:opacity-80 transition-opacity">
+                <Image 
+                  src="/O_App_logo_transparent.png" 
+                  alt="O.App Logo" 
+                  width={65} 
+                  height={65} 
+                  className="object-contain"
+                />
+              </Link>
+              <p className="text-zinc-400 max-w-sm text-lg leading-relaxed">
+                The modern ordering system for South African food businesses. Take control of your digital storefront.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Product Options</h4>
+              <ul className="space-y-4">
+                <li>
+                  <Link href="/admin/login" className="text-zinc-400 hover:text-white transition-colors">Admin Dashboard</Link>
+                </li>
+                <li>
+                  <Link href="/order" className="text-zinc-400 hover:text-white transition-colors">Customer Demo</Link>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Contact</h4>
+              <ul className="space-y-4">
+                <li>
+                  <Link href="mailto:jared@makefriendly.co.za" className="text-zinc-400 hover:text-white transition-colors">
+                    jared@makefriendly.co.za
+                  </Link>
+                </li>
+                <li className="text-zinc-400">
+                  Cape Town, South Africa
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-600 font-medium">
             <p>© {new Date().getFullYear()} O.App. All rights reserved.</p>
             <div className="flex gap-6">
-              <Link href="/privacy-policy" className="hover:text-zinc-900 transition-colors">Privacy Policy</Link>
-              <Link href="/terms-of-service" className="hover:text-zinc-900 transition-colors">Terms of Service</Link>
+              <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>
