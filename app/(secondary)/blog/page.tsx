@@ -34,13 +34,13 @@ export default function BlogListingPage() {
                 />
               </div>
               
-              <CardContent className="p-8 flex flex-col flex-grow">
+              <CardContent className="p-6 flex flex-col flex-grow">
                 {/* tags */}
-                <div className="flex flex-wrap items-center gap-2 mb-4 text-xs font-bold text-zinc-600 uppercase tracking-wider">
-                  {post.tags.slice(0, 2).map((tag, i, arr) => (
-                    <span key={i} className="flex items-center">
-                      <span>{tag.name}</span>
-                      {i < arr.length - 1 && <span className="ml-2 text-brand">•</span>}
+                <div className="mb-4 text-xs font-bold text-zinc-600 uppercase tracking-wider truncate">
+                  {post.tags.map((tag, i, arr) => (
+                    <span key={i}>
+                      {tag.name}
+                      {i < arr.length - 1 && <span className="mx-2 text-brand">•</span>}
                     </span>
                   ))}
                 </div>
