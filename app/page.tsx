@@ -21,9 +21,9 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-cyan-300 selection:text-cyan-950 select-text">
       {/* Navbar */}
-      <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+      <header className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-5xl z-50 bg-white border border-zinc-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full">
+        <div className="px-6 h-20 flex items-center justify-between">
+          <Link href="/" aria-label="Home" className="pl-2">
             <Image 
               src="/O_App_logo_transparent.png" 
               alt="O.App Logo" 
@@ -36,12 +36,12 @@ export default function LandingPage() {
             <Link href="#features" className="hover:text-brand transition-colors">Features</Link>
             <Link href="#how-it-works" className="hover:text-brand transition-colors">How it works</Link>
           </nav>
-          <div className="flex items-center gap-4">
-            <Link href="/admin/login" className="text-sm font-medium text-zinc-600 hover:text-brand transition-colors hidden sm:block">
+          <div className="flex items-center gap-4 pr-1">
+            <Link href="/admin/login" className="text-sm font-medium text-zinc-600 hover:text-brand transition-colors hidden sm:block mr-2">
               Log in
             </Link>
-            <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-lg font-medium px-6 shadow-md">
-              <Link href="#contact">Request Setup</Link>
+            <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5">
+              <Link href="#contact">Get this for my business</Link>
             </Button>
           </div>
         </div>
