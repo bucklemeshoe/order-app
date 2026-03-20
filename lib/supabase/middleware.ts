@@ -5,8 +5,8 @@ export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co",
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-key",
     {
       cookies: {
         getAll() {
@@ -30,12 +30,13 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Protect admin routes
+  // Routes
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin")
   const isAdminLogin = request.nextUrl.pathname === "/admin/login"
   const isAuthRoute = request.nextUrl.pathname.startsWith("/auth")
   const isApiRoute = request.nextUrl.pathname.startsWith("/api")
   const isOfflineRoute = request.nextUrl.pathname.startsWith("/offline")
+  const isMarketingRoute = request.nextUrl.pathname === "/"
 
   if (isAdminRoute && !isAdminLogin) {
     if (!user) {
@@ -55,13 +56,13 @@ export async function updateSession(request: NextRequest) {
     if (profile?.role !== "admin") {
       // Not admin → redirect to customer app
       const url = request.nextUrl.clone()
-      url.pathname = "/"
+      url.pathname = "/order" // Redirect non-admins to /order instead of /
       return NextResponse.redirect(url)
     }
   }
 
   // Protect all other app routes (Customer App)
-  if (!isAdminRoute && !isAuthRoute && !isApiRoute && !isOfflineRoute) {
+  if (!isAdminRoute && !isAuthRoute && !isApiRoute && !isOfflineRoute && !isMarketingRoute) {
     if (!user) {
       // Not logged in → redirect to auth login
       const url = request.nextUrl.clone()
