@@ -30,12 +30,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/oapp_favicon.png', sizes: 'any' },
       { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
       { url: '/icon-512.png', type: 'image/png', sizes: '512x512' }
     ],
     apple: [
-      { url: '/icon-192.png' }
+      { url: '/oapp_favicon.png' }
     ]
   },
   description: 'Stop paying 30% commissions to delivery apps. Let your customers order online, pay securely, and choose delivery or collection from your own beautifully branded digital storefront.',
