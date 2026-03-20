@@ -4,6 +4,7 @@ import { Poppins } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import { PWAOptimizer } from '@/components/PWAOptimizer'
+import Script from 'next/script'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -58,6 +59,10 @@ html {
         <PWAOptimizer />
         {children}
         <Toaster />
+        
+        {/* Elfsight WhatsApp Chat | OrderApp Whatsapp */}
+        <Script src="https://elfsightcdn.com/platform.js" strategy="lazyOnload" />
+        <div className="elfsight-app-04bb6332-b43b-4085-8938-cf931886c598" data-elfsight-app-lazy></div>
       </body>
     </html>
   )
