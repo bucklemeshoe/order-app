@@ -6,7 +6,6 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
 
 export default function RequestSetupPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,13 +51,8 @@ Looking forward to hearing from you!`
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 py-12 px-4 flex items-center justify-center font-[family-name:var(--font-sans)]">
+    <div className="px-4 flex items-center justify-center font-[family-name:var(--font-sans)]">
       <div className="w-full max-w-xl animate-in fade-in slide-in-from-bottom-8 duration-700">
-        <div className="mb-6 ml-2">
-          <Link href="/" className="inline-flex items-center text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to home
-          </Link>
-        </div>
         
         <Card className="border-0 shadow-2xl rounded-[2rem] overflow-hidden py-0 gap-0">
           <div className="bg-zinc-950 p-8 sm:p-10 text-white relative overflow-hidden">

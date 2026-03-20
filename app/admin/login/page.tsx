@@ -76,7 +76,7 @@ export default function AdminLoginPage() {
         {/* Bottom Testimonial */}
         <div className="relative z-10 mt-auto max-w-2xl">
           <blockquote className="space-y-6">
-            <p className="text-3xl xl:text-4xl font-medium leading-relaxed drop-shadow-sm text-zinc-100">
+            <p className="text-2xl xl:text-3xl font-medium leading-relaxed drop-shadow-sm text-zinc-100">
               "This platform has completely transformed how we manage our incoming orders. The simplicity, speed, and reliability are unmatched."
             </p>
             <footer className="flex items-center gap-4">
@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex w-full lg:max-w-[480px] xl:max-w-[560px] items-center justify-center p-8 sm:p-12 relative bg-neutral-900 border-l border-neutral-800">
+      <div className="flex w-full lg:max-w-[480px] xl:max-w-[560px] items-center justify-center p-8 sm:p-12 relative bg-white border-l border-zinc-200">
         <div className="w-full max-w-sm space-y-8">
           <div className="flex flex-col gap-2 relative z-10">
             <div className="lg:hidden flex items-center justify-center mb-6">
@@ -110,17 +110,17 @@ export default function AdminLoginPage() {
               />
             </div>
             
-            <h1 className="text-3xl font-bold tracking-tight text-white lg:text-left text-center">
+            <h1 className="text-3xl font-bold tracking-tight text-zinc-900 lg:text-left text-center">
               Admin Login
             </h1>
-            <p className="text-neutral-400 lg:text-left text-center">
+            <p className="text-zinc-500 lg:text-left text-center">
               Sign in with your secure admin credentials.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-neutral-300 font-medium">Email address</Label>
+              <Label htmlFor="email" className="text-zinc-700 font-medium">Email address</Label>
               <Input
                 id="email"
                 type="email"
@@ -128,11 +128,11 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-12 bg-neutral-800 border-neutral-700 text-white shadow-sm placeholder:text-neutral-500 transition-colors focus-visible:ring-1 focus-visible:ring-white/50"
+                className="h-12 bg-white border-zinc-300 text-zinc-900 shadow-sm placeholder:text-zinc-400 transition-colors focus-visible:ring-1 focus-visible:ring-zinc-900/50"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-neutral-300 font-medium">Password</Label>
+              <Label htmlFor="password" className="text-zinc-700 font-medium">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -140,12 +140,12 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="h-12 bg-neutral-800 border-neutral-700 text-white shadow-sm placeholder:text-neutral-500 transition-colors focus-visible:ring-1 focus-visible:ring-white/50"
+                className="h-12 bg-white border-zinc-300 text-zinc-900 shadow-sm placeholder:text-zinc-400 transition-colors focus-visible:ring-1 focus-visible:ring-zinc-900/50"
               />
             </div>
 
             {error && (
-              <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-4 text-sm text-red-400 font-medium flex items-center gap-2">
+              <div className="rounded-xl bg-red-50 border border-red-200 p-4 text-sm text-red-600 font-medium flex items-center gap-2">
                 <div className="h-1.5 w-1.5 rounded-full bg-red-500" />
                 {error}
               </div>
@@ -153,7 +153,7 @@ export default function AdminLoginPage() {
 
             <Button
               type="submit"
-              className="w-full h-12 shadow-md transition-all active:scale-[0.98] bg-white text-neutral-900 hover:bg-neutral-200 font-semibold text-base mt-2"
+              className="w-full h-12 shadow-md transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 font-semibold text-base mt-2"
               disabled={loading}
             >
               {loading ? "Signing in..." : "Sign In"}
@@ -163,8 +163,8 @@ export default function AdminLoginPage() {
         </div>
         
         {/* Mobile Background Elements (So right side isn't totally blank) */}
-        <div className="absolute inset-0 pointer-events-none select-none lg:hidden opacity-10">
-           <div className="absolute top-10 right-10 w-64 h-64 bg-white rounded-full blur-[100px]" />
+        <div className="absolute inset-0 pointer-events-none select-none lg:hidden opacity-5">
+           <div className="absolute top-10 right-10 w-64 h-64 bg-black rounded-full blur-[100px]" />
         </div>
       </div>
     </main>

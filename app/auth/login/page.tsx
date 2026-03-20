@@ -53,7 +53,44 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-muted/40 px-4 relative overflow-hidden">
+    <main className="flex min-h-[100dvh] items-center justify-center bg-brand px-4 relative overflow-hidden" style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)" }}>
+      {/* Scattered food emoji background */}
+      <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
+        {[
+          { emoji: "🍕", top: "4%",  left: "8%",   size: "2.2rem", rotate: "-15deg" },
+          { emoji: "☕", top: "8%",  right: "12%",  size: "1.8rem", rotate: "20deg" },
+          { emoji: "🍔", top: "18%", left: "75%",   size: "2.5rem", rotate: "-8deg" },
+          { emoji: "🧁", top: "15%", left: "25%",   size: "1.6rem", rotate: "30deg" },
+          { emoji: "🍩", top: "28%", right: "8%",   size: "2rem",   rotate: "-25deg" },
+          { emoji: "🍟", top: "35%", left: "5%",    size: "1.7rem", rotate: "12deg" },
+          { emoji: "🥤", top: "3%",  left: "50%",   size: "1.9rem", rotate: "-20deg" },
+          { emoji: "🍰", top: "70%", left: "10%",   size: "2.3rem", rotate: "18deg" },
+          { emoji: "🌮", top: "75%", right: "15%",  size: "2rem",   rotate: "-12deg" },
+          { emoji: "🥐", top: "60%", left: "80%",   size: "1.8rem", rotate: "25deg" },
+          { emoji: "🍦", top: "85%", left: "30%",   size: "2.1rem", rotate: "-30deg" },
+          { emoji: "🥗", top: "90%", right: "10%",  size: "1.7rem", rotate: "10deg" },
+          { emoji: "🍜", top: "55%", left: "3%",    size: "1.9rem", rotate: "-5deg" },
+          { emoji: "🧃", top: "45%", right: "5%",   size: "1.6rem", rotate: "22deg" },
+          { emoji: "🍪", top: "50%", left: "88%",   size: "1.5rem", rotate: "-18deg" },
+          { emoji: "🥞", top: "92%", left: "70%",   size: "2rem",   rotate: "8deg" },
+          { emoji: "🍿", top: "40%", left: "18%",   size: "1.8rem", rotate: "-22deg" },
+          { emoji: "🥨", top: "65%", left: "55%",   size: "1.6rem", rotate: "15deg" },
+        ].map((item, i) => (
+          <span
+            key={i}
+            className="absolute opacity-55"
+            style={{
+              top: item.top,
+              left: item.left,
+              right: (item as any).right,
+              fontSize: item.size,
+              transform: `rotate(${item.rotate})`,
+            }}
+          >
+            {item.emoji}
+          </span>
+        ))}
+      </div>
       <div className="w-full max-w-sm space-y-6 relative z-10 bg-card border border-border rounded-2xl p-8 shadow-sm">
         <div className="flex flex-col items-center gap-3">
           <Image
