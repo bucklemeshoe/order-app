@@ -124,7 +124,29 @@ Looking forward to hearing from you!`
                 <Textarea id="notes" name="notes" placeholder="Tell us if there's anything specific you need..." className="min-h-[120px] rounded-xl resize-y bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" />
               </div>
 
-              <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="space-y-4 pt-4 mt-8 border-t border-zinc-100">
+                <div className="flex items-start space-x-4">
+                  <Checkbox id="terms-ack" name="terms-ack" className="mt-1 h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand flex-shrink-0" required />
+                  <div className="space-y-4 leading-relaxed">
+                    <Label htmlFor="terms-ack" className="font-medium text-base text-zinc-800 cursor-pointer pt-0.5 inline-block">
+                      I have read and understand the setup terms *
+                    </Label>
+                    <div className="text-sm text-zinc-600 font-medium leading-relaxed bg-zinc-50 p-5 rounded-2xl border border-zinc-100 space-y-3">
+                      <p>
+                        I have read and understand that O.App is a one-time setup service. The setup includes deploying and configuring the system, connecting payments, and preparing a working environment with a core menu so the business can start taking orders.
+                      </p>
+                      <p>
+                        I understand that full menu population, ongoing updates, and custom development are not included. After setup, I will have full access to manage my system independently.
+                      </p>
+                      <p>
+                        I understand that support is not included as a monthly service, but is available separately if needed.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p className="text-zinc-500 text-sm font-medium order-2 sm:order-1">
                   No credit card required.
                 </p>

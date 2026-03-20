@@ -320,6 +320,65 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Pricing / What's Included */}
+        <section className="py-24 md:py-32 bg-white flex justify-center px-4">
+          <div className="max-w-6xl w-full">
+            <div className="text-center mb-16 md:mb-20">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-6 font-[family-name:var(--font-heading)] text-zinc-900">
+                O.App Setup
+              </h2>
+              <div className="text-3xl md:text-4xl font-black text-brand mb-6 font-[family-name:var(--font-heading)]">
+                R17,500 – R29,500 <span className="text-xl md:text-2xl text-zinc-500 tracking-tight font-bold">(once-off)</span>
+              </div>
+              <p className="text-zinc-600 text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+                This is a once-off setup to get your full ordering system live and ready to take real customer orders.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
+              {/* Included */}
+              <div className="bg-zinc-50 rounded-[2rem] p-8 lg:p-12 border border-zinc-200 flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="text-2xl font-bold text-zinc-900 mb-8 font-[family-name:var(--font-heading)] flex items-center gap-3">
+                  <CheckCircle2 className="w-7 h-7 text-brand" /> What's included:
+                </h3>
+                <ul className="space-y-4 text-zinc-700 font-medium text-lg flex-grow">
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Full deployment of your ordering system</span></li>
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Database setup (Supabase)</span></li>
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Hosting setup (Vercel)</span></li>
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Payment setup (SnapScan and/or Yoco)</span></li>
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Delivery and/or collection configuration</span></li>
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Core menu setup (categories + initial items)</span></li>
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Basic branding setup (name, logo, colors)</span></li>
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Admin access and guidance</span></li>
+                </ul>
+              </div>
+
+              {/* Not Included & After Setup */}
+              <div className="flex flex-col gap-8 lg:gap-10 h-full">
+                <div className="bg-white rounded-[2rem] p-8 lg:p-12 border border-zinc-200 flex-grow shadow-sm hover:shadow-md transition-shadow">
+                  <h3 className="text-2xl font-bold text-zinc-900 mb-8 font-[family-name:var(--font-heading)] flex items-center gap-3">
+                    <span className="w-7 h-7 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400 font-black text-sm">&times;</span> What's not included:
+                  </h3>
+                  <ul className="space-y-4 text-zinc-600 font-medium text-lg">
+                    <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-zinc-300 shrink-0 block mt-2.5"></span><span className="leading-snug">Full menu population for large product ranges</span></li>
+                    <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-zinc-300 shrink-0 block mt-2.5"></span><span className="leading-snug">Ongoing menu updates or management</span></li>
+                    <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-zinc-300 shrink-0 block mt-2.5"></span><span className="leading-snug">Custom feature development outside the core system</span></li>
+                  </ul>
+                </div>
+                
+                <div className="bg-zinc-900 rounded-[2rem] p-8 lg:p-10 border border-zinc-800 text-white shadow-xl relative overflow-hidden group">
+                   <div className="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+                   <h4 className="text-xl font-bold mb-4 font-[family-name:var(--font-heading)] text-brand">After setup:</h4>
+                   <p className="text-zinc-300 font-medium text-lg leading-relaxed mb-6">Your system is fully yours to manage. Support is available on request.</p>
+                   <Link href="/documentation" className="inline-flex items-center text-white hover:text-brand font-bold transition-colors">
+                     Read the documentation <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                   </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section (Featuring the Emoji Pattern on Accent Color) */}
         <section id="contact" className="py-32 bg-brand relative overflow-hidden flex items-center min-h-[500px]">
           {/* Subtle radial glow */}
@@ -406,13 +465,16 @@ export default function LandingPage() {
             </div>
             
             <div className="flex flex-col md:items-end md:text-right">
-              <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Product Options</h4>
+              <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Quick Links</h4>
               <ul className="space-y-4 text-left md:text-right">
                 <li>
-                  <Link href="/admin/login" className="text-zinc-400 hover:text-white transition-colors">Admin Dashboard</Link>
+                  <Link href="/admin/login" className="text-zinc-400 hover:text-white transition-colors">Admin App</Link>
                 </li>
                 <li>
-                  <Link href="/order" className="text-zinc-400 hover:text-white transition-colors">Customer Demo</Link>
+                  <Link href="/order" className="text-zinc-400 hover:text-white transition-colors">Customer App</Link>
+                </li>
+                <li>
+                  <Link href="/documentation" className="text-zinc-400 hover:text-white transition-colors">Documentation</Link>
                 </li>
               </ul>
             </div>

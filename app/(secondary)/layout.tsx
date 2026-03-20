@@ -49,13 +49,16 @@ export default function SecondaryLayout({
             </div>
             
             <div className="flex flex-col md:items-end md:text-right">
-              <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Product Options</h4>
+              <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Quick Links</h4>
               <ul className="space-y-4 text-left md:text-right">
                 <li>
-                  <Link href="/admin/login" className="text-zinc-400 hover:text-white transition-colors">Admin Dashboard</Link>
+                  <Link href="/admin/login" className="text-zinc-400 hover:text-white transition-colors">Admin App</Link>
                 </li>
                 <li>
-                  <Link href="/order" className="text-zinc-400 hover:text-white transition-colors">Customer Demo</Link>
+                  <Link href="/order" className="text-zinc-400 hover:text-white transition-colors">Customer App</Link>
+                </li>
+                <li>
+                  <Link href="/documentation" className="text-zinc-400 hover:text-white transition-colors">Documentation</Link>
                 </li>
               </ul>
             </div>
