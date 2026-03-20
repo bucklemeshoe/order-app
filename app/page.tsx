@@ -365,11 +365,11 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
+          <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
             <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight mb-6 font-[family-name:var(--font-heading)]">
               Get your own ordering system set up
             </h2>
-            <p className="text-xl md:text-2xl text-white/90 font-medium mb-12">
+            <p className="text-xl md:text-2xl text-white/90 font-medium mb-12 lg:whitespace-nowrap">
               We&apos;ll handle the technical setup. You start taking your orders.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
