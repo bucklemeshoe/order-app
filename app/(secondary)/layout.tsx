@@ -26,7 +26,7 @@ export default function SecondaryLayout({
         </div>
       </header>
 
-      <main className="flex-1 pt-32 pb-24">
+      <main className="flex-1 pt-40 md:pt-48 pb-24">
         {children}
       </main>
 
