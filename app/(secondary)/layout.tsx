@@ -32,8 +32,8 @@ export default function SecondaryLayout({
 
       <footer className="bg-zinc-950 border-t border-zinc-800 pt-20 pb-10 mt-auto">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div className="col-span-1 md:col-span-2">
+          <div className="flex flex-col md:flex-row justify-between gap-12 mb-16">
+            <div className="max-w-sm">
               <Link href="/" className="inline-block mb-6 hover:opacity-80 transition-opacity">
                 <Image 
                   src="/O_App_logo_transparent.png" 
@@ -43,14 +43,14 @@ export default function SecondaryLayout({
                   className="object-contain"
                 />
               </Link>
-              <p className="text-zinc-400 max-w-sm text-lg leading-relaxed">
+              <p className="text-zinc-400 text-lg leading-relaxed">
                 The modern ordering system for South African food businesses. Take control of your digital storefront.
               </p>
             </div>
             
-            <div>
+            <div className="flex flex-col md:items-end md:text-right">
               <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Product Options</h4>
-              <ul className="space-y-4">
+              <ul className="space-y-4 mb-8 text-left md:text-right">
                 <li>
                   <Link href="/admin/login" className="text-zinc-400 hover:text-white transition-colors">Admin Dashboard</Link>
                 </li>
@@ -58,20 +58,9 @@ export default function SecondaryLayout({
                   <Link href="/order" className="text-zinc-400 hover:text-white transition-colors">Customer Demo</Link>
                 </li>
               </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Contact</h4>
-              <ul className="space-y-4">
-                <li>
-                  <Link href="mailto:jared@makefriendly.co.za" className="text-zinc-400 hover:text-white transition-colors">
-                    jared@makefriendly.co.za
-                  </Link>
-                </li>
-                <li className="text-zinc-400">
-                  Cape Town, South Africa
-                </li>
-              </ul>
+              <a href="mailto:jared@makefriendly.co.za" className="text-white font-bold text-xl hover:text-brand transition-colors font-[family-name:var(--font-heading)] block mt-auto">
+                Email Us
+              </a>
             </div>
           </div>
           
