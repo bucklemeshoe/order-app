@@ -40,7 +40,7 @@ export default function LandingPage() {
             <Link href="/admin/login" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors hidden sm:block">
               Log in
             </Link>
-            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full font-semibold px-6 shadow-sm">
+            <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-lg font-medium px-6 shadow-md">
               <Link href="#contact">Request Setup</Link>
             </Button>
           </div>
@@ -56,7 +56,7 @@ export default function LandingPage() {
               Available for South African businesses
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 max-w-5xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-slate-900 drop-shadow-sm">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-4xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-slate-900 drop-shadow-sm">
               Your own ordering system. <br className="hidden md:block" />
               <span className="text-primary">No commissions.</span>
             </h1>
@@ -66,12 +66,12 @@ export default function LandingPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full w-full sm:w-auto h-14 px-8 text-lg font-semibold shadow-lg shadow-primary/25 border border-primary">
+              <Button size="lg" asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-xl w-full sm:w-auto h-14 px-8 text-lg font-medium shadow-md">
                 <Link href="#demo">
                   <Play className="w-5 h-5 mr-2 fill-current" /> Watch Demo
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="w-full sm:w-auto h-14 px-8 rounded-full text-lg font-semibold border-slate-200 bg-white hover:bg-slate-50 text-slate-800 shadow-sm">
+              <Button size="lg" variant="outline" asChild className="transition-all active:scale-[0.98] w-full sm:w-auto h-14 px-8 rounded-xl text-lg font-medium border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-900 shadow-sm">
                 <Link href="#contact">
                   Get this for my business
                 </Link>
@@ -233,7 +233,7 @@ export default function LandingPage() {
                 </ul>
                 
                 <div className="pt-6">
-                  <Button size="lg" asChild className="bg-white hover:bg-slate-200 text-slate-900 rounded-full h-14 px-8 text-lg font-bold">
+                  <Button size="lg" asChild className="transition-all active:scale-[0.98] bg-white hover:bg-zinc-200 text-zinc-900 rounded-xl h-14 px-8 text-lg font-medium shadow-md">
                     <Link href="/order">
                       Try the Customer Demo
                     </Link>
@@ -296,10 +296,10 @@ export default function LandingPage() {
               We&apos;ll handle the technical setup. You start taking your orders.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="bg-white text-primary hover:bg-slate-50 rounded-full w-full sm:w-auto h-16 px-10 text-xl font-bold shadow-xl">
+              <Button size="lg" className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-xl w-full sm:w-auto h-16 px-10 text-xl font-medium shadow-xl">
                 Request Setup
               </Button>
-              <Button size="lg" variant="outline" asChild className="border-white text-white hover:bg-white/10 rounded-full w-full sm:w-auto h-16 px-10 text-xl font-bold bg-white/5 backdrop-blur-sm">
+              <Button size="lg" variant="outline" asChild className="transition-all active:scale-[0.98] border-white/40 text-white hover:bg-white/10 rounded-xl w-full sm:w-auto h-16 px-10 text-xl font-medium bg-white/5 backdrop-blur-sm shadow-md">
                 <Link href="mailto:jared@makefriendly.co.za">
                   Contact Us
                 </Link>
