@@ -38,7 +38,7 @@ export async function updateSession(request: NextRequest) {
   const isOfflineRoute = request.nextUrl.pathname.startsWith("/offline")
   const isBlogRoute = request.nextUrl.pathname.startsWith("/blog")
   
-  const publicRoutes = ["/", "/request-setup", "/privacy-policy", "/terms-of-service"]
+  const publicRoutes = ["/", "/request-setup", "/privacy-policy", "/terms-of-service", "/documentation"]
   const isPublicRoute = publicRoutes.includes(request.nextUrl.pathname)
 
   if (isAdminRoute && !isAdminLogin) {
