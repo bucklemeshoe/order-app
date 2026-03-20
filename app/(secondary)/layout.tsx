@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { HeaderAction } from './header-action'
+import { MobileMenu } from '@/components/MobileMenu'
 
 export default function SecondaryLayout({
   children,
@@ -10,7 +11,7 @@ export default function SecondaryLayout({
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans flex flex-col">
       <header className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-5xl z-50 bg-white border border-zinc-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full">
-        <div className="px-6 h-20 flex items-center justify-between">
+        <div className="px-6 h-16 md:h-20 flex items-center justify-between">
           <Link href="/" aria-label="Home" className="pl-2">
             <Image 
               src="/O_App_logo_transparent.png" 
@@ -21,7 +22,10 @@ export default function SecondaryLayout({
             />
           </Link>
           <div className="flex items-center gap-4 pr-1">
-            <HeaderAction />
+            <div className="hidden md:block">
+              <HeaderAction />
+            </div>
+            <MobileMenu />
           </div>
         </div>
       </header>

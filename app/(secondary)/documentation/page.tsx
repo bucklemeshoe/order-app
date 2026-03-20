@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, FileText } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Documentation | O.App',
@@ -16,9 +16,7 @@ export default function DocumentationPage() {
         </Link>
       </div>
       <div className="mb-12 md:text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-100 text-zinc-800 text-sm font-semibold mb-6">
-          <span className="w-6 h-6 rounded-full bg-brand/15 text-brand flex items-center justify-center text-xs">📚</span> <span>Documentation</span>
-        </div>
+        <FileText className="w-16 h-16 md:mx-auto text-zinc-300 mb-8" />
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-zinc-900 mb-6 font-[family-name:var(--font-heading)] tracking-tight">
           How O.App Setup Works
         </h1>
@@ -27,7 +25,7 @@ export default function DocumentationPage() {
         </p>
       </div>
 
-      <div className="bg-white rounded-3xl p-6 md:p-12 lg:p-16 border border-zinc-200 shadow-sm block w-full">
+      <div className="bg-white rounded-none md:rounded-3xl p-6 px-5 md:p-12 lg:p-16 border-y md:border border-zinc-200 shadow-sm block w-[calc(100%+2rem)] md:w-full -mx-4 md:mx-0">
         <div className="text-xl text-zinc-800 font-medium leading-relaxed pb-8 mb-10 border-b border-zinc-100">
           When you request a setup, we handle the full technical and operational configuration required to get your business live and ready to take orders.
         </div>

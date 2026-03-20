@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { Store } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { MobileMenu } from "@/components/MobileMenu"
 import { Typewriter } from "@/components/ui/typewriter"
 
 export default function LandingPage() {
@@ -23,7 +24,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-cyan-300 selection:text-cyan-950 select-text">
       {/* Navbar */}
       <header className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-5xl z-50 bg-white border border-zinc-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full">
-        <div className="px-6 h-20 flex items-center justify-between">
+        <div className="px-6 h-16 md:h-20 flex items-center justify-between">
           <Link href="/" aria-label="Home" className="pl-2">
             <Image 
               src="/O_App_logo_transparent.png" 
@@ -39,9 +40,12 @@ export default function LandingPage() {
             <Link href="#use-cases" className="transition-all hover:text-brand hover:underline hover:decoration-wavy hover:decoration-zinc-900 hover:underline-offset-[6px]">Use cases</Link>
           </nav>
           <div className="flex items-center gap-4 pr-1">
-            <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5 shadow-sm">
-              <Link href="/request-setup">Request Setup</Link>
-            </Button>
+            <div className="hidden md:block">
+              <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5 shadow-sm">
+                <Link href="/request-setup">Request Setup</Link>
+              </Button>
+            </div>
+            <MobileMenu />
           </div>
         </div>
       </header>
@@ -50,7 +54,7 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 px-4">
           <div className="container mx-auto relative z-10 text-center">
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-zinc-200 text-sm font-medium mb-8 text-zinc-800 shadow-sm ring-1 ring-zinc-900/5">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-sm font-medium mb-8 text-emerald-800 shadow-sm ring-1 ring-emerald-500/10">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -98,7 +102,7 @@ export default function LandingPage() {
         </section>
 
         {/* Feature Blocks */}
-        <section id="features" className="py-24 bg-zinc-50 border-y border-zinc-200">
+        <section id="features" className="py-24 bg-zinc-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16 max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6 font-[family-name:var(--font-heading)] text-zinc-900">
@@ -151,6 +155,30 @@ export default function LandingPage() {
                   <p className="text-zinc-600 leading-relaxed">{feature.description}</p>
                 </div>
               ))}
+
+              {/* Customer Proof Block */}
+              <div className="group px-8 py-10 rounded-3xl bg-brand text-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden flex flex-col justify-center">
+                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent pointer-events-none" />
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 text-yellow-300 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    ))}
+                  </div>
+                  <blockquote className="text-lg font-medium leading-relaxed mb-6 flex-grow">
+                    &quot;O.App completely changed how we handle our deliveries. We saved thousands on marketplace fees in our first month alone.&quot;
+                  </blockquote>
+                  <div className="flex items-center gap-4 mt-auto">
+                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 relative bg-white/10 shrink-0">
+                      <Image src="/images/testimonial-avatar.png" alt="Customer" fill className="object-cover" />
+                    </div>
+                    <div>
+                      <div className="font-bold font-[family-name:var(--font-heading)]">Sarah Hendricks</div>
+                      <div className="text-white/80 text-sm">Owner, The Daily Roast</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -194,7 +222,7 @@ export default function LandingPage() {
                       <ArrowRight className="w-5 h-5 text-zinc-400" />
                     </div>
                   )}
-                  <div className="text-6xl font-black text-brand opacity-20 mb-6 font-[family-name:var(--font-heading)] transform transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-[1.05] origin-bottom-left inline-block">{item.step}</div>
+                  <div className="text-6xl font-black text-brand opacity-20 group-hover:opacity-100 mb-6 font-[family-name:var(--font-heading)] transform transition-all duration-500 group-hover:-rotate-6 group-hover:scale-[1.05] origin-bottom-left inline-block">{item.step}</div>
                   <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-200 shadow-sm flex items-center justify-center mb-6">
                     {item.icon}
                   </div>
@@ -344,7 +372,6 @@ export default function LandingPage() {
                 </h3>
                 <ul className="space-y-4 text-zinc-700 font-medium text-lg flex-grow">
                   <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Full deployment of your ordering system</span></li>
-                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Database setup (Supabase)</span></li>
                   <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Hosting setup (Vercel)</span></li>
                   <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Payment setup (SnapScan and/or Yoco)</span></li>
                   <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Delivery and/or collection configuration</span></li>
@@ -483,10 +510,18 @@ export default function LandingPage() {
           
           <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-600 font-medium">
             <p>© {new Date().getFullYear()} O.App. All rights reserved.</p>
-            <div className="flex gap-6">
-              <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
-              <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex gap-6">
+                <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+                <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+              </div>
+              <div className="flex gap-4 md:border-l md:border-zinc-800 md:pl-6 text-zinc-500">
+                <a href="https://x.com/makefriendly" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  <span className="sr-only">X (Twitter)</span>
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.922H5.078z"/></svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>

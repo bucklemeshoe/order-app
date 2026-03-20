@@ -43,7 +43,7 @@ export default function LoginPage() {
           password,
         })
         if (signInError) throw signInError
-        router.push("/")
+        router.push("/order")
         router.refresh()
       }
     } catch (err: any) {

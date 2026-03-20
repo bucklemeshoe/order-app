@@ -92,6 +92,8 @@ export const metadata: Metadata = {
 
 }
 
+import { WhatsAppWidget } from '@/components/WhatsAppWidget'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -113,10 +115,7 @@ html {
         <PWAOptimizer />
         {children}
         <Toaster />
-        
-        {/* Elfsight WhatsApp Chat | OrderApp Whatsapp */}
-        <Script src="https://elfsightcdn.com/platform.js" strategy="lazyOnload" />
-        <div className="elfsight-app-04bb6332-b43b-4085-8938-cf931886c598" data-elfsight-app-lazy></div>
+        <WhatsAppWidget />
       </body>
     </html>
   )
