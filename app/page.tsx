@@ -61,7 +61,7 @@ export default function LandingPage() {
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-4xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-zinc-900 drop-shadow-sm">
               Your own ordering system. <br className="hidden md:block" />
-              <span className="text-brand">No commissions.</span>
+              <span className="text-brand inline-block animate-in fade-in slide-in-from-bottom-4 duration-1000 ease-out fill-mode-both delay-300">No commissions.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
