@@ -64,7 +64,7 @@ Looking forward to hearing from you!`
         <div className="mb-10">
           <h1 className="text-4xl md:text-5xl font-black text-zinc-900 mb-4 font-[family-name:var(--font-heading)] tracking-tight">Request Setup</h1>
           <p className="text-zinc-600 text-lg md:text-xl font-medium">
-            Tell us a bit about your business, and we'll <br className="hidden md:block" /> handle the entire technical setup for you.
+            Tell us a bit about your business, and we'll handle the <br className="hidden md:block" /> entire technical setup for you.
           </p>
         </div>
         
