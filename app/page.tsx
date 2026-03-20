@@ -33,9 +33,9 @@ export default function LandingPage() {
             />
           </Link>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
-            <Link href="#use-cases" className="hover:text-brand transition-colors">Use cases</Link>
             <Link href="#features" className="hover:text-brand transition-colors">Features</Link>
             <Link href="#how-it-works" className="hover:text-brand transition-colors">How it works</Link>
+            <Link href="#use-cases" className="hover:text-brand transition-colors">Use cases</Link>
           </nav>
           <div className="flex items-center gap-4 pr-1">
             <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5">
