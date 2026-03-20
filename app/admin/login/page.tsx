@@ -56,7 +56,7 @@ export default function AdminLoginPage() {
       <div className="hidden lg:flex flex-1 relative bg-zinc-950 flex-col justify-between p-12 xl:p-16 overflow-hidden">
         {/* Background Image using standard img to bypass next.config domain restrictions */}
         <img
-          src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=2670&auto=format&fit=crop"
+          src="/images/admin-login-bg.png"
           alt="Restaurant interior"
           className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-luminosity pointer-events-none select-none"
         />
@@ -82,7 +82,7 @@ export default function AdminLoginPage() {
             <footer className="flex items-center gap-4">
               <div className="h-14 w-14 xl:h-16 xl:w-16 rounded-full overflow-hidden border-2 border-white/20">
                 <img 
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop" 
+                  src="/images/testimonial-avatar.png" 
                   alt="Client avatar" 
                   className="w-full h-full object-cover"
                 />
