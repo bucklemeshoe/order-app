@@ -184,7 +184,7 @@ export default function LandingPage() {
                       <ArrowRight className="w-5 h-5 text-slate-400" />
                     </div>
                   )}
-                  <div className="text-6xl font-black text-slate-100 mb-6 font-[family-name:var(--font-heading)]">{item.step}</div>
+                  <div className="text-6xl font-black text-brand opacity-20 mb-6 font-[family-name:var(--font-heading)]">{item.step}</div>
                   <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center mb-6">
                     {item.icon}
                   </div>
