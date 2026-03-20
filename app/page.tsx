@@ -51,9 +51,12 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 px-4">
           <div className="container mx-auto relative z-10 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100/80 border border-slate-200 text-sm font-medium mb-8 text-slate-700 shadow-sm backdrop-blur-sm">
-              <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-              Available for South African businesses
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-zinc-200 text-sm font-medium mb-8 text-zinc-800 shadow-sm ring-1 ring-zinc-900/5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span>Available for South African businesses</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-4xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-slate-900 drop-shadow-sm">
