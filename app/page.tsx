@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Wrench,
   Monitor,
+  X,
 } from "lucide-react"
 import { Store } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -357,7 +358,7 @@ export default function LandingPage() {
               <div className="flex flex-col gap-8 lg:gap-10 h-full">
                 <div className="bg-white rounded-[2rem] p-8 lg:p-12 border border-zinc-200 flex-grow shadow-sm hover:shadow-md transition-shadow">
                   <h3 className="text-2xl font-bold text-zinc-900 mb-8 font-[family-name:var(--font-heading)] flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400 font-black text-sm">&times;</span> What's not included:
+                    <span className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center"><X className="w-5 h-5 text-zinc-900 stroke-[3]" /></span> What's not included:
                   </h3>
                   <ul className="space-y-4 text-zinc-600 font-medium text-lg">
                     <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-zinc-300 shrink-0 block mt-2.5"></span><span className="leading-snug">Full menu population for large product ranges</span></li>
