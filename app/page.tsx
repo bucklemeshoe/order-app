@@ -18,9 +18,9 @@ import { Button } from "@/components/ui/button"
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-primary/20">
+    <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-primary/20">
       {/* Navbar */}
-      <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+      <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <Image 
@@ -31,13 +31,13 @@ export default function LandingPage() {
               className="object-contain"
             />
           </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-            <Link href="#features" className="hover:text-primary transition-colors">Features</Link>
-            <Link href="#how-it-works" className="hover:text-primary transition-colors">How it works</Link>
-            <Link href="/order" className="hover:text-primary transition-colors">Try Demo</Link>
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+            <Link href="#features" className="hover:text-brand transition-colors">Features</Link>
+            <Link href="#how-it-works" className="hover:text-brand transition-colors">How it works</Link>
+            <Link href="/order" className="hover:text-brand transition-colors">Try Demo</Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Link href="/admin/login" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors hidden sm:block">
+            <Link href="/admin/login" className="text-sm font-medium text-zinc-600 hover:text-brand transition-colors hidden sm:block">
               Log in
             </Link>
             <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-lg font-medium px-6 shadow-md">
@@ -59,20 +59,20 @@ export default function LandingPage() {
               <span>Available for South African businesses</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-4xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-slate-900 drop-shadow-sm">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-4xl mx-auto leading-[1.05] tracking-tight font-[family-name:var(--font-heading)] text-zinc-900 drop-shadow-sm">
               Your own ordering system. <br className="hidden md:block" />
-              <span className="text-primary">No commissions.</span>
+              <span className="text-brand">No commissions.</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
               Let your customers order online, pay securely with SnapScan or Yoco, and choose delivery or collection — all managed from one simple dashboard.
             </p>
             
 
 
             {/* Video Container (The Hero piece) */}
-            <div id="demo" className="mt-20 relative mx-auto max-w-5xl rounded-2xl md:rounded-[2.5rem] border border-slate-200 bg-slate-50 p-2 md:p-4 shadow-2xl">
-              <div className="aspect-video relative rounded-xl md:rounded-[2rem] overflow-hidden bg-slate-900 border border-slate-200/50 group cursor-pointer flex items-center justify-center shadow-inner">
+            <div id="demo" className="mt-20 relative mx-auto max-w-5xl rounded-2xl md:rounded-[2.5rem] border border-zinc-200 bg-zinc-50 p-2 md:p-4 shadow-2xl">
+              <div className="aspect-video relative rounded-xl md:rounded-[2rem] overflow-hidden bg-zinc-900 border border-zinc-200/50 group cursor-pointer flex items-center justify-center shadow-inner">
                 {/* Fallback image if no video yet */}
                 <Image 
                   src="/images/admin-login-bg.png" 
@@ -81,7 +81,7 @@ export default function LandingPage() {
                   className="object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-500"
                 />
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
                 
                 {/* Play Button */}
                 <div className="relative z-10 w-24 h-24 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform duration-300 shadow-2xl">
@@ -97,13 +97,13 @@ export default function LandingPage() {
         </section>
 
         {/* Feature Blocks */}
-        <section id="features" className="py-24 bg-slate-50 border-y border-slate-200">
+        <section id="features" className="py-24 bg-zinc-50 border-y border-zinc-200">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16 max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6 font-[family-name:var(--font-heading)] text-slate-900">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6 font-[family-name:var(--font-heading)] text-zinc-900">
                 Everything you need to sell online
               </h2>
-              <p className="text-slate-500 text-lg">
+              <p className="text-zinc-600 text-lg">
                 Stop paying 30% to delivery apps. Take back control of your customers and your margin with a beautiful system built just for you.
               </p>
             </div>
@@ -111,7 +111,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {[
                 {
-                  icon: <ShoppingBag className="w-7 h-7 text-primary" />,
+                  icon: <ShoppingBag className="w-7 h-7 text-brand" />,
                   title: "Online ordering",
                   description: "A beautiful, lightning-fast mobile menu that makes ordering from your store completely effortless."
                 },
@@ -136,12 +136,12 @@ export default function LandingPage() {
                   description: "Keep 100% of your revenue. You just pay a flat monthly software fee to keep running."
                 }
               ].map((feature, i) => (
-                <div key={i} className="group px-8 py-10 rounded-3xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-white group-hover:shadow-sm transition-all">
+                <div key={i} className="group px-8 py-10 rounded-3xl bg-white border border-zinc-200 hover:border-zinc-300 hover:shadow-xl hover:-tranzinc-y-1 transition-all duration-300">
+                  <div className="w-14 h-14 rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-white group-hover:shadow-sm transition-all">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-slate-800 font-[family-name:var(--font-heading)]">{feature.title}</h3>
-                  <p className="text-slate-500 leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl font-bold mb-3 text-zinc-800 font-[family-name:var(--font-heading)]">{feature.title}</h3>
+                  <p className="text-zinc-600 leading-relaxed">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -152,10 +152,10 @@ export default function LandingPage() {
         <section id="how-it-works" className="py-24 bg-white relative">
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-20 max-w-2xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6 font-[family-name:var(--font-heading)] text-slate-900">
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6 font-[family-name:var(--font-heading)] text-zinc-900">
                 Setup is effortless
               </h2>
-              <p className="text-slate-500 text-lg">
+              <p className="text-zinc-600 text-lg">
                 Get up and running in days, not weeks. We handle the technical heavy lifting so you can focus entirely on making great food.
               </p>
             </div>
@@ -166,33 +166,33 @@ export default function LandingPage() {
                   step: "01",
                   title: "We build it for you",
                   desc: "Send us your menu. We upload your items with photos, connect your SnapScan or Yoco, and configure your delivery areas.",
-                  icon: <Wrench className="w-7 h-7 text-slate-600" />
+                  icon: <Wrench className="w-7 h-7 text-zinc-600" />
                 },
                 {
                   step: "02",
                   title: "Customers order",
                   desc: "Share your unique app link on Instagram, WhatsApp, or Facebook. Customers browse natively and pay securely.",
-                  icon: <Smartphone className="w-7 h-7 text-slate-600" />
+                  icon: <Smartphone className="w-7 h-7 text-zinc-600" />
                 },
                 {
                   step: "03",
                   title: "Manage in one place",
                   desc: "Incoming orders trigger an alert on your dashboard. Accept them, mark them as ready, and complete the sale.",
-                  icon: <Monitor className="w-7 h-7 text-slate-600" />
+                  icon: <Monitor className="w-7 h-7 text-zinc-600" />
                 }
               ].map((item, i, arr) => (
-                <div key={i} className="relative flex-1 bg-slate-50/50 rounded-3xl p-8 lg:p-10 border border-slate-200">
+                <div key={i} className="relative flex-1 bg-zinc-50/50 rounded-3xl p-8 lg:p-10 border border-zinc-200">
                   {i !== arr.length - 1 && (
-                    <div className="hidden md:block absolute top-[50%] -right-4 lg:-right-6 -translate-y-1/2 z-20 bg-white rounded-full p-2 border border-slate-200 shadow-sm">
-                      <ArrowRight className="w-5 h-5 text-slate-400" />
+                    <div className="hidden md:block absolute top-[50%] -right-4 lg:-right-6 -tranzinc-y-1/2 z-20 bg-white rounded-full p-2 border border-zinc-200 shadow-sm">
+                      <ArrowRight className="w-5 h-5 text-zinc-400" />
                     </div>
                   )}
                   <div className="text-6xl font-black text-brand opacity-20 mb-6 font-[family-name:var(--font-heading)]">{item.step}</div>
-                  <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-200 shadow-sm flex items-center justify-center mb-6">
                     {item.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-slate-800 font-[family-name:var(--font-heading)]">{item.title}</h3>
-                  <p className="text-slate-500 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-xl font-bold mb-3 text-zinc-800 font-[family-name:var(--font-heading)]">{item.title}</h3>
+                  <p className="text-zinc-600 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -200,14 +200,14 @@ export default function LandingPage() {
         </section>
 
         {/* Product Preview / Images */}
-        <section className="py-24 bg-slate-950 text-white rounded-t-[3rem] md:rounded-t-[5rem] mt-12 px-4 shadow-[0_-20px_40px_rgba(0,0,0,0.1)]">
+        <section className="py-24 bg-zinc-950 text-white rounded-t-[3rem] md:rounded-t-[5rem] mt-12 px-4 shadow-[0_-20px_40px_rgba(0,0,0,0.1)]">
           <div className="container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto items-center">
               <div className="space-y-8 lg:pr-12 order-2 lg:order-1">
                 <h2 className="text-4xl md:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] text-white">
                   Looking sharp, <br/>selling more.
                 </h2>
-                <p className="text-slate-300 text-lg leading-relaxed">
+                <p className="text-zinc-300 text-lg leading-relaxed">
                   Your brand takes the spotlight. The O.App interface is minimal, fast, and aggressively optimized for high conversion rates.
                 </p>
                 
@@ -217,8 +217,8 @@ export default function LandingPage() {
                     "Lightning-fast digital cart system",
                     "Beautiful image-first product displays"
                   ].map((text, i) => (
-                    <li key={i} className="flex items-center gap-4 text-slate-200 font-medium text-lg">
-                      <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />
+                    <li key={i} className="flex items-center gap-4 text-zinc-200 font-medium text-lg">
+                      <CheckCircle2 className="w-6 h-6 text-brand shrink-0" />
                       <span>{text}</span>
                     </li>
                   ))}
@@ -234,12 +234,12 @@ export default function LandingPage() {
               </div>
               <div className="grid grid-cols-2 gap-4 order-1 lg:order-2">
                 <div className="space-y-4 pt-12">
-                   <div className="rounded-[2rem] overflow-hidden border border-white/10 aspect-[4/5] relative bg-slate-900 shadow-2xl">
+                   <div className="rounded-[2rem] overflow-hidden border border-white/10 aspect-[4/5] relative bg-zinc-900 shadow-2xl">
                      <Image src="/images/hero-banner.png" alt="App interface" fill className="object-cover" />
                    </div>
                 </div>
                 <div className="space-y-4">
-                   <div className="rounded-[2rem] overflow-hidden border border-white/10 aspect-[4/5] relative bg-slate-900 shadow-2xl">
+                   <div className="rounded-[2rem] overflow-hidden border border-white/10 aspect-[4/5] relative bg-zinc-900 shadow-2xl">
                      <Image src="/images/default-product.png" alt="Product interface" fill className="object-cover" />
                    </div>
                 </div>
@@ -249,17 +249,17 @@ export default function LandingPage() {
         </section>
 
         {/* Trust / Positioning */}
-        <section className="py-32 bg-slate-100 flex items-center justify-center text-center px-4">
+        <section className="py-32 bg-zinc-100 flex items-center justify-center text-center px-4">
           <div className="container mx-auto max-w-4xl">
-            <Store className="w-16 h-16 mx-auto text-slate-300 mb-8" />
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-10 font-[family-name:var(--font-heading)] text-slate-900">
+            <Store className="w-16 h-16 mx-auto text-zinc-300 mb-8" />
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-10 font-[family-name:var(--font-heading)] text-zinc-900">
               Built for small food businesses
             </h2>
-            <div className="flex flex-wrap justify-center gap-4 text-lg font-bold text-slate-600">
-              <span className="px-8 py-4 rounded-full bg-white border border-slate-200 shadow-sm">Takeaway shops</span>
-              <span className="px-8 py-4 rounded-full bg-white border border-slate-200 shadow-sm">Cafes / Coffee bars</span>
-              <span className="px-8 py-4 rounded-full bg-white border border-slate-200 shadow-sm">Bakeries</span>
-              <span className="px-8 py-4 rounded-full bg-white border border-slate-200 shadow-sm">Meal prep brands</span>
+            <div className="flex flex-wrap justify-center gap-4 text-lg font-bold text-zinc-600">
+              <span className="px-8 py-4 rounded-full bg-white border border-zinc-200 shadow-sm">Takeaway shops</span>
+              <span className="px-8 py-4 rounded-full bg-white border border-zinc-200 shadow-sm">Cafes / Coffee bars</span>
+              <span className="px-8 py-4 rounded-full bg-white border border-zinc-200 shadow-sm">Bakeries</span>
+              <span className="px-8 py-4 rounded-full bg-white border border-zinc-200 shadow-sm">Meal prep brands</span>
             </div>
           </div>
         </section>
@@ -331,7 +331,7 @@ export default function LandingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-950 border-t border-slate-800 pt-20 pb-10">
+      <footer className="bg-zinc-950 border-t border-zinc-800 pt-20 pb-10">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-1 md:col-span-2">
@@ -344,7 +344,7 @@ export default function LandingPage() {
                   className="object-contain"
                 />
               </Link>
-              <p className="text-slate-400 max-w-sm text-lg leading-relaxed">
+              <p className="text-zinc-400 max-w-sm text-lg leading-relaxed">
                 The modern ordering system for South African food businesses. Take control of your digital storefront.
               </p>
             </div>
@@ -353,10 +353,10 @@ export default function LandingPage() {
               <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Product Options</h4>
               <ul className="space-y-4">
                 <li>
-                  <Link href="/admin/login" className="text-slate-400 hover:text-white transition-colors">Admin Dashboard</Link>
+                  <Link href="/admin/login" className="text-zinc-400 hover:text-white transition-colors">Admin Dashboard</Link>
                 </li>
                 <li>
-                  <Link href="/order" className="text-slate-400 hover:text-white transition-colors">Customer Demo</Link>
+                  <Link href="/order" className="text-zinc-400 hover:text-white transition-colors">Customer Demo</Link>
                 </li>
               </ul>
             </div>
@@ -365,18 +365,18 @@ export default function LandingPage() {
               <h4 className="text-white font-bold text-lg mb-6 font-[family-name:var(--font-heading)]">Contact</h4>
               <ul className="space-y-4">
                 <li>
-                  <Link href="mailto:jared@makefriendly.co.za" className="text-slate-400 hover:text-white transition-colors">
+                  <Link href="mailto:jared@makefriendly.co.za" className="text-zinc-400 hover:text-white transition-colors">
                     jared@makefriendly.co.za
                   </Link>
                 </li>
-                <li className="text-slate-400">
+                <li className="text-zinc-400">
                   Cape Town, South Africa
                 </li>
               </ul>
             </div>
           </div>
           
-          <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500 font-medium">
+          <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-600 font-medium">
             <p>© {new Date().getFullYear()} O.App. All rights reserved.</p>
             <div className="flex gap-6">
               <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
