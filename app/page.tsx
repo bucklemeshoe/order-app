@@ -38,8 +38,8 @@ export default function LandingPage() {
             <Link href="#use-cases" className="transition-all hover:text-brand hover:underline hover:decoration-wavy hover:decoration-zinc-900 hover:underline-offset-[6px]">Use cases</Link>
           </nav>
           <div className="flex items-center gap-4 pr-1">
-            <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5">
-              <Link href="#contact">Get in touch</Link>
+            <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-6 py-5 shadow-sm">
+              <Link href="/request-setup">Request Setup</Link>
             </Button>
           </div>
         </div>
@@ -373,11 +373,11 @@ export default function LandingPage() {
               We&apos;ll handle the technical setup. You start taking your orders.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium sm:w-auto w-full px-6 py-5 shadow-xl">
-                Request Setup
+              <Button asChild className="transition-all active:scale-[0.98] bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium sm:w-auto w-full px-6 py-5 shadow-xl">
+                <Link href="/request-setup">Request Setup</Link>
               </Button>
               <Button variant="outline" asChild className="transition-all active:scale-[0.98] border-white/40 text-white hover:bg-white hover:text-zinc-900 rounded-full font-medium sm:w-auto w-full px-6 py-5 bg-white/5 backdrop-blur-sm shadow-md">
-                <Link href="mailto:jared@makefriendly.co.za">
+                <Link href="https://wa.me/27123456789?text=Hi%20there!%20I'd%20love%20to%20chat%20about%20setting%20up%20my%20own%20ordering%20app." target="_blank" rel="noopener noreferrer">
                   Contact Us
                 </Link>
               </Button>
