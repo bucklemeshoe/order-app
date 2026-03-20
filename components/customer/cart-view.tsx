@@ -66,7 +66,13 @@ export function CartView({
                     className="h-12 w-12 object-cover"
                   />
                 ) : (
-                  <Coffee className="h-5 w-5 text-amber-400/60" />
+                  <Image
+                    src="/images/default-product.png"
+                    alt={ci.product.name}
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 object-cover"
+                  />
                 )}
               </div>
               <div className="flex-1 min-w-0">
@@ -151,8 +157,8 @@ export function EmptyCartView({ onBrowseMenu }: { onBrowseMenu: () => void }) {
     <section className="grid gap-6 py-6">
       <div className="mt-4" />
       <div className={cn("rounded-xl border p-8 text-center", UI.surface, UI.border)}>
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-neutral-100 border border-neutral-200">
-          <Coffee className="h-8 w-8 text-brand-dark" />
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full overflow-hidden">
+          <Image src="/images/empty-cart.png" alt="Empty cart" width={80} height={80} className="object-contain" />
         </div>
         <div className="mt-4 text-lg font-semibold">Your cart is empty</div>
         <p className={cn("mt-1 text-sm", UI.muted)}>

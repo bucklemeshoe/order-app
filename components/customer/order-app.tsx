@@ -866,9 +866,7 @@ export default function OrderApp() {
                         {activeProduct.image && !activeProduct.image.includes("placeholder") ? (
                           <Image src={activeProduct.image} alt={activeProduct.name} width={672} height={352} className="w-full h-full object-cover" />
                         ) : (
-                          <div className="flex flex-col items-center gap-2 text-neutral-400">
-                            <Coffee className="h-12 w-12 text-amber-300/50" />
-                          </div>
+                          <Image src="/images/default-product.png" alt={activeProduct.name} width={672} height={352} className="w-full h-full object-cover" />
                         )}
                       </div>
                     </div>

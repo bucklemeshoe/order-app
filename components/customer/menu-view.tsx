@@ -17,9 +17,15 @@ function HeroBanner() {
       )}
       aria-label="Promotional banner"
     >
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-900 via-orange-800 to-rose-900" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15)_0%,transparent_60%)]" />
+      {/* Hero image */}
+      <Image
+        src="/images/hero-banner.png"
+        alt="Fresh food and artisan coffee"
+        fill
+        className="object-cover"
+        priority
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
       {/* Content */}
       <div className="relative h-full flex flex-col justify-end p-5">
@@ -69,10 +75,12 @@ function FeaturedCarousel({ products, onOpenProduct }: { products: Product[], on
                     </>
                   ) : (
                     <>
-                      <div className="absolute inset-0 bg-gradient-to-br from-amber-900 via-orange-800 to-rose-900" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                        <Coffee className="h-24 w-24 text-white" />
-                      </div>
+                      <Image
+                        src="/images/default-product.png"
+                        alt={p.name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
                     </>
                   )
                 })()}
@@ -113,11 +121,15 @@ function ProductImage({ src, alt }: { src?: string | null; alt: string }) {
       />
     )
   }
-  // Clean fallback icon for items without images
+  // Warm fallback image for items without custom images
   return (
-    <div className="h-14 w-14 flex items-center justify-center bg-gradient-to-br from-amber-50 to-orange-50">
-      <Coffee className="h-6 w-6 text-amber-400/60" />
-    </div>
+    <Image
+      src="/images/default-product.png"
+      alt={alt}
+      width={56}
+      height={56}
+      className="h-14 w-14 object-cover"
+    />
   )
 }
 
