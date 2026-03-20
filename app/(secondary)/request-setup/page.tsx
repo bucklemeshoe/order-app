@@ -71,31 +71,29 @@ Looking forward to hearing from you!`
         
         <Card className="border-0 shadow-2xl rounded-[2rem] overflow-hidden">
           <CardContent className="p-8 sm:p-10 bg-white">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="restaurantName" className="font-semibold text-zinc-900">Restaurant / Business Name *</Label>
-                  <Input id="restaurantName" name="restaurantName" placeholder="E.g. The Daily Grind" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="ownerName" className="font-semibold text-zinc-900">Your Full Name *</Label>
-                  <Input id="ownerName" name="ownerName" placeholder="E.g. Sarah Smith" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" required />
-                </div>
+            <form className="space-y-8" onSubmit={handleSubmit}>
+              <div className="space-y-3">
+                <Label htmlFor="restaurantName" className="text-base font-medium text-zinc-800">Restaurant / Business Name *</Label>
+                <Input id="restaurantName" name="restaurantName" placeholder="E.g. The Daily Grind" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" required />
+              </div>
+              
+              <div className="space-y-3">
+                <Label htmlFor="ownerName" className="text-base font-medium text-zinc-800">Your Full Name *</Label>
+                <Input id="ownerName" name="ownerName" placeholder="E.g. Sarah Smith" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" required />
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="font-semibold text-zinc-900">Email Address *</Label>
-                  <Input id="email" name="email" type="email" placeholder="sarah@example.com" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="font-semibold text-zinc-900">WhatsApp Number *</Label>
-                  <Input id="phone" name="phone" type="tel" placeholder="+27 82 000 0000" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" required />
-                </div>
+              <div className="space-y-3">
+                <Label htmlFor="email" className="text-base font-medium text-zinc-800">Email Address *</Label>
+                <Input id="email" name="email" type="email" placeholder="sarah@example.com" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" required />
+              </div>
+              
+              <div className="space-y-3">
+                <Label htmlFor="phone" className="text-base font-medium text-zinc-800">WhatsApp Number *</Label>
+                <Input id="phone" name="phone" type="tel" placeholder="+27 82 000 0000" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" required />
               </div>
 
               <div className="space-y-4 pt-2">
-                <Label className="font-semibold text-zinc-900 text-base">Do you currently use Yoco, Snapscan, or both for payments?</Label>
+                <Label className="text-base font-medium text-zinc-800">Do you currently use Yoco, Snapscan, or both for payments?</Label>
                 <div className="flex flex-col gap-4 pl-1">
                   <div className="flex items-center space-x-3">
                     <Checkbox id="payment-yoco" name="payments" value="Yoco" className="h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand" />
@@ -112,19 +110,19 @@ Looking forward to hearing from you!`
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="menuLink" className="font-semibold text-zinc-900">Link to your current menu (Website, Instagram, PDF)</Label>
-                <Input id="menuLink" name="menuLink" type="url" placeholder="https://..." className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" />
+              <div className="space-y-3">
+                <Label htmlFor="menuLink" className="text-base font-medium text-zinc-800">Link to your current menu (Website, Instagram, PDF)</Label>
+                <Input id="menuLink" name="menuLink" type="url" placeholder="https://..." className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="apps" className="font-semibold text-zinc-900">Do you currently use delivery apps? (UberEats, MrD, etc.)</Label>
-                <Input id="apps" name="apps" placeholder="E.g. Yes, we use UberEats and MrD" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand" />
+              <div className="space-y-3">
+                <Label htmlFor="apps" className="text-base font-medium text-zinc-800">Do you currently use delivery apps? (UberEats, MrD, etc.)</Label>
+                <Input id="apps" name="apps" placeholder="E.g. Yes, we use UberEats and MrD" className="h-12 rounded-xl bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="notes" className="font-semibold text-zinc-900">Any special requirements or notes?</Label>
-                <Textarea id="notes" name="notes" placeholder="Tell us if there's anything specific you need..." className="min-h-[120px] rounded-xl resize-y bg-zinc-50 border-zinc-200 focus-visible:ring-brand" />
+              <div className="space-y-3">
+                <Label htmlFor="notes" className="text-base font-medium text-zinc-800">Any special requirements or notes?</Label>
+                <Textarea id="notes" name="notes" placeholder="Tell us if there's anything specific you need..." className="min-h-[120px] rounded-xl resize-y bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" />
               </div>
 
               <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
