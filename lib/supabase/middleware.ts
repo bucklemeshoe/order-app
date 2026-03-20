@@ -36,7 +36,9 @@ export async function updateSession(request: NextRequest) {
   const isAuthRoute = request.nextUrl.pathname.startsWith("/auth")
   const isApiRoute = request.nextUrl.pathname.startsWith("/api")
   const isOfflineRoute = request.nextUrl.pathname.startsWith("/offline")
-  const isMarketingRoute = request.nextUrl.pathname === "/"
+  
+  const publicRoutes = ["/", "/request-setup", "/privacy-policy", "/terms-of-service"]
+  const isPublicRoute = publicRoutes.includes(request.nextUrl.pathname)
 
   if (isAdminRoute && !isAdminLogin) {
     if (!user) {
@@ -62,7 +64,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Protect all other app routes (Customer App)
-  if (!isAdminRoute && !isAuthRoute && !isApiRoute && !isOfflineRoute && !isMarketingRoute) {
+  if (!isAdminRoute && !isAuthRoute && !isApiRoute && !isOfflineRoute && !isPublicRoute) {
     if (!user) {
       // Not logged in → redirect to auth login
       const url = request.nextUrl.clone()
