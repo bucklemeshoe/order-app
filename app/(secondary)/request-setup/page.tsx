@@ -124,14 +124,14 @@ Looking forward to hearing from you!`
                 <Textarea id="notes" name="notes" placeholder="Tell us if there's anything specific you need..." className="min-h-[120px] rounded-xl resize-y bg-zinc-50 border-zinc-200 focus-visible:ring-brand text-base" />
               </div>
 
-              <div className="space-y-4 pt-4 mt-8 border-t border-zinc-100">
-                <div className="flex items-start space-x-4">
-                  <Checkbox id="terms-ack" name="terms-ack" className="mt-1 h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand flex-shrink-0" required />
-                  <div className="space-y-4 leading-relaxed">
-                    <Label htmlFor="terms-ack" className="font-medium text-base text-zinc-800 cursor-pointer pt-0.5 inline-block">
+              <div className="pt-8 border-t border-zinc-200 block w-full">
+                <div className="flex items-start gap-4 w-full">
+                  <Checkbox id="terms-ack" name="terms-ack" className="mt-1 h-5 w-5 rounded-md border-zinc-300 data-[state=checked]:bg-brand data-[state=checked]:border-brand shrink-0" required />
+                  <div className="space-y-4 leading-relaxed w-full">
+                    <Label htmlFor="terms-ack" className="font-bold text-base text-zinc-800 cursor-pointer pt-0.5 block select-none">
                       I have read and understand the setup terms *
                     </Label>
-                    <div className="text-sm text-zinc-600 font-medium leading-relaxed bg-zinc-50 p-5 rounded-2xl border border-zinc-100 space-y-3">
+                    <div className="text-sm text-zinc-600 font-medium leading-relaxed bg-zinc-50 p-6 rounded-2xl border border-zinc-200 space-y-4 w-full block">
                       <p>
                         I have read and understand that O.App is a one-time setup service. The setup includes deploying and configuring the system, connecting payments, and preparing a working environment with a core menu so the business can start taking orders.
                       </p>
@@ -146,11 +146,8 @@ Looking forward to hearing from you!`
                 </div>
               </div>
 
-              <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p className="text-zinc-500 text-sm font-medium order-2 sm:order-1">
-                  No credit card required.
-                </p>
-                <Button type="submit" className="w-full sm:w-auto bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-8 h-11 transition-all active:scale-[0.98] order-1 sm:order-2">
+              <div className="pt-6 block w-full">
+                <Button type="submit" className="w-full bg-zinc-900 text-white hover:bg-zinc-800 rounded-full font-medium px-8 h-12 transition-all active:scale-[0.98]">
                   Submit Request
                 </Button>
               </div>

@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Documentation | O.App',
@@ -7,7 +9,12 @@ export const metadata: Metadata = {
 
 export default function DocumentationPage() {
   return (
-    <div className="container mx-auto px-4 max-w-3xl font-[family-name:var(--font-sans)] mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <div className="container mx-auto px-4 max-w-3xl font-[family-name:var(--font-sans)] mb-20">
+      <div className="mb-10">
+        <Link href="/" className="inline-flex items-center text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
+          <ArrowLeft className="w-4 h-4 mr-2" /> Back to home
+        </Link>
+      </div>
       <div className="mb-12 md:text-center">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-100 text-zinc-800 text-sm font-semibold mb-6">
           <span className="w-6 h-6 rounded-full bg-brand/15 text-brand flex items-center justify-center text-xs">📚</span> <span>Documentation</span>
@@ -15,7 +22,7 @@ export default function DocumentationPage() {
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-zinc-900 mb-6 font-[family-name:var(--font-heading)] tracking-tight">
           How O.App Setup Works
         </h1>
-        <p className="text-zinc-600 text-lg md:text-xl font-medium max-w-2xl mx-auto">
+        <p className="text-zinc-600 text-lg md:text-xl font-medium max-w-2xl mx-auto block w-full">
           O.App is a fully browser-based ordering system designed to be simple, fast, and easy to manage. 
         </p>
       </div>
