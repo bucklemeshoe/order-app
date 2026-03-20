@@ -1,0 +1,74 @@
+import { createServerClient, type CookieOptions } from "@supabase/ssr"
+import { NextResponse, type NextRequest } from "next/server"
+
+export async function updateSession(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({ request })
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          )
+          supabaseResponse = NextResponse.next({ request })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          )
+        },
+      },
+    }
+  )
+
+  // Refresh the session (important for keeping tokens valid)
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  // Protect admin routes
+  const isAdminRoute = request.nextUrl.pathname.startsWith("/admin")
+  const isAdminLogin = request.nextUrl.pathname === "/admin/login"
+  const isAuthRoute = request.nextUrl.pathname.startsWith("/auth")
+  const isApiRoute = request.nextUrl.pathname.startsWith("/api")
+  const isOfflineRoute = request.nextUrl.pathname.startsWith("/offline")
+
+  if (isAdminRoute && !isAdminLogin) {
+    if (!user) {
+      // Not logged in → redirect to admin login
+      const url = request.nextUrl.clone()
+      url.pathname = "/admin/login"
+      return NextResponse.redirect(url)
+    }
+
+    // Check admin role from public.users
+    const { data: profile } = await supabase
+      .from("users")
+      .select("role")
+      .eq("id", user.id)
+      .single()
+
+    if (profile?.role !== "admin") {
+      // Not admin → redirect to customer app
+      const url = request.nextUrl.clone()
+      url.pathname = "/"
+      return NextResponse.redirect(url)
+    }
+  }
+
+  // Protect all other app routes (Customer App)
+  if (!isAdminRoute && !isAuthRoute && !isApiRoute && !isOfflineRoute) {
+    if (!user) {
+      // Not logged in → redirect to auth login
+      const url = request.nextUrl.clone()
+      url.pathname = "/auth/login"
+      return NextResponse.redirect(url)
+    }
+  }
+
+  return supabaseResponse
+}

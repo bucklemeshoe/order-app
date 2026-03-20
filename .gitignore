@@ -1,0 +1,35 @@
+
+# PWA files
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# YoYo AI version control directory
+# debug
+# dependencies
+# env files
+# next.js
+# production
+# typescript
+# vercel
+**/.env
+**/.env.local
+**/dist
+*.tsbuildinfo
+.DS_Store
+.env*
+.idea
+.pnpm-debug.log*
+.vercel
+.vscode
+.yoyo/
+/.next/
+/build
+/node_modules
+/out/
+next-env.d.ts
+node_modules
+npm-debug.log*
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
+yarn-debug.log*
+yarn-error.log*
