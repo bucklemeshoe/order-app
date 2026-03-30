@@ -21,7 +21,7 @@ import { Typewriter } from "@/components/ui/typewriter"
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-cyan-300 selection:text-cyan-950 select-text">
+    <div className="min-h-screen bg-zinc-950 text-zinc-900 font-sans selection:bg-cyan-300 selection:text-cyan-950 select-text">
       {/* Navbar */}
       <header className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-5xl z-50 bg-white border border-zinc-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full">
         <div className="px-6 h-16 md:h-20 flex items-center justify-between">
@@ -50,7 +50,7 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <main className="pt-20">
+      <main className="pt-20 bg-white">
         {/* Hero Section */}
         <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 px-4">
           <div className="container mx-auto relative z-10 text-center">
@@ -372,7 +372,7 @@ export default function LandingPage() {
                 </h3>
                 <ul className="space-y-4 text-zinc-700 font-medium text-lg flex-grow">
                   <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Full deployment of your ordering system</span></li>
-                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Hosting setup (Vercel)</span></li>
+                  <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Hosting setup</span></li>
                   <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Payment setup (SnapScan and/or Yoco)</span></li>
                   <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Delivery and/or collection configuration</span></li>
                   <li className="flex items-start gap-4"><span className="w-2 h-2 rounded-full bg-brand shrink-0 block mt-2.5"></span><span className="leading-snug">Core menu setup (categories + initial items)</span></li>

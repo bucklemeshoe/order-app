@@ -145,6 +145,10 @@
     cursor: pointer;
   }
   
+  html {
+    background-color: #09090b; /* zinc-950 — matches footer, prevents white flash at edges */
+  }
+
   body {
     @apply bg-background text-foreground;
   }

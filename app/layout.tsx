@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       { url: '/icon-512.png', type: 'image/png', sizes: '512x512' }
     ],
     apple: [
-      { url: '/oapp_favicon.png' }
+      { url: '/apple-touch-icon.png', sizes: '180x180' }
     ]
   },
   description: 'Stop paying 30% commissions to delivery apps. Let your customers order online, pay securely, and choose delivery or collection from your own beautifully branded digital storefront.',

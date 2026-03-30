@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { createSupabaseBrowser } from "@/lib/supabase/browser"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -64,13 +65,15 @@ export default function AdminLoginPage() {
 
         {/* Top Branding */}
         <div className="relative z-10 flex items-center gap-3">
-          <Image
-            src="/O_App_logo_transparent.png"
-            alt="O App"
-            width={72}
-            height={72}
-            className="w-16 h-16 object-contain drop-shadow-md"
-          />
+          <Link href="/" aria-label="Home">
+            <Image
+              src="/O_App_logo_transparent.png"
+              alt="O App"
+              width={72}
+              height={72}
+              className="w-16 h-16 object-contain drop-shadow-md hover:opacity-80 transition-opacity"
+            />
+          </Link>
         </div>
 
         {/* Bottom Testimonial */}
@@ -101,13 +104,15 @@ export default function AdminLoginPage() {
         <div className="w-full max-w-sm space-y-8">
           <div className="flex flex-col gap-2 relative z-10">
             <div className="lg:hidden flex items-center justify-center mb-6">
-              <Image
-                src="/O_App_logo_transparent.png"
-                alt="O App"
-                width={80}
-                height={80}
-                className="w-20 h-20 object-contain drop-shadow"
-              />
+              <Link href="/" aria-label="Home">
+                <Image
+                  src="/O_App_logo_transparent.png"
+                  alt="O App"
+                  width={80}
+                  height={80}
+                  className="w-20 h-20 object-contain drop-shadow hover:opacity-80 transition-opacity"
+                />
+              </Link>
             </div>
             
             <h1 className="text-3xl font-bold tracking-tight text-zinc-900 lg:text-left text-center">
