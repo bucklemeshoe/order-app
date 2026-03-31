@@ -1,7 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useTransition } from "react"
+import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { createSupabaseBrowser } from "@/lib/supabase/browser"
 import { cn } from "@/lib/utils"
@@ -34,6 +35,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useTheme()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   async function handleSignOut() {
     const supabase = createSupabaseBrowser()
@@ -92,12 +94,11 @@ function AdminShell({ children }: { children: React.ReactNode }) {
                 ? pathname === "/admin"
                 : pathname.startsWith(item.href)
             return (
-              <button
+              <Link
                 key={item.href}
-                onClick={() => {
-                  router.push(item.href)
-                  setSidebarOpen(false)
-                }}
+                href={item.href}
+                prefetch={true}
+                onClick={() => setSidebarOpen(false)}
                 className={cn(
                   "flex w-full items-center rounded-lg text-sm font-medium transition-colors",
                   collapsed ? "justify-center px-2 py-2.5" : "gap-3 px-3 py-2.5",
@@ -109,7 +110,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
               >
                 <item.icon className="h-4 w-4 flex-shrink-0" />
                 {!collapsed && item.label}
-              </button>
+              </Link>
             )
           })}
         </nav>
@@ -164,7 +165,9 @@ function AdminShell({ children }: { children: React.ReactNode }) {
 
         {/* Page content — scrollable */}
         <main className="flex-1 overflow-y-auto w-full flex flex-col">
-          {children}
+          <div className={cn(isPending && "opacity-60 pointer-events-none transition-opacity duration-150")}>
+            {children}
+          </div>
         </main>
       </div>
     </div>
