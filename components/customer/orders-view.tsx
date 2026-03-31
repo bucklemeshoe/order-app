@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 import { UI } from "@/lib/theme"
 import { formatCurrency, formatDate } from "@/lib/helpers/formatting"
-import { RefreshCw } from "lucide-react"
+import { RefreshCw, Coffee, History } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { StatusBadge } from "@/components/shared"
@@ -122,8 +122,14 @@ export function OrdersView({
 
         <TabsContent value="current" className="mt-3 grid gap-2">
           {currentOrders.length === 0 ? (
-            <div className="text-center py-8">
-              <div className={cn("text-sm", UI.muted)}>No current orders</div>
+            <div className={cn("rounded-xl border p-8 text-center", UI.surface, UI.border)}>
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand/10">
+                <Coffee className="h-8 w-8 text-brand" />
+              </div>
+              <div className="mt-4 text-lg font-semibold">No current orders</div>
+              <p className={cn("mt-1 text-sm", UI.muted)}>
+                When you place an order, it will appear here.
+              </p>
             </div>
           ) : (
             currentOrders.map(renderOrder)
@@ -132,8 +138,14 @@ export function OrdersView({
 
         <TabsContent value="past" className="mt-3 grid gap-2">
           {pastOrders.length === 0 ? (
-            <div className="text-center py-8">
-              <div className={cn("text-sm", UI.muted)}>No past orders</div>
+            <div className={cn("rounded-xl border p-8 text-center", UI.surface, UI.border)}>
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand/10">
+                <History className="h-8 w-8 text-brand" />
+              </div>
+              <div className="mt-4 text-lg font-semibold">No past orders</div>
+              <p className={cn("mt-1 text-sm", UI.muted)}>
+                Your completed and cancelled orders will show up here.
+              </p>
             </div>
           ) : (
             pastOrders.map(renderOrder)
